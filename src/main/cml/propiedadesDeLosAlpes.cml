@@ -1,0 +1,105 @@
+ContextMap PropiedadesDeLosAlpesMap {
+  type = SYSTEM_LANDSCAPE
+  state = AS_IS
+
+  contains RealEstateInformationServicesBC, DataManagementPlatformBC, OperationalSupportSystemsBC
+
+  RealEstateInformationServicesBC [SK]<->[SK] DataManagementPlatformBC
+  DataManagementPlatformBC [D]<-[U,OHS,PL] OperationalSupportSystemsBC
+}
+
+BoundedContext RealEstateInformationServicesBC implements RealEstateInformationServices{
+  domainVisionStatement = "To become a leading provider of comprehensive, accurate, and timely real estate information, including property details, listings, and transactions, to facilitate informed decision-making for clients worldwide."
+}
+
+BoundedContext DataManagementPlatformBC implements DataManagementPlatform {
+  domainVisionStatement = "To develop a scalable, flexible data management infrastructure that supports the global expansion of real estate services, ensuring data accuracy, completeness, and timeliness."
+}
+
+BoundedContext OperationalSupportSystemsBC implements OperationalSupportSystems{
+  domainVisionStatement = "To empower the real estate information services with robust operational support systems that streamline workflows, improve data quality, and enhance customer engagement."
+}
+
+
+
+Domain RealEstateInformationServices {
+  domainVisionStatement = "To become a leading provider of comprehensive, accurate, and timely real estate information, including property details, listings, and transactions, to facilitate informed decision-making for clients worldwide."
+
+  Subdomain PropertyDetails {
+    type = CORE_DOMAIN
+    domainVisionStatement = "In-depth information on real estate properties, including physical characteristics and photographs."
+  }
+
+  Subdomain ListingsManagement {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Management of rental, sublease, and sales listings across various markets."
+  }
+
+  Subdomain TransactionsProcessing {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Handling of lease and sales transactions to provide current and historical data."
+  }
+
+  Subdomain TenantInformation {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Collection and verification of tenant-related data from various sources."
+  }
+
+  Subdomain SalesComparatives {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Analysis and provision of sales transaction data for market comparison."
+  }
+
+  Subdomain MarketAndPropertyAnalysis {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Tools and analytics for market share, trends, and property valuation."
+  }
+}
+
+Domain DataManagementPlatform {
+  domainVisionStatement = "To develop a scalable, flexible data management infrastructure that supports the global expansion of real estate services, ensuring data accuracy, completeness, and timeliness."
+
+  Subdomain DataCapture {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Manual and automated data collection processes for acquiring real estate information."
+  }
+
+  Subdomain DataIngestion {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Integration of data from various sources into the platform."
+  }
+
+  Subdomain DataProcessingAndCleaning {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Refinement of raw data into usable formats for analysis and decision-making."
+  }
+
+  Subdomain DataValidation {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Ensuring the accuracy and reliability of data through verification processes."
+  }
+
+  Subdomain DataEnrichment {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Enhancement of data with additional insights or information from external sources."
+  }
+}
+
+Domain OperationalSupportSystems {
+  domainVisionStatement = "To empower the real estate information services with robust operational support systems that streamline workflows, improve data quality, and enhance customer engagement."
+
+  Subdomain GISAndPropertyMapping {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Geographic Information Systems for mapping and analyzing property locations and features."
+  }
+
+  Subdomain ContractualInformationManagement {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Handling of legal and contractual data related to real estate transactions."
+  }
+
+  Subdomain CustomerRelationshipManagement {
+    type = GENERIC_SUBDOMAIN
+    domainVisionStatement = "Tools and processes for managing interactions with clients and stakeholders."
+  }
+}
