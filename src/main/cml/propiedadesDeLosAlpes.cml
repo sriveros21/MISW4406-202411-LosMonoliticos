@@ -2,104 +2,111 @@ ContextMap PropiedadesDeLosAlpesMap {
   type = SYSTEM_LANDSCAPE
   state = AS_IS
 
-  contains RealEstateInformationServicesBC, DataManagementPlatformBC, OperationalSupportSystemsBC
+  contains CommercialRealEstateInformationBC, RentalAndSalesListingsBC, TenantInformationBC, LeaseTransactionsBC, SalesComparativesBC, MarketAndPropertyAnalysisBC
 
-  RealEstateInformationServicesBC [SK]<->[SK] DataManagementPlatformBC
-  DataManagementPlatformBC [D]<-[U,OHS,PL] OperationalSupportSystemsBC
-}
-
-BoundedContext RealEstateInformationServicesBC implements RealEstateInformationServices{
-  domainVisionStatement = "To become a leading provider of comprehensive, accurate, and timely real estate information, including property details, listings, and transactions, to facilitate informed decision-making for clients worldwide."
-}
-
-BoundedContext DataManagementPlatformBC implements DataManagementPlatform {
-  domainVisionStatement = "To develop a scalable, flexible data management infrastructure that supports the global expansion of real estate services, ensuring data accuracy, completeness, and timeliness."
-}
-
-BoundedContext OperationalSupportSystemsBC implements OperationalSupportSystems{
-  domainVisionStatement = "To empower the real estate information services with robust operational support systems that streamline workflows, improve data quality, and enhance customer engagement."
+  CommercialRealEstateInformationBC [D, ACL]<-[U, OHS, PL] RentalAndSalesListingsBC
+  RentalAndSalesListingsBC [D, ACL]<-[U, OHS] TenantInformationBC
+  TenantInformationBC [D, ACL]<-[U] LeaseTransactionsBC
+  LeaseTransactionsBC [D, ACL]<-[U, OHS, PL] SalesComparativesBC
+  SalesComparativesBC [SK]<->[SK] MarketAndPropertyAnalysisBC
+  CommercialRealEstateInformationBC [D,C]<-[U,S] MarketAndPropertyAnalysisBC
 }
 
 
+BoundedContext CommercialRealEstateInformationBC implements CommercialRealEstateInformation {
+  domainVisionStatement = "To provide detailed, accurate, and actionable commercial real estate information through exhaustive physical inspections and data gathering."
+}
 
-Domain RealEstateInformationServices {
-  domainVisionStatement = "To become a leading provider of comprehensive, accurate, and timely real estate information, including property details, listings, and transactions, to facilitate informed decision-making for clients worldwide."
+BoundedContext RentalAndSalesListingsBC implements RentalAndSalesListings {
+  domainVisionStatement = "Efficiently manage rental and sales listings to maximize property visibility and accelerate transactions."
+}
 
-  Subdomain PropertyDetails {
+BoundedContext TenantInformationBC  implements TenantInformation {
+  domainVisionStatement = "To offer comprehensive tenant data verification and collection, enabling precise property management and leasing strategies."
+}
+
+BoundedContext LeaseTransactionsBC  implements LeaseTransactions {
+  domainVisionStatement = "To manage and process lease transactions efficiently, capturing and updating data to reflect the current leasing landscape accurately."
+}
+
+BoundedContext SalesComparativesBC implements SalesComparatives {
+  domainVisionStatement = "To provide in-depth sales comparative analysis, enhancing market understanding through historical and current sales data."
+}
+
+BoundedContext MarketAndPropertyAnalysisBC implements MarketAndPropertyAnalysis {
+  domainVisionStatement = "To deliver detailed market and property analysis, offering users the ability to make informed decisions based on comprehensive data comparisons."
+}
+
+Domain CommercialRealEstateInformation {
+  domainVisionStatement = "To provide detailed, accurate, and actionable commercial real estate information through exhaustive physical inspections and data gathering."
+
+  Subdomain IndustrialAndRetailInspections {
     type = CORE_DOMAIN
-    domainVisionStatement = "In-depth information on real estate properties, including physical characteristics and photographs."
+    domainVisionStatement = "Conduct thorough physical inspections of industrial and retail properties to ensure data accuracy and comprehensiveness."
   }
+
+  Subdomain PhysicalCharacteristics {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Detailed documentation of properties' physical characteristics to support informed decision-making."
+  }
+
+  Subdomain PropertyPhotography {
+    type = CORE_DOMAIN
+    domainVisionStatement = "Capture and provide high-quality photographs of properties to enhance listings and information services."
+  }
+}
+
+Domain RentalAndSalesListings {
+  domainVisionStatement = "Efficiently manage rental and sales listings to maximize property visibility and accelerate transactions."
 
   Subdomain ListingsManagement {
     type = SUPPORTING_DOMAIN
-    domainVisionStatement = "Management of rental, sublease, and sales listings across various markets."
+    domainVisionStatement = "Ensure accurate and timely entry, update, and maintenance of property listings across platforms."
   }
 
-  Subdomain TransactionsProcessing {
+  Subdomain RealTimeUpdates {
     type = SUPPORTING_DOMAIN
-    domainVisionStatement = "Handling of lease and sales transactions to provide current and historical data."
+    domainVisionStatement = "Provide real-time updates to key CRM platforms to keep all stakeholders informed."
   }
 
-  Subdomain TenantInformation {
+  Subdomain CommunicationWithAgents {
     type = SUPPORTING_DOMAIN
-    domainVisionStatement = "Collection and verification of tenant-related data from various sources."
-  }
-
-  Subdomain SalesComparatives {
-    type = SUPPORTING_DOMAIN
-    domainVisionStatement = "Analysis and provision of sales transaction data for market comparison."
-  }
-
-  Subdomain MarketAndPropertyAnalysis {
-    type = GENERIC_SUBDOMAIN
-    domainVisionStatement = "Tools and analytics for market share, trends, and property valuation."
+    domainVisionStatement = "Maintain consistent communication with agents and property owners to ensure listings accuracy and satisfaction."
   }
 }
 
-Domain DataManagementPlatform {
-  domainVisionStatement = "To develop a scalable, flexible data management infrastructure that supports the global expansion of real estate services, ensuring data accuracy, completeness, and timeliness."
-
-  Subdomain DataCapture {
+Domain TenantInformation {
+  domainVisionStatement = "To offer comprehensive tenant data verification and collection, enabling precise property management and leasing strategies."
+  
+  Subdomain TenantDataVerification {
     type = CORE_DOMAIN
-    domainVisionStatement = "Manual and automated data collection processes for acquiring real estate information."
-  }
-
-  Subdomain DataIngestion {
-    type = CORE_DOMAIN
-    domainVisionStatement = "Integration of data from various sources into the platform."
-  }
-
-  Subdomain DataProcessingAndCleaning {
-    type = SUPPORTING_DOMAIN
-    domainVisionStatement = "Refinement of raw data into usable formats for analysis and decision-making."
-  }
-
-  Subdomain DataValidation {
-    type = SUPPORTING_DOMAIN
-    domainVisionStatement = "Ensuring the accuracy and reliability of data through verification processes."
-  }
-
-  Subdomain DataEnrichment {
-    type = GENERIC_SUBDOMAIN
-    domainVisionStatement = "Enhancement of data with additional insights or information from external sources."
+    domainVisionStatement = "Verify tenant information through web reviews, social media, and direct calls, ensuring accurate tenant profiles for key properties."
   }
 }
 
-Domain OperationalSupportSystems {
-  domainVisionStatement = "To empower the real estate information services with robust operational support systems that streamline workflows, improve data quality, and enhance customer engagement."
-
-  Subdomain GISAndPropertyMapping {
-    type = CORE_DOMAIN
-    domainVisionStatement = "Geographic Information Systems for mapping and analyzing property locations and features."
-  }
-
-  Subdomain ContractualInformationManagement {
+Domain LeaseTransactions {
+  domainVisionStatement = "To manage and process lease transactions efficiently, capturing and updating data to reflect the current leasing landscape accurately."
+  
+  Subdomain LeaseDataManagement {
     type = SUPPORTING_DOMAIN
-    domainVisionStatement = "Handling of legal and contractual data related to real estate transactions."
+    domainVisionStatement = "Process and monitor lease transactions, including new leases, extensions, and expirations, through registered and unregistered data sources."
   }
+}
 
-  Subdomain CustomerRelationshipManagement {
+Domain SalesComparatives {
+  domainVisionStatement = "To provide in-depth sales comparative analysis, enhancing market understanding through historical and current sales data."
+  
+  Subdomain SalesTransactionAnalysis {
+    type = SUPPORTING_DOMAIN
+    domainVisionStatement = "Load historical sales transactions for immediate analysis, identify true buyers and sellers, and verify property status at the time of sale."
+  }
+}
+
+Domain MarketAndPropertyAnalysis {
+  domainVisionStatement = "To deliver detailed market and property analysis, offering users the ability to make informed decisions based on comprehensive data comparisons."
+  
+  Subdomain MarketTrendsAnalysis {
     type = GENERIC_SUBDOMAIN
-    domainVisionStatement = "Tools and processes for managing interactions with clients and stakeholders."
+    domainVisionStatement = "Enable users to analyze main property characteristics, market share, historical trends, and comparative rates within specific geographical areas or competitive property sets."
   }
 }
