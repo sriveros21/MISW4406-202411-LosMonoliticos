@@ -8,7 +8,7 @@
 ### Estructura de proyecto:
 El proyecto tiene la siguiente estructura:
 - Dentro de la carpeta `src/main/cml` se encuentran los archivos utilizados para desarrollar y construir el diagrama de contexto, ya que mediante la funcionalidad de Gitpod se puede generar los archivos con el menu de opciones, dando click en la opción `Generate graphical context map`. Acá se tienen dos archivos, uno es para la construcción del AS_IS de nombre `propiedadesDeLosAlpes.cml` y otro para la construcción del TO_BE de nombre `propiedadesDeLosAlpes_tobe.cml`. El archivo de `demo.cml` es para fines de ejemplo.
-- Dentro de la carpeta `src-gen` se encuentran las imágenes exportadas mediante la funcionalidad anteriormente descrita, y estas imágenes se exportan en tres formatos: .`png, .svg y .gv`. El archivo `.png` es el más utilizado para visualizar el diagrama de contexto.
+- Dentro de la carpeta `src-gen` se encuentran las imágenes exportadas mediante la funcionalidad anteriormente descrita, y estas imágenes se exportan en tres formatos: `.png, .svg y .gv`. El archivo `.png` es el más utilizado para visualizar el diagrama de contexto.
 - Dichos diagramas de contexto tambien se clasifican con el mismo nombre para diferenciar el diagrama AS_IS y el diagrama TO_BE.
 - Otros archivos tales como el `.gitignore`, sirve para excluir de los commits de Git ciertos archivos con determinada extensión; `.gitpod.Dockerfile`, sirve para la configuración del ambiente tal y como se ha visto en los tutoriales.
 
@@ -21,9 +21,10 @@ Los fragmentos de código se encuentran en los archivos con extensión `.cml` qu
 Las imágenes realizadas para event-storming se encuentran en la ruta `root/event-storming`, y se clasifican de la siguiente manera:
 - Event Storming -AS IS.jpg
 - Event Storming -TO BE.jpg
+
 De igual manera, si se desea ver estas imágenes directamente en Miro, se puede utilizar los siguientes links:
-- Event Storming -AS IS <https://miro.com/app/board/uXjVNxn5L0I=/>
-- Event Storming -TO BE <https://miro.com/app/board/uXjVNx-2YZY=/>
+- Event Storming -AS IS: <https://miro.com/app/board/uXjVNxn5L0I=/>
+- Event Storming -TO BE: <https://miro.com/app/board/uXjVNx-2YZY=/>
 
 ----
 
