@@ -1,0 +1,30 @@
+digraph "ContextMapGraph" {
+graph ["imagepath"="/tmp/GraphvizJava"]
+"ArchitectureMigrationBC" ["margin"="0.3","orientation"="244","shape"="egg","fontsize"="16","style"="bold","label"="ArchitectureMigrationBC\n","fontname"="sans-serif"]
+"TimeZoneManagementBC" ["margin"="0.3","orientation"="188","shape"="egg","fontsize"="16","style"="bold","label"="TimeZoneManagementBC\n","fontname"="sans-serif"]
+"MonolithBusinessImplementationBC" ["margin"="0.3","orientation"="314","shape"="egg","fontsize"="16","style"="bold","label"="MonolithBusinessImplementationBC\n","fontname"="sans-serif"]
+"RemoteWorkBC" ["margin"="0.3","orientation"="67","shape"="egg","fontsize"="16","style"="bold","label"="RemoteWorkBC\n","fontname"="sans-serif"]
+"LegalDifferenceBC" ["margin"="0.3","orientation"="111","shape"="egg","fontsize"="16","style"="bold","label"="LegalDifferenceBC\n","fontname"="sans-serif"]
+"ServiceLatencyBC" ["margin"="0.3","orientation"="301","shape"="egg","fontsize"="16","style"="bold","label"="ServiceLatencyBC\n","fontname"="sans-serif"]
+"ConquerLatamMarketBC" ["margin"="0.3","orientation"="316","shape"="egg","fontsize"="16","style"="bold","label"="ConquerLatamMarketBC\n","fontname"="sans-serif"]
+"GlobalExpansionMenaEneaOceaniaBC" ["margin"="0.3","orientation"="286","shape"="egg","fontsize"="16","style"="bold","label"="GlobalExpansionMenaEneaOceaniaBC\n","fontname"="sans-serif"]
+"ArchitectureMigrationBC" -> "TimeZoneManagementBC" ["fontsize"="12","style"="bold","label"="Shared Kernel","dir"="none","fontname"="sans-serif"]
+"ArchitectureMigrationBC" -> "MonolithBusinessImplementationBC" ["headlabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">D</td><td sides="trbl" bgcolor="white"><font>ACL</font></td></tr>
+</table>>,"labeldistance"="0","fontsize"="12","taillabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">U</td><td sides="trbl" bgcolor="white"><font>OHS, PL</font></td></tr>
+</table>>,"style"="bold","label"="                                        ","dir"="none","fontname"="sans-serif"]
+"ArchitectureMigrationBC" -> "RemoteWorkBC" ["fontsize"="12","style"="bold","label"="Shared Kernel","dir"="none","fontname"="sans-serif"]
+"ArchitectureMigrationBC" -> "LegalDifferenceBC" ["fontsize"="12","style"="bold","label"="Shared Kernel","dir"="none","fontname"="sans-serif"]
+"ArchitectureMigrationBC" -> "ServiceLatencyBC" ["fontsize"="12","style"="bold","label"="Shared Kernel","dir"="none","fontname"="sans-serif"]
+"ConquerLatamMarketBC" -> "ArchitectureMigrationBC" ["headlabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">D</td><td sides="trbl" bgcolor="white"><font>ACL</font></td></tr>
+</table>>,"labeldistance"="0","fontsize"="12","taillabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">U</td><td sides="trbl" bgcolor="white"><font>OHS, PL</font></td></tr>
+</table>>,"style"="bold","label"="                                        ","dir"="none","fontname"="sans-serif"]
+"GlobalExpansionMenaEneaOceaniaBC" -> "ConquerLatamMarketBC" ["headlabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">D</td><td sides="trbl" bgcolor="white"><font>ACL</font></td></tr>
+</table>>,"labeldistance"="0","fontsize"="12","taillabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">U</td><td sides="trbl" bgcolor="white"><font>OHS, PL</font></td></tr>
+</table>>,"style"="bold","label"="                                        ","dir"="none","fontname"="sans-serif"]
+}

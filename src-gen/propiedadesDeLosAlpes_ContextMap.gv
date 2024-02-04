@@ -1,0 +1,35 @@
+digraph "ContextMapGraph" {
+graph ["imagepath"="/tmp/GraphvizJava"]
+"CommercialRealEstateInformationBC" ["margin"="0.3","orientation"="27","shape"="egg","fontsize"="16","style"="bold","label"="CommercialRealEstateInformationBC\n","fontname"="sans-serif"]
+"LeaseTransactionsBC" ["margin"="0.3","orientation"="246","shape"="egg","fontsize"="16","style"="bold","label"="LeaseTransactionsBC\n","fontname"="sans-serif"]
+"TenantInformationBC" ["margin"="0.3","orientation"="15","shape"="egg","fontsize"="16","style"="bold","label"="TenantInformationBC\n","fontname"="sans-serif"]
+"RentalAndSalesListingsBC" ["margin"="0.3","orientation"="269","shape"="egg","fontsize"="16","style"="bold","label"="RentalAndSalesListingsBC\n","fontname"="sans-serif"]
+"MarketAndPropertyAnalysisBC" ["margin"="0.3","orientation"="49","shape"="egg","fontsize"="16","style"="bold","label"="MarketAndPropertyAnalysisBC\n","fontname"="sans-serif"]
+"SalesComparativesBC" ["margin"="0.3","orientation"="291","shape"="egg","fontsize"="16","style"="bold","label"="SalesComparativesBC\n","fontname"="sans-serif"]
+"LeaseTransactionsBC" -> "TenantInformationBC" ["headlabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">D</td><td sides="trbl" bgcolor="white"><font>ACL</font></td></tr>
+</table>>,"labeldistance"="0","fontsize"="12","taillabel"=<<table cellspacing="0" cellborder="0" border="0">
+<tr><td bgcolor="white">U</td></tr>
+</table>>,"style"="bold","label"="                                        ","dir"="none","fontname"="sans-serif"]
+"TenantInformationBC" -> "RentalAndSalesListingsBC" ["headlabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">D</td><td sides="trbl" bgcolor="white"><font>ACL</font></td></tr>
+</table>>,"labeldistance"="0","fontsize"="12","taillabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">U</td><td sides="trbl" bgcolor="white"><font>OHS</font></td></tr>
+</table>>,"style"="bold","label"="                                        ","dir"="none","fontname"="sans-serif"]
+"RentalAndSalesListingsBC" -> "CommercialRealEstateInformationBC" ["headlabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">D</td><td sides="trbl" bgcolor="white"><font>ACL</font></td></tr>
+</table>>,"labeldistance"="0","fontsize"="12","taillabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">U</td><td sides="trbl" bgcolor="white"><font>OHS, PL</font></td></tr>
+</table>>,"style"="bold","label"="                                        ","dir"="none","fontname"="sans-serif"]
+"MarketAndPropertyAnalysisBC" -> "CommercialRealEstateInformationBC" ["headlabel"=<<table cellspacing="0" cellborder="0" border="0">
+<tr><td bgcolor="white">D</td></tr>
+</table>>,"labeldistance"="0","fontsize"="12","taillabel"=<<table cellspacing="0" cellborder="0" border="0">
+<tr><td bgcolor="white">U</td></tr>
+</table>>,"style"="bold","label"="Customer/Supplier","dir"="none","fontname"="sans-serif"]
+"SalesComparativesBC" -> "MarketAndPropertyAnalysisBC" ["fontsize"="12","style"="bold","label"="Shared Kernel","dir"="none","fontname"="sans-serif"]
+"SalesComparativesBC" -> "LeaseTransactionsBC" ["headlabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">D</td><td sides="trbl" bgcolor="white"><font>ACL</font></td></tr>
+</table>>,"labeldistance"="0","fontsize"="12","taillabel"=<<table cellspacing="0" cellborder="1" border="0">
+<tr><td bgcolor="white" sides="r">U</td><td sides="trbl" bgcolor="white"><font>OHS, PL</font></td></tr>
+</table>>,"style"="bold","label"="                                        ","dir"="none","fontname"="sans-serif"]
+}
