@@ -26,6 +26,16 @@ De igual manera, si se desea ver estas imágenes directamente en Miro, se puede 
 - Event Storming -AS IS: <https://miro.com/app/board/uXjVNxn5L0I=/>
 - Event Storming -TO BE: <https://miro.com/app/board/uXjVNx-2YZY=/>
 
+### Documentación de las relaciones y tipos de integracion entre contextos:
+#### AS_IS:
+- 
+
+#### TO_BE:
+- El contexto `MonolithBusinessImplementation` tiene una relación [D - Downstream] hacia `ArchitectureMigration` debido a que es la migración y la actualización tecnológica que se pretende realizar en la visión. También tiene un [ACL - Anticorruption Layer] debido a que los cambios que se hagan arriba no deberían afectar al componente actual. De forma contraria, el contexto `ArchitectureMigration` tiene una relación de [U - Upstream], [OHS - Open Host Service] y [PL - Published Language] debido a que es el contexto superior, describe un contexto superior que provee ciertas funcionalidades y tiene el conocimiento para las funcionalidades.
+- El contexto `ArchitectureMigration` tiene una relación con `TimeZoneManagement`, `RemoteWorkBC`, `LegalDifference` y `ServiceLatency` de [SK - Shared Kernel] debido que estos se relacionan en el mismo grado de importancia en el desarrollo de la solución y tienen partes comunes en el dominio del modelo y la evolución de la solución, pues cada una impacta un área diferente pero son necesarias para el crecimiento y la adaptación en los nuevos mercados.
+- El contexto `ArchitectureMigration` tiene una relación [D - Downstream] y [ACL - Anticorruption Layer] con `ConquerLatamMarket` debido a que es necesario implementar una nueva arquitectura para empezar a expandirse de la mejor manera y no quedarse cortos en las actividades cuando demanden nuevos servicios, como también para evitar el retroceso de los datos. En sentido contrario, tiene una relación de [U - Upstream], [OHS - Open Host Service] y [PL - Published Language] debido a que es el contexto superior, describe un contexto superior que provee ciertas funcionalidades y tiene el conocimiento para las funcionalidades.
+- El contexto 'ConquerLatamMarket' tiene una relación [D - Downstream] y [ACL - Anticorruption Layer] con `GlobalExpansionMenaEneaOceania` debido a que es necesario primero expandirse en la region de Latam, pues tiene similitudes con Colombia, antes de empezar con mercados extranjeros; es importante tener conocimiento de la solución, y tener presente que dicha expansión no debería impactar lo logrado actualmente. En sentido contrario, tiene una relación de [U - Upstream], [OHS - Open Host Service] y [PL - Published Language] debido a que es el contexto superior, describe un contexto superior que provee ciertas funcionalidades y tiene el conocimiento para las funcionalidades, como también que para lograr una expansión global se tuvieron que tener hitos grandes de la solución, lo que la hace viable y capaz de expandirse con todo el conocimiento que tiene desde pasos iniciales.
+
 ----
 
 ![Context Mapper](https://raw.githubusercontent.com/wiki/ContextMapper/context-mapper-dsl/logo/cm-logo-github-small.png)
