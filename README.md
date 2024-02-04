@@ -18,7 +18,7 @@ Los fragmentos de código se encuentran en los archivos con extensión `.cml` qu
 - propiedadesDeLosAlpes_tobe.cml -> TO_BE
 
 ### Dónde encontrar las imágenes de Event-Storming:
-Las imágenes realizadas para event-storming se encuentran en la ruta `root/event-storming`, y se clasifican de la siguiente manera:
+Las imágenes realizadas para event-storming se encuentran en la ruta `event-storming`, y se clasifican de la siguiente manera:
 - Event Storming -AS IS.jpg
 - Event Storming -TO BE.jpg
 
