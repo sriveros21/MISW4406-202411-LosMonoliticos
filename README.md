@@ -1,4 +1,23 @@
-Instrucciones de uso:
+## Integrantes grupo Los Monolíticos:
+- Helena Patarroyo
+- Carlos Tovar
+- Sergio Riveros
+- Sebastián Arango
+
+## Instrucciones de uso:
+### Estructura de proyecto:
+El proyecto tiene la siguiente estructura:
+- Dentro de la carpeta src/main/cml se encuentran los archivos utilizados para desarrollar y construir el diagrama de contexto, ya que mediante la funcionalidad de Gitpod se puede generar los archivos con el menu de opciones, dando click en la opción "Generate graphical context map". Acá se tienen dos archivos, uno es para la construcción del AS_IS de nombre "propiedadesDeLosAlpes.cml" y otro para la construcción del TO_BE de nombre "propiedadesDeLosAlpes_tobe.cml". El archivo de "demo.cml" es para fines de ejemplo.
+- Dentro de la carpeta src-gen se encuentran las imágenes exportadas mediante la funcionalidad anteriormente descrita, y estas imágenes se exportan en tres formatos: png, svg y gv. El archivo .png es el más utilizado para visualizar el diagrama de contexto.
+- Dichos diagramas de contexto tambien se clasifican con el mismo nombre para diferenciar el diagrama AS_IS y el diagrama TO_BE.
+- Otros archivos tales como el .gitignore, sirve para excluir de los commits de Git ciertos archivos con determinada extensión; .gitpod.Dockerfile, sirve para la configuración del ambiente tal y como se ha visto en los tutoriales.
+
+### Donde encontrar los fragmentos de código:
+Los fragmentos de código se encuentran en los archivos con extensión .cml que se ubican en el directorio src/main/cml, y se dividen por el archivo de AS_IS y el de TO_BE:
+- propiedadesDeLosAlpes.cml -> AS_IS
+- propiedadesDeLosAlpes_tobe.cml -> TO_BE
+
+----
 
 ![Context Mapper](https://raw.githubusercontent.com/wiki/ContextMapper/context-mapper-dsl/logo/cm-logo-github-small.png)
 # Context Mapper Demo for Online IDE 
