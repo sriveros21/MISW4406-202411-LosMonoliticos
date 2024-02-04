@@ -1,7 +1,6 @@
 ContextMap PropiedadesDeLosAlpesMap {
   type = SYSTEM_LANDSCAPE
   state = AS_IS
-
   contains CommercialRealEstateInformationBC, RentalAndSalesListingsBC, TenantInformationBC, LeaseTransactionsBC, SalesComparativesBC, MarketAndPropertyAnalysisBC
 
   CommercialRealEstateInformationBC [D, ACL]<-[U, OHS, PL] RentalAndSalesListingsBC
@@ -9,9 +8,8 @@ ContextMap PropiedadesDeLosAlpesMap {
   TenantInformationBC [D, ACL]<-[U] LeaseTransactionsBC
   LeaseTransactionsBC [D, ACL]<-[U, OHS, PL] SalesComparativesBC
   SalesComparativesBC [SK]<->[SK] MarketAndPropertyAnalysisBC
-  CommercialRealEstateInformationBC [D,C]<-[U,S] MarketAndPropertyAnalysisBC
+  CommercialRealEstateInformationBC [D, C]<-[U, S] MarketAndPropertyAnalysisBC
 }
-
 
 BoundedContext CommercialRealEstateInformationBC implements CommercialRealEstateInformation {
   domainVisionStatement = "To provide detailed, accurate, and actionable commercial real estate information through exhaustive physical inspections and data gathering."
@@ -54,6 +52,7 @@ Domain CommercialRealEstateInformation {
     type = CORE_DOMAIN
     domainVisionStatement = "Capture and provide high-quality photographs of properties to enhance listings and information services."
   }
+
 }
 
 Domain RentalAndSalesListings {
@@ -73,6 +72,7 @@ Domain RentalAndSalesListings {
     type = SUPPORTING_DOMAIN
     domainVisionStatement = "Maintain consistent communication with agents and property owners to ensure listings accuracy and satisfaction."
   }
+
 }
 
 Domain TenantInformation {
@@ -82,6 +82,7 @@ Domain TenantInformation {
     type = CORE_DOMAIN
     domainVisionStatement = "Verify tenant information through web reviews, social media, and direct calls, ensuring accurate tenant profiles for key properties."
   }
+
 }
 
 Domain LeaseTransactions {
@@ -91,6 +92,7 @@ Domain LeaseTransactions {
     type = SUPPORTING_DOMAIN
     domainVisionStatement = "Process and monitor lease transactions, including new leases, extensions, and expirations, through registered and unregistered data sources."
   }
+
 }
 
 Domain SalesComparatives {
@@ -100,6 +102,7 @@ Domain SalesComparatives {
     type = SUPPORTING_DOMAIN
     domainVisionStatement = "Load historical sales transactions for immediate analysis, identify true buyers and sellers, and verify property status at the time of sale."
   }
+
 }
 
 Domain MarketAndPropertyAnalysis {
@@ -109,4 +112,6 @@ Domain MarketAndPropertyAnalysis {
     type = GENERIC_SUBDOMAIN
     domainVisionStatement = "Enable users to analyze main property characteristics, market share, historical trends, and comparative rates within specific geographical areas or competitive property sets."
   }
+
 }
+

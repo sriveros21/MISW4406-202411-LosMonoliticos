@@ -1,136 +1,86 @@
 ContextMap PropiedadesDeLosAlpesMap {
   type = SYSTEM_LANDSCAPE
   state = TO_BE
+  contains GlobalExpansionMenaEneaOceaniaBC, ConquerLatamMarketBC, ArchitectureMigrationBC, TimeZoneManagementBC, RemoteWorkBC, LegalDifferenceBC, ServiceLatencyBC, MonolithBusinessImplementationBC
 
-  contains CommercialRealEstateInformationBC, RentalAndSalesListingsBC, TenantInformationBC, LeaseTransactionsBC, SalesComparativesBC, MarketAndPropertyAnalysisBC, LegalPropertiesLatamBC, LegalPropertiesENEABC, LegalPropertiesMENABC, LegalPropertiesOceaniaBC
-
-  CommercialRealEstateInformationBC [D, ACL]<-[U, OHS, PL] RentalAndSalesListingsBC
-  RentalAndSalesListingsBC [D, ACL]<-[U, OHS] TenantInformationBC
-  TenantInformationBC [D, ACL]<-[U] LeaseTransactionsBC
-  LeaseTransactionsBC [D, ACL]<-[U, OHS, PL] SalesComparativesBC
-  SalesComparativesBC [SK]<->[SK] MarketAndPropertyAnalysisBC
-  CommercialRealEstateInformationBC [D,C]<-[U,S] MarketAndPropertyAnalysisBC
-  CommercialRealEstateInformationBC [D, ACL] <- [U, OHS, PL] LegalPropertiesLatamBC
-  CommercialRealEstateInformationBC [D, ACL] <- [U, OHS, PL] LegalPropertiesENEABC
-  CommercialRealEstateInformationBC [D, ACL] <- [U, OHS, PL] LegalPropertiesMENABC
-  CommercialRealEstateInformationBC [D, ACL] <- [U, OHS, PL] LegalPropertiesOceaniaBC
+  MonolithBusinessImplementationBC [D, ACL] <- [U, OHS, PL] ArchitectureMigrationBC
+  ArchitectureMigrationBC [SK] <-> [SK] TimeZoneManagementBC
+  ArchitectureMigrationBC [SK] <-> [SK] RemoteWorkBC
+  ArchitectureMigrationBC [SK] <-> [SK] LegalDifferenceBC
+  ArchitectureMigrationBC [SK] <-> [SK] ServiceLatencyBC
+  ArchitectureMigrationBC [D, ACL] <- [U, OHS, PL] ConquerLatamMarketBC
+  ConquerLatamMarketBC [D, ACL] <- [U, OHS, PL] GlobalExpansionMenaEneaOceaniaBC
 }
 
-
-BoundedContext CommercialRealEstateInformationBC implements CommercialRealEstateInformation {
-  domainVisionStatement = "To provide detailed, accurate, and actionable commercial real estate information through exhaustive physical inspections and data gathering."
+BoundedContext GlobalExpansionMenaEneaOceaniaBC implements GlobalExpansionMenaEneaOceania {
+  domainVisionStatement = "Seeks global expansion by entering new markets on other continents."
 }
 
-BoundedContext RentalAndSalesListingsBC implements RentalAndSalesListings {
-  domainVisionStatement = "Efficiently manage rental and sales listings to maximize property visibility and accelerate transactions."
+BoundedContext ConquerLatamMarketBC implements ConquerLatamMarket {
+  domainVisionStatement = "It seeks to expand operations worldwide, conquering the Latin American market starting in countries such as Brazil, Peru, Ecuador, Chile, Argentina and Mexico."
 }
 
-BoundedContext TenantInformationBC  implements TenantInformation {
-  domainVisionStatement = "To offer comprehensive tenant data verification and collection, enabling precise property management and leasing strategies."
+BoundedContext ArchitectureMigrationBC implements ArchitectureMigration {
+  domainVisionStatement = "Changes in the application architecture evolving from monolithic components to have easy scalability, modification and extensibility of technology and resources."
 }
 
-BoundedContext LeaseTransactionsBC  implements LeaseTransactions {
-  domainVisionStatement = "To manage and process lease transactions efficiently, capturing and updating data to reflect the current leasing landscape accurately."
+BoundedContext TimeZoneManagementBC implements TimeZoneManagement {
+  domainVisionStatement = "Time zone management for the different regions of the expansion."
 }
 
-BoundedContext SalesComparativesBC implements SalesComparatives {
-  domainVisionStatement = "To provide in-depth sales comparative analysis, enhancing market understanding through historical and current sales data."
+BoundedContext ServiceLatencyBC implements ServiceLatency {
+  domainVisionStatement = "Control of service latency due to new potential customer locations."
 }
 
-BoundedContext MarketAndPropertyAnalysisBC implements MarketAndPropertyAnalysis {
-  domainVisionStatement = "To deliver detailed market and property analysis, offering users the ability to make informed decisions based on comprehensive data comparisons."
+BoundedContext RemoteWorkBC implements RemoteWork {
+  domainVisionStatement = "Remote work for employees because they will be in remote locations depending on their work."
 }
 
-BoundedContext LegalPropertiesLatamBC implements LegalProperties {
-  domainVisionStatement = "To control the different laws in Latam region and how it affect the processes"
+BoundedContext LegalDifferenceBC implements LegalDifference {
+  domainVisionStatement = "Differences related to the laws of each country or region because each location maintains different terminology and unique processes."
 }
 
-BoundedContext LegalPropertiesMENABC implements LegalProperties {
-  domainVisionStatement = "To control the different laws in MENA region and how it affect the processes"
+BoundedContext MonolithBusinessImplementationBC implements MonolithBusinessImplementation {
+  domainVisionStatement = "Monolithic implementation that shares database with systems and uses Colombia's coupled information with laws and processes."
 }
 
-BoundedContext LegalPropertiesENEABC implements LegalProperties {
-  domainVisionStatement = "To control the different laws in ENEA region and how it affect the processes"
+Domain GlobalExpansionMenaEneaOceania {
+  domainVisionStatement = "Seeks global expansion by entering new markets on other continents."
+
 }
 
-BoundedContext LegalPropertiesOceaniaBC implements LegalProperties {
-  domainVisionStatement = "To control the different laws in Oceania region and how it affect the processes"
+Domain ConquerLatamMarket {
+  domainVisionStatement = "It seeks to expand operations worldwide, conquering the Latin American market starting in countries such as Brazil, Peru, Ecuador, Chile, Argentina and Mexico."
+
 }
 
-Domain CommercialRealEstateInformation {
-  domainVisionStatement = "To provide detailed, accurate, and actionable commercial real estate information through exhaustive physical inspections and data gathering."
+Domain ArchitectureMigration {
+  domainVisionStatement = "Changes in the application architecture evolving from monolithic components to have easy scalability, modification and extensibility of technology and resources."
 
-  Subdomain IndustrialAndRetailInspections {
-    type = CORE_DOMAIN
-    domainVisionStatement = "Conduct thorough physical inspections of industrial and retail properties to ensure data accuracy and comprehensiveness."
-  }
-
-  Subdomain PhysicalCharacteristics {
-    type = CORE_DOMAIN
-    domainVisionStatement = "Detailed documentation of properties' physical characteristics to support informed decision-making."
-  }
-
-  Subdomain PropertyPhotography {
-    type = CORE_DOMAIN
-    domainVisionStatement = "Capture and provide high-quality photographs of properties to enhance listings and information services."
-  }
 }
 
-Domain RentalAndSalesListings {
-  domainVisionStatement = "Efficiently manage rental and sales listings to maximize property visibility and accelerate transactions."
+Domain TimeZoneManagement {
+  domainVisionStatement = "Time zone management for the different regions of the expansion."
 
-  Subdomain ListingsManagement {
-    type = SUPPORTING_DOMAIN
-    domainVisionStatement = "Ensure accurate and timely entry, update, and maintenance of property listings across platforms."
-  }
-
-  Subdomain RealTimeUpdates {
-    type = SUPPORTING_DOMAIN
-    domainVisionStatement = "Provide real-time updates to key CRM platforms to keep all stakeholders informed."
-  }
-
-  Subdomain CommunicationWithAgents {
-    type = SUPPORTING_DOMAIN
-    domainVisionStatement = "Maintain consistent communication with agents and property owners to ensure listings accuracy and satisfaction."
-  }
 }
 
-Domain TenantInformation {
-  domainVisionStatement = "To offer comprehensive tenant data verification and collection, enabling precise property management and leasing strategies."
-  
-  Subdomain TenantDataVerification {
-    type = CORE_DOMAIN
-    domainVisionStatement = "Verify tenant information through web reviews, social media, and direct calls, ensuring accurate tenant profiles for key properties."
-  }
+Domain ServiceLatency {
+  domainVisionStatement = "Control of service latency due to new potential customer locations."
+
 }
 
-Domain LeaseTransactions {
-  domainVisionStatement = "To manage and process lease transactions efficiently, capturing and updating data to reflect the current leasing landscape accurately."
-  
-  Subdomain LeaseDataManagement {
-    type = SUPPORTING_DOMAIN
-    domainVisionStatement = "Process and monitor lease transactions, including new leases, extensions, and expirations, through registered and unregistered data sources."
-  }
+Domain RemoteWork {
+  domainVisionStatement = "Remote work for employees because they will be in remote locations depending on their work."
+
 }
 
-Domain SalesComparatives {
-  domainVisionStatement = "To provide in-depth sales comparative analysis, enhancing market understanding through historical and current sales data."
-  
-  Subdomain SalesTransactionAnalysis {
-    type = SUPPORTING_DOMAIN
-    domainVisionStatement = "Load historical sales transactions for immediate analysis, identify true buyers and sellers, and verify property status at the time of sale."
-  }
+Domain LegalDifference {
+  domainVisionStatement = "Differences related to the laws of each country or region because each location maintains different terminology and unique processes."
+
 }
 
-Domain MarketAndPropertyAnalysis {
-  domainVisionStatement = "To deliver detailed market and property analysis, offering users the ability to make informed decisions based on comprehensive data comparisons."
-  
-  Subdomain MarketTrendsAnalysis {
-    type = GENERIC_SUBDOMAIN
-    domainVisionStatement = "Enable users to analyze main property characteristics, market share, historical trends, and comparative rates within specific geographical areas or competitive property sets."
-  }
+Domain MonolithBusinessImplementation {
+  domainVisionStatement = "Monolithic implementation that shares database with systems and uses Colombia's coupled information with laws and processes."
+
 }
 
-Domain LegalProperties {
-  domainVisionStatement = "To control the different laws in every region and how it affect the processes"
-}
