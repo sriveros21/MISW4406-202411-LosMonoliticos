@@ -11,10 +11,6 @@ class NombreCompleto(ObjetoValor):
 class EmailContacto(ObjetoValor):
     correo: str
 
-@dataclass(frozen=True)
-class Identificacion(ObjetoValor):
-    numero: str
-    tipo: str  # Ejemplo: Cédula, RUT, Pasaporte
 
 @dataclass(frozen=True)
 class FechaRegistro(ObjetoValor):

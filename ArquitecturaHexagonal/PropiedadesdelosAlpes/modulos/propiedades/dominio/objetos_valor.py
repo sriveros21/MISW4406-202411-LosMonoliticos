@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.objetos_valor import ObjetoValor
+from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.objetos_valor import ObjetoValor, Identificacion
 from datetime import datetime
 from enum import Enum
 

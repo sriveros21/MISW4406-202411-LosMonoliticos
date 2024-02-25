@@ -6,36 +6,44 @@ persistir objetos dominio (agregaciones) en la capa de infraestructura del domin
 """
 
 from PropiedadesdelosAlpes.config.db import db
-from PropiedadesdelosAlpes.modulos.propiedades.dominio.repositorios import 
-from PropiedadesdelosAlpes.modulos.propiedades.dominio.objetos_valor import 
-from PropiedadesdelosAlpes.modulos.propiedades.dominio.entidades import 
+from PropiedadesdelosAlpes.modulos.propiedades.dominio.repositorios import RepositorioPropiedades, RepositorioClientes
+from PropiedadesdelosAlpes.modulos.propiedades.dominio.entidades import Propietario, Propiedad
 from PropiedadesdelosAlpes.modulos.propiedades.dominio.fabricas import FabricaPropiedades
-from .dto import Reserva as ReservaDTO
-from .mapeadores import MapeadorReserva
+from .dto import Propiedad as PropiedadDTO
+from .mapeadores import MapeadorPropiedades
 from uuid import UUID
 
-class RepositorioProveedoresSQLite(RepositorioProveedores):
+class RepositorioPropiedadesSQLite(RepositorioPropiedades):
 
-    def obtener_por_id(self, id: UUID) -> Reserva:
+    def obtener_por_id(self, id: UUID) -> Propietario:
         # TODO
         raise NotImplementedError
 
-    def obtener_todos(self) -> list[Reserva]:
-        origen=Aeropuerto(codigo="CPT", nombre="Cape Town International")
-        destino=Aeropuerto(codigo="JFK", nombre="JFK International Airport")
-        legs=[Leg(origen=origen, destino=destino)]
-        segmentos = [Segmento(legs)]
-        odos=[Odo(segmentos=segmentos)]
+    def obtener_todos(self) -> list[Propietario]:
 
-        proveedor = Proveedor(codigo=CodigoIATA(codigo="AV"), nombre=NombreAero(nombre= "Avianca"))
-        proveedor.itinerarios = [Itinerario(odos=odos, proveedor=proveedor)]
-        return [proveedor]
+        id_propiedad = 123
+        nombre_propiedad = "prop.nombre"
+        tamano_propiedad = 200
+        tipo_construccion = "prop.tipo"
+        ubicacion_propiedad = "prop.ubicacion"
+        estado_propiedad = "prop.estado"
 
-    def agregar(self, entity: Reserva):
+        propiedad = Propiedad(
+            id=id_propiedad,
+            nombre=nombre_propiedad,
+            dimensiones=tamano_propiedad,
+            tipo=tipo_construccion,
+            ubicacion=ubicacion_propiedad,
+            estado=estado_propiedad
+        )
+
+        return [propiedad]
+
+    def agregar(self, entity: Propiedad):
         # TODO
         raise NotImplementedError
 
-    def actualizar(self, entity: Reserva):
+    def actualizar(self, entity: Propiedad):
         # TODO
         raise NotImplementedError
 
@@ -44,29 +52,29 @@ class RepositorioProveedoresSQLite(RepositorioProveedores):
         raise NotImplementedError
 
 
-class RepositorioReservasSQLite(RepositorioReservas):
+class RepositorioClientesSQLite(RepositorioClientes):
 
     def __init__(self):
-        self._fabrica_vuelos: FabricaVuelos = FabricaVuelos()
+        self._fabrica_propiedades: FabricaPropiedades = FabricaPropiedades()
 
     @property
-    def fabrica_vuelos(self):
-        return self._fabrica_vuelos
+    def fabrica_propiedades(self):
+        return self._fabrica_propiedades
 
-    def obtener_por_id(self, id: UUID) -> Reserva:
-        reserva_dto = db.session.query(ReservaDTO).filter_by(id=str(id)).one()
-        return self.fabrica_vuelos.crear_objeto(reserva_dto, MapeadorReserva())
+    def obtener_por_id(self, id: UUID) -> Propiedad:
+        propiedad_dto = db.session.query(PropiedadDTO).filter_by(id=str(id)).one()
+        return self.fabrica_propiedades.crear_objeto(propiedad_dto, MapeadorPropiedades())
 
-    def obtener_todos(self) -> list[Reserva]:
+    def obtener_todos(self) -> list[Propiedad]:
         # TODO
         raise NotImplementedError
 
-    def agregar(self, reserva: Reserva):
-        reserva_dto = self.fabrica_vuelos.crear_objeto(reserva, MapeadorReserva())
-        db.session.add(reserva_dto)
+    def agregar(self, propiedad: Propiedad):
+        propiedad_dto = self.fabrica_propiedades.crear_objeto(propiedad, MapeadorPropiedades())
+        db.session.add(propiedad_dto)
         db.session.commit()
 
-    def actualizar(self, reserva: Reserva):
+    def actualizar(self, reserva: Propiedad):
         # TODO
         raise NotImplementedError
 

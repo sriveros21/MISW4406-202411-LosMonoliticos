@@ -15,8 +15,9 @@ class Ubicacion:
         return f"{self.direccion}, {self.ciudad}, {self.codigoPostal}"
 
 @dataclass
-class Propiedad(AgregacionRaiz):
+class Propiedad(Entidad):
     id: ov.IdPropiedad = field(default_factory=ov.IdPropiedad)
+    nombre: ov.Nombre = field(default_factory=ov.Nombre)
     ubicacion: Ubicacion = field(default_factory=Ubicacion)
     dimensiones: ov.Dimensiones = field(default_factory=ov.Dimensiones)
     tipo: ov.TipoPropiedad = field(default_factory=ov.TipoPropiedad)
@@ -27,3 +28,7 @@ class Propiedad(AgregacionRaiz):
 
     def marcar_como_no_disponible(self):
         self.estado = ov.EstadoPropiedad(disponible=False)
+
+@dataclass
+class Propietario(AgregacionRaiz):
+    propiedades: list[ov.Propiedad] = field(default_factory=list[ov.Propiedad])
