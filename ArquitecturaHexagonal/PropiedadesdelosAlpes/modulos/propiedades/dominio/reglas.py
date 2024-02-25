@@ -1,5 +1,5 @@
 from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.reglas import ReglaNegocio
-from .objetos_valor import Ubicacion, Propiedad
+from .objetos_valor import Ubicacion, Propiedad, Dimensiones
 from datetime import datetime
 
 class UbicacionValida(ReglaNegocio):
@@ -22,3 +22,12 @@ class MinimoUnaPropiedad(ReglaNegocio):
 
     def es_valido(self) -> bool:
         return len(self.propiedades) > 0
+    
+class ReglaDimensionesValidas(ReglaNegocio):
+    def __init__(self, dimensiones: Dimensiones, mensaje='Las dimensiones propuestas son incorrectas'):
+        super().__init__(mensaje)
+        self.dimensiones = dimensiones
+
+    def es_valido(self) -> bool:
+        # Logica para validar dimensiones
+        return True

@@ -11,8 +11,10 @@ class IdentificadorUnico(ABC, ObjetoValor):
     id: str
 
 @dataclass(frozen=True)
-class Dimensiones(ObjetoValor):
-    metros_cuadrados: float
+class Dimension:
+    width: float
+    length: float
+    unit: str
 
 @dataclass(frozen=True)
 class Direccion(ObjetoValor):
