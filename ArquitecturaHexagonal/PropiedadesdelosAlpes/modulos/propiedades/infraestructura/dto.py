@@ -6,7 +6,7 @@ la infraestructura del dominio de propiedades
 """
 
 from PropiedadesdelosAlpes.config.db import db
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm import declarative_base, relationship, backref
 from sqlalchemy import Column, ForeignKey, Integer, Table
 
 import uuid
@@ -20,8 +20,16 @@ class Propiedad(db.Model):
     nombre_propiedad = db.Column(db.String, primary_key=False, nullable=False)
     tamano_propiedad = db.Column(db.Integer, primary_key=False, nullable=False)
     tipo_construccion = db.Column(db.String, primary_key=False, nullable=False)
-    zonificacion = db.Column(db.String, primary_key=False, nullable=False)
-    tamano_lote = db.Column(db.Integer, primary_key=False, nullable=False)
-    numero_pisos = db.Column(db.Integer, primary_key=False, nullable=False)
-    estacionamiento = db.Column(db.Boolean, primary_key=False, nullable=False)
+    ubicacion_propiedad = db.Column(db.String, primary_key=False, nullable=False)
+    estado_propiedad = db.Column(db.Boolean, primary_key=False, nullable=False)
+
+
+class Propietario(db.Model):
+    __tablename__ = "propietario"
+    id_propietario = db.Column(db.Integer, primary_key=True, nullable=False)
+    nombre_propietario = db.Column(db.String, primary_key=False, nullable=False)
+    email_propietario = db.Column(db.String, primary_key=False, nullable=False)
+    fecha_registro = db.Column(db.DateTime, nullable=False, primary_key=True)
+    id_propiedad = Column(Integer, ForeignKey('propiedades.id_propiedad'))
+    propiedad = relationship(Propiedad, backref=backref('propietario', uselist=True))
 

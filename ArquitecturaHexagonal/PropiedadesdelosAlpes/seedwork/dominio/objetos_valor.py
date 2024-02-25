@@ -36,3 +36,8 @@ class Precio(ObjetoValor):
 @dataclass(frozen=True)
 class Fecha(ObjetoValor):
     fecha: datetime
+
+@dataclass(frozen=True)
+class Identificacion(ObjetoValor):
+    numero: str
+    tipo: str  # Ejemplo: Cédula, RUT, Pasaporte
