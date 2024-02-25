@@ -10,6 +10,13 @@ from datetime import datetime
 class MapeadorPropiedadDTOJson(AppMap):
     def externo_a_dto(self, externo: dict) -> PropiedadDTO:
         propiedad_dto = PropiedadDTO()  
+        propiedad_dto.nombre=externo.nombre
+        propiedad_dto.ubicacion=externo.ubicacion
+        propiedad_dto.dimensiones=externo.dimensiones
+        propiedad_dto.tipo=externo.tipo
+        propiedad_dto.estado=externo.estado
+        propiedad_dto.terreno=externo.terreno
+
         return propiedad_dto
     
     #Esto debe modificarse?
