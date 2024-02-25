@@ -7,7 +7,7 @@ from .mapeadores import MapeadorPropiedad
 
 from .dto import PropiedadDTO
 
-class ServicioReserva(Servicio):
+class ServicioPropiedad(Servicio):
 
     def __init__(self):
         self._fabrica_repositorio: FabricaRepositorio = FabricaRepositorio()

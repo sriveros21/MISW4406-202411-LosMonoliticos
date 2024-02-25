@@ -38,7 +38,9 @@ class MapeadorPropiedad(RepMap):
 
 
     #Validar consitencia Entidad Propiedad en Dominio y AplicacionDTO
-        return PropiedadDTO(fecha_creacion, fecha_actualizacion, _id, _nombre,_ubicacion,_dimensiones,_tipo,_estado,_edificaciones,_terreno)
+        return PropiedadDTO(fecha_creacion, fecha_actualizacion, _id, 
+                            _nombre,_ubicacion,_dimensiones,_tipo,
+                            _estado,_edificaciones,_terreno)
     
     #Requiere Propiedad como entidad de Dominio
     def dto_a_entidad(self, dto: PropiedadDTO) -> Propiedad:
