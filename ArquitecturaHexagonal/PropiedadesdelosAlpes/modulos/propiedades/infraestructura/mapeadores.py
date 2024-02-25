@@ -12,11 +12,12 @@ from PropiedadesdelosAlpes.modulos.propiedades.dominio.entidades import Proveedo
 from PropiedadesdelosAlpes.modulos.propiedades.dominio.entidades import Propietario, Propiedad
 from .dto import Propiedad as PropiedadDTO
 from .dto import Propietario as PropietarioDTO
+from typing import List
 
 class MapeadorPropiedades(Mapeador):
     _FORMATO_FECHA = '%Y-%m-%dT%H:%M:%SZ'
 
-    def _procesar_propiedades_dto(self, propiedades_dto: list) -> list[Propiedad]:
+    def _procesar_propiedades_dto(self, propiedades_dto: list) -> List[Propiedad]:
         prop_dict = dict()
         
         for prop in propiedades_dto:

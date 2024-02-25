@@ -12,6 +12,7 @@ from PropiedadesdelosAlpes.modulos.propiedades.dominio.fabricas import FabricaPr
 from .dto import Propiedad as PropiedadDTO
 from .mapeadores import MapeadorPropiedades
 from uuid import UUID
+from typing import List
 
 class RepositorioPropiedadesSQLite(RepositorioPropiedades):
 
@@ -19,7 +20,7 @@ class RepositorioPropiedadesSQLite(RepositorioPropiedades):
         # TODO
         raise NotImplementedError
 
-    def obtener_todos(self) -> list[Propietario]:
+    def obtener_todos(self) -> List[Propietario]:
 
         id_propiedad = 123
         nombre_propiedad = "prop.nombre"
@@ -65,7 +66,7 @@ class RepositorioClientesSQLite(RepositorioClientes):
         propiedad_dto = db.session.query(PropiedadDTO).filter_by(id=str(id)).one()
         return self.fabrica_propiedades.crear_objeto(propiedad_dto, MapeadorPropiedades())
 
-    def obtener_todos(self) -> list[Propiedad]:
+    def obtener_todos(self) -> List[Propiedad]:
         # TODO
         raise NotImplementedError
 
