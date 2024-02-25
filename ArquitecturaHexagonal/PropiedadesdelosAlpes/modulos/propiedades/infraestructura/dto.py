@@ -22,14 +22,3 @@ class Propiedad(db.Model):
     tipo_construccion = db.Column(db.String, primary_key=False, nullable=False)
     ubicacion_propiedad = db.Column(db.String, primary_key=False, nullable=False)
     estado_propiedad = db.Column(db.Boolean, primary_key=False, nullable=False)
-
-
-class Propietario(db.Model):
-    __tablename__ = "propietario"
-    id_propietario = db.Column(db.Integer, primary_key=True, nullable=False)
-    nombre_propietario = db.Column(db.String, primary_key=False, nullable=False)
-    email_propietario = db.Column(db.String, primary_key=False, nullable=False)
-    fecha_registro = db.Column(db.DateTime, nullable=False, primary_key=True)
-    id_propiedad = Column(Integer, ForeignKey('propiedades.id_propiedad'))
-    propiedad = relationship(Propiedad, backref=backref('propietario', uselist=True))
-
