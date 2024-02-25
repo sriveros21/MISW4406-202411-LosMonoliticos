@@ -1,21 +1,29 @@
-from .entidades import Propiedad
-from .reglas import ReglaDimensionesValidas, UbicacionValida
-from .excepciones import TipoObjetoNoExisteEnDominioPropiedadesExcepcion
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.repositorios import Mapeador, Repositorio
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.fabricas import Fabrica
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.entidades import Entidad
 from dataclasses import dataclass
+from typing import Type
+from .entidades import Propiedad, Edificacion, Terreno
+from .reglas import UbicacionValida, ReglaDimensionesValidas
+from .excepciones import TipoObjetoNoExisteEnDominioPropiedadesExcepcion
+from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.propiedades.infraestructura.mapeadores import MapeadorPropiedades
+from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.fabricas import Fabrica
+from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.repositorios import Mapeador, Repositorio
 
 @dataclass
 class FabricaPropiedades(Fabrica):
-    def crear_objeto(self, obj: any, mapeador: Mapeador) -> any:
-        if isinstance(obj, Entidad):
-            return mapeador.entidad_a_dto(obj)
-        else:
-            propiedad: Propiedad = mapeador.dto_a_entidad(obj)
+    repositorio_propiedades: Repositorio
+    mapeador: Type[Mapeador] = MapeadorPropiedades
 
-            # Validar reglas específicas para la creación de una propiedad
-            self.validar_regla(UbicacionValida(propiedad.ubicacion))
-            self.validar_regla(ReglaDimensionesValidas(propiedad.dimensiones))
-            
-            return propiedad
+    def crear_desde_dto(self, dto: any) -> Propiedad:
+        # Assuming dto is an instance of a data transfer object for Propiedad
+        propiedad: Propiedad = self.mapeador.dto_a_entidad(dto)
+
+        # Validate specific rules for property creation
+        if not UbicacionValida(propiedad.ubicacion).es_valido():
+            raise TipoObjetoNoExisteEnDominioPropiedadesExcepcion("Ubicación no válida.")
+        
+        if not ReglaDimensionesValidas(propiedad.dimensiones).es_valido():
+            raise TipoObjetoNoExisteEnDominioPropiedadesExcepcion("Dimensiones no válidas.")
+
+        # Additional logic for processing or storing the created Propiedad entity
+        self.repositorio_propiedades.agregar(propiedad)
+        
+        return propiedad

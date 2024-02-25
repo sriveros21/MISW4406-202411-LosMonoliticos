@@ -4,16 +4,13 @@ from datetime import datetime
 from enum import Enum
 
 @dataclass(frozen=True)
-class Direccion(ObjetoValor):
-    calle: str
-    numero: str
-    ciudad: str
-    estado: str
-    codigo_postal: str
+class InformacionGeoespacial:
+    latitude: float
+    longitude: float
 
 @dataclass(frozen=True)
-class Dimensiones(ObjetoValor):
-    metros_cuadrados: float
+class IdentificadorPropiedad:
+    identificador: str
 
 @dataclass(frozen=True)
 class EstadoPropiedad(Enum):
@@ -26,10 +23,6 @@ class TipoPropiedad(Enum):
     RESIDENCIAL = "Residencial"
     COMERCIAL = "Comercial"
     INDUSTRIAL = "Industrial"
-
-@dataclass(frozen=True)
-class FechaConstruccion(ObjetoValor):
-    fecha: datetime
 
 @dataclass(frozen=True)
 class Precio(ObjetoValor):
