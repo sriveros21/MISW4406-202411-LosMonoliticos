@@ -3,9 +3,9 @@ from typing import Type
 from .entidades import Propiedad, Edificacion, Terreno
 from .reglas import UbicacionValida, ReglaDimensionesValidas
 from .excepciones import TipoObjetoNoExisteEnDominioPropiedadesExcepcion
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.propiedades.infraestructura.mapeadores import MapeadorPropiedades
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.fabricas import Fabrica
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.repositorios import Mapeador, Repositorio
+from ....modulos.propiedades.infraestructura.mapeadores import MapeadorPropiedades
+from ....seedwork.dominio.fabricas import Fabrica
+from ....seedwork.dominio.repositorios import Mapeador, Repositorio
 
 @dataclass
 class FabricaPropiedades(Fabrica):

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from ....seedwork.dominio.objetos_valor import ObjetoValor, Identificacion
+from ....seedwork.dominio.objetos_valor import ObjetoValor
 from datetime import datetime
 from enum import Enum
 
