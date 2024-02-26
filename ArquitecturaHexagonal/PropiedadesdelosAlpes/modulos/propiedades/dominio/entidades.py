@@ -5,13 +5,13 @@ from dataclasses import dataclass, field
 from typing import List
 
 from ....seedwork.dominio.entidades import Entidad, AgregacionRaiz
-from ....seedwork.dominio.objetos_valor import Ubicacion
+from ....seedwork.dominio.objetos_valor import Ubicacion, Dimension
 import PropiedadesdelosAlpes.modulos.propiedades.dominio.objetos_valor as ov
 
 @dataclass
 class Edificacion(Entidad, ABC):
-    id: ov.IdEdificacion = field(default_factory=ov.IdEdificacion)
-    dimensiones: ov.Dimensiones = field(default_factory=ov.Dimensiones)
+    id: ov.IdentificadorPropiedad = field(default_factory=ov.IdentificadorPropiedad)
+    dimensiones: Dimension = field(default_factory=Dimension)
     tipo: str  # Minorista, Oficina, Industrial, Especializado
     pisos: List[ov.Piso] = field(default_factory=list)
 
@@ -45,16 +45,16 @@ class Especializado(Edificacion):
 
 @dataclass
 class Terreno(Entidad):
-    id: ov.IdTerreno = field(default_factory=ov.IdTerreno)
-    dimensiones: ov.Dimensiones = field(default_factory=ov.Dimensiones)
+    id: ov.IdentificadorPropiedad = field(default_factory=ov.IdentificadorPropiedad)
+    dimensiones: Dimension = field(default_factory=Dimension)
     lote: ov.Lote = field(default_factory=ov.Lote)
 
 @dataclass
 class Propiedad(AgregacionRaiz):
-    id: ov.IdPropiedad = field(default_factory=ov.IdPropiedad)
+    id: ov.IdentificadorPropiedad = field(default_factory=ov.IdentificadorPropiedad)
     nombre: ov.Nombre = field(default_factory=ov.Nombre)
     ubicacion: Ubicacion = field(default_factory=Ubicacion)
-    dimensiones: ov.Dimensiones = field(default_factory=ov.Dimensiones)
+    dimensiones: Dimension = field(default_factory=Dimension)
     tipo: ov.TipoPropiedad = field(default_factory=ov.TipoPropiedad)
     estado: ov.EstadoPropiedad = field(default_factory=ov.EstadoPropiedad)
     edificaciones: List[Edificacion] = field(default_factory=list)

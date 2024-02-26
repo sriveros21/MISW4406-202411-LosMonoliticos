@@ -46,17 +46,8 @@ class RepositorioPropiedadesSQLite(RepositorioPropiedades):
         )
 
         return [propiedad]
-        raise NotImplementedError
 
     def agregar(self, propiedad: Propiedad):
         propiedad_dto = self.fabrica_propiedades.crear_objeto(propiedad, MapeadorPropiedades())
         db.session.add(propiedad_dto)
         db.session.commit()
-
-    def actualizar(self, reserva: Propiedad):
-        # TODO
-        raise NotImplementedError
-
-    def eliminar(self, reserva_id: UUID):
-        # TODO
-        raise NotImplementedError
