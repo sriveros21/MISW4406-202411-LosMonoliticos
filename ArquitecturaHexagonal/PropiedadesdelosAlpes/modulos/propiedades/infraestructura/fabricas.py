@@ -19,3 +19,10 @@ class FabricaRepositorio(Fabrica):
             return RepositorioPropiedadesSQLite()
         else:
             raise ExcepcionFabrica()
+
+    def obtener_repositorio_propiedades(self) -> RepositorioPropiedades:
+        """
+        Returns an instance of RepositorioPropiedades.
+        This method simplifies accessing the properties repository.
+        """
+        return RepositorioPropiedadesSQLite()

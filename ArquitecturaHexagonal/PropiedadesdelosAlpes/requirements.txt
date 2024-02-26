@@ -3,3 +3,5 @@ Flask-SQLAlchemy==3.0.2
 marshmallow==3.13.0
 SQLAlchemy==1.4.44
 Werkzeug==2.2.2
+pulsar-client==3.4.0
+PyDispatcher==2.0.6

@@ -1,5 +1,6 @@
-from dataclasses import dataclass, field, 
+from dataclasses import dataclass, field
 from PropiedadesdelosAlpes.seedwork.aplicacion.dto import DTO
+from typing import List
 
 @dataclass(frozen=True)
 class InformacionGeoespacialDTO(DTO):
@@ -25,7 +26,7 @@ class EdificacionDTO(DTO):
     id: str
     tipo: str  # Minorista, Oficina, Industrial, Especializado
     dimensiones: float
-    pisos: list[PisoDTO] = field(default_factory=list)
+    pisos: List[PisoDTO] = field(default_factory=list)
 
 @dataclass(frozen=True)
 class TerrenoDTO(DTO):
@@ -33,7 +34,6 @@ class TerrenoDTO(DTO):
     dimensiones: float
     lote: str
 
-#Ajustar este con entidad Propiedad en el Dominio
 @dataclass(frozen=True)
 class PropiedadDTO(DTO):
     fecha_creacion: str = field(default_factory=str)
@@ -44,5 +44,5 @@ class PropiedadDTO(DTO):
     dimensiones: float = field(default_factory=float)
     tipo: str = field(default_factory=str)
     estado: str = field(default_factory=str)
-    edificaciones: list[EdificacionDTO] = field(default_factory=list)
+    edificaciones: List[EdificacionDTO] = field(default_factory=list)
     terreno: TerrenoDTO = field(default_factory=TerrenoDTO)

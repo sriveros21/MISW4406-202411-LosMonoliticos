@@ -28,3 +28,15 @@ class TipoPropiedad(Enum):
 class Precio(ObjetoValor):
     valor: float
     moneda: str
+
+@dataclass(frozen=True)
+class Piso(ObjetoValor):
+    valor: float
+
+@dataclass(frozen=True)
+class Lote(ObjetoValor):
+    valor: float
+
+@dataclass(frozen=True)
+class Nombre(ObjetoValor):
+    valor: str

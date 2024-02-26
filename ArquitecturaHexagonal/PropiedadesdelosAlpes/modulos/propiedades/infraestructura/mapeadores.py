@@ -8,10 +8,8 @@ encargados de la transformación entre formatos de dominio y DTOs
 from PropiedadesdelosAlpes.seedwork.dominio.repositorios import Mapeador
 from PropiedadesdelosAlpes.modulos.propiedades.dominio.entidades import Propiedad
 from .dto import Propiedad as PropiedadDTO
-from typing import List
 
 class MapeadorPropiedades(Mapeador):
-    _FORMATO_FECHA = '%Y-%m-%dT%H:%M:%SZ'
     
     def obtener_tipo(self) -> type:
         return Propiedad.__class__
