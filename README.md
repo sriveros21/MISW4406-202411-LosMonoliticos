@@ -5,12 +5,23 @@
 - Sebastián Arango
 
 ## Instrucciones de uso:
+## Escenarios de calidad a probar:
+Los escenarios de calidad que se pretender probar con el desarrollo del proyecto son:
+- Escalabilidad
+- Disponibilidad
+- Interoperabilidad
+
+Para cada uno de estos atributos de calidad se plantearos 3 escenarios de calidad los cuales son presentados en la entrega 3 del curso.
+
 ### Estructura de proyecto:
 El proyecto tiene la siguiente estructura:
 - Dentro de la carpeta `src/main/cml` se encuentran los archivos utilizados para desarrollar y construir el diagrama de contexto, ya que mediante la funcionalidad de Gitpod se puede generar los archivos con el menu de opciones, dando click en la opción `Generate graphical context map`. Acá se tienen dos archivos, uno es para la construcción del AS_IS de nombre `propiedadesDeLosAlpes.cml` y otro para la construcción del TO_BE de nombre `propiedadesDeLosAlpes_tobe.cml`. El archivo de `demo.cml` es para fines de ejemplo.
 - Dentro de la carpeta `src-gen` se encuentran las imágenes exportadas mediante la funcionalidad anteriormente descrita, y estas imágenes se exportan en tres formatos: `.png, .svg y .gv`. El archivo `.png` es el más utilizado para visualizar el diagrama de contexto.
 - Dichos diagramas de contexto tambien se clasifican con el mismo nombre para diferenciar el diagrama AS_IS y el diagrama TO_BE.
 - Otros archivos tales como el `.gitignore`, sirve para excluir de los commits de Git ciertos archivos con determinada extensión; `.gitpod.Dockerfile`, sirve para la configuración del ambiente tal y como se ha visto en los tutoriales.
+- En la carpeta `ArquitecturaHexagonal` -> `PropiedadesdelosAlpes` se encuentran las carpetas de `modulos` y `seedwork` las cuales son necesarias para el desarrollo del proyecto.
+- En la carpeta `modulos` se tienen los microservicios (o modulos) que se desean conectar mediante eventos, y dentro de cada uno, se tiene la estructura de carpetas de acuerdo a una estructura hexagonal o cebolla, la cual reúne las carpetas de `aplicacion`, `dominio` e `infraestructura`, las cuales a su vez tienen los archivos necesarios para el desarrollo. La descripción y explicación de cada archivo se puede encontrar en el video explicativo de la entrega 3 del curso.
+- Para levantar la aplicación, hay que ejecutar el comando `flask run`.
 
 ### Dónde encontrar los fragmentos de código:
 Los fragmentos de código se encuentran en los archivos con extensión `.cml` que se ubican en el directorio `src/main/cml`, y se dividen por el archivo de AS_IS y el de TO_BE:
