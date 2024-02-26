@@ -1,8 +1,8 @@
 from flask import Blueprint, request, Response, json
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.propiedades.aplicacion.servicios import ServicioPropiedad
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.propiedades.aplicacion.dto import PropiedadDTO
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.excepciones import ExcepcionDominio
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.propiedades.aplicacion.mapeadores import MapeadorPropiedadDTOJson
+from ..modulos.propiedades.aplicacion.servicios import ServicioPropiedad
+from ..modulos.propiedades.aplicacion.dto import PropiedadDTO
+from ..seedwork.dominio.excepciones import ExcepcionDominio
+from ..modulos.propiedades.aplicacion.mapeadores import MapeadorPropiedadDTOJson
 
 bp = Blueprint('propiedades', __name__, url_prefix='/propiedades')
 

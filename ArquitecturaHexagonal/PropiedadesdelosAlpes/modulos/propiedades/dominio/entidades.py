@@ -1,11 +1,12 @@
-from abc import ABC, abstractmethod
 from __future__ import annotations
+from abc import ABC, abstractmethod
+
 from dataclasses import dataclass, field
 from typing import List
 
-import ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.propiedades.dominio.objetos_valor as ov
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.entidades import Entidad, AgregacionRaiz
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.objetos_valor import Ubicacion
+from ....seedwork.dominio.entidades import Entidad, AgregacionRaiz
+from ....seedwork.dominio.objetos_valor import Ubicacion
+import PropiedadesdelosAlpes.modulos.propiedades.dominio.objetos_valor as ov
 
 @dataclass
 class Edificacion(Entidad, ABC):
