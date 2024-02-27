@@ -69,5 +69,5 @@ class MapeadorPropiedad(RepMap):
         )
 
     def dto_a_entidad(self, dto: PropiedadDTO) -> Propiedad:
-        propiedad = Propiedad()
+        propiedad: Propiedad = dto
         return propiedad
