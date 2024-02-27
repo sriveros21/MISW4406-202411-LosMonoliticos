@@ -38,3 +38,8 @@ class Precio(ObjetoValor):
 @dataclass(frozen=True)
 class Fecha(ObjetoValor):
     fecha: datetime
+
+@dataclass(frozen=True)
+class NombreCompleto(ObjetoValor):
+    nombre: str
+    apellido: str
