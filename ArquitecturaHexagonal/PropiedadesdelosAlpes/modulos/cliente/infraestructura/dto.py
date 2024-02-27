@@ -6,10 +6,6 @@ la infraestructura del dominio de clientes
 """
 
 from PropiedadesdelosAlpes.config.db import db
-from sqlalchemy.orm import declarative_base, relationship, backref
-from sqlalchemy import Column, ForeignKey, Integer, Table
-
-import uuid
 
 Base = db.declarative_base()
 
