@@ -14,8 +14,21 @@ class MapeadorPropiedadDTOJson(AppMap):
         propiedad_dto.dimensiones=propiedad.dimensiones
         propiedad_dto.tipo=propiedad.tipo
         propiedad_dto.estado=propiedad.estado
-        propiedad_dto.terreno=propiedad.terreno
+        #Revisar esta linea
+        #propiedad_dto.terreno=propiedad.terreno
+        terreno:TerrenoDTO=TerrenoDTO(
+            id=str(propiedad.terreno.id),
+            dimensiones=propiedad.terreno.dimensiones,
+            lote=propiedad.terreno.lote
+        )
+        propiedad_dto.terreno=terreno
+
+        #propiedad_dto.terreno.id=propiedad.terreno.id
+        #propiedad_dto.terreno.dimensiones=propiedad.terreno.dimensiones
+        #propiedad_dto.terreno.lote=propiedad.terreno.lote
         
+
+
         edificaciones_dto:list[EdificacionDTO]=list()
 
         for edificacion in propiedad.get('edificaciones',list()):
