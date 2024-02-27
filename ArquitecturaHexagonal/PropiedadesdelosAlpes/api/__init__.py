@@ -5,6 +5,11 @@ from flask_sqlalchemy import SQLAlchemy
 # Identifies the base directory
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+#Register Handlers
+def registrar_handlers():
+    import PropiedadesdelosAlpes.modulos.auditorias.aplicacion
+    
+
 # Initialize the database variable here
 db = SQLAlchemy()
 
