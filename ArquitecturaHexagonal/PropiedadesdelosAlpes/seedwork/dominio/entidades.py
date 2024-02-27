@@ -1,9 +1,12 @@
 from dataclasses import dataclass, field
+from .eventos import EventoDominio
 from .mixins import ValidarReglasMixin
 from .reglas import IdEntidadEsInmutable
 from .excepciones import IdDebeSerInmutableExcepcion
 from datetime import datetime
 import uuid
+
+
 
 @dataclass
 class Entidad:
@@ -17,7 +20,13 @@ class Entidad:
 
 @dataclass
 class AgregacionRaiz(Entidad, ValidarReglasMixin):
-    pass
+    eventos: list[EventoDominio] = field(default_factory=list)
+
+    def agregar_evento(self, evento: EventoDominio):
+        self.eventos.append(evento)
+    
+    def limpiar_eventos(self):
+        self.eventos = list()
 
 @dataclass
 class Locacion(Entidad):
