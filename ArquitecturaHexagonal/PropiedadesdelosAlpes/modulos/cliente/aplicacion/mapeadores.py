@@ -1,18 +1,17 @@
+from PropiedadesdelosAlpes.modulos.cliente.dominio.entidades import Cliente
+from PropiedadesdelosAlpes.seedwork.aplicacion.dto import Mapeador as AppMap
+from PropiedadesdelosAlpes.seedwork.dominio.repositorios import Mapeador as RepMap
+
 from .dto import ClienteDTO
-from ....modulos.cliente.dominio.entidades import Cliente
-from ....seedwork.aplicacion.dto import Mapeador as AppMap
-from ....seedwork.dominio.repositorios import Mapeador as RepMap
 
 
 class MapeadorClienteDTOJson(AppMap):
     def externo_a_dto(self, cliente: dict) -> ClienteDTO:
         cliente_dto = ClienteDTO()
+        cliente_dto.nombre = cliente.get('nombre')
+        cliente_dto.apellido = cliente.get('apellido')
+        cliente_dto.email = cliente.get('email')
 
-        cliente_dto.nombre.nombre = cliente.nombre
-        cliente_dto.nombre.apellido = cliente.apellido
-        cliente_dto.email.correo = cliente.email
-
-        cliente_dto.cliente.append()
         return cliente_dto
 
     def dto_a_externo(self, dto: ClienteDTO) -> dict:
@@ -25,9 +24,9 @@ class MapeadorCliente(RepMap):
 
     def entidad_a_dto(self, entidad: Cliente) -> ClienteDTO:
         return ClienteDTO(
-            nombre=entidad.nombre.nombre,
-            apellido=entidad.nombre.apellido,
-            email=entidad.email.correo
+            nombre=entidad.nombre.valor,
+            apellido=entidad.apellido.valor,
+            email=entidad.email.valor
         )
 
     def dto_a_entidad(self, dto: ClienteDTO) -> Cliente:
