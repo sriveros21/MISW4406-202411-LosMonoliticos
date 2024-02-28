@@ -7,7 +7,7 @@ En este archivo usted encontrará los objetos valor del dominio auditorias
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from PropiedadesdelosAlpes.seedwork.dominio.objetos_valor import ObjetoValor, Fecha, Codigo
+from ....seedwork.dominio.objetos_valor import ObjetoValor, Fecha
 from abc import ABC, abstractmethod
 from datetime import datetime
 from enum import Enum

@@ -15,7 +15,7 @@ Base =db.declarative_base()
 
 class Auditoria(db.Model):
     __tablename__ = "auditorias"
-    #id= db.Column(db.String, primary_key=True, nullable=False)
+    id= db.Column(db.String, primary_key=True, nullable=False)
     codigo_auditoria =  db.Column(db.String, primary_key=False, nullable=False)
     fecha_auditoria =  db.Column(db.DateTime, primary_key=False, nullable=False)
     nombre_auditor =  db.Column(db.String, primary_key=False, nullable=False)

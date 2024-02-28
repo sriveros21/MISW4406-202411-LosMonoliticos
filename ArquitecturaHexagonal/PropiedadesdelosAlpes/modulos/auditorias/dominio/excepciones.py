@@ -4,8 +4,7 @@ En este archivo se encontrarán las excepciones del dominio de auditorias
 
 """
 
-
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.excepciones import ExcepcionFabrica
+from ....seedwork.dominio.excepciones import ExcepcionFabrica
 
 
 class TipoObjetoNoExisteEnDominioAuditoriasExcepcion(ExcepcionFabrica):
