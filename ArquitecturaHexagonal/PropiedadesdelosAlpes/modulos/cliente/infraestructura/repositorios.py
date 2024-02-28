@@ -1,5 +1,4 @@
 from typing import List
-from uuid import UUID
 
 from PropiedadesdelosAlpes.modulos.cliente.dominio.entidades import Cliente
 from PropiedadesdelosAlpes.modulos.cliente.dominio.fabricas import FabricaCliente
@@ -11,7 +10,6 @@ from ....config.db import db
 
 
 class RepositorioClienteSQLite(RepositorioCliente):
-
     def __init__(self):
         self._fabrica_cliente: FabricaCliente = FabricaCliente()
 
@@ -19,18 +17,20 @@ class RepositorioClienteSQLite(RepositorioCliente):
     def fabrica_cliente(self):
         return self._fabrica_cliente
 
-    def obtener_por_id(self, id: UUID) -> Cliente:
+    def obtener_por_id(self, id: str) -> Cliente:
         cliente_dto = db.session.query(ClienteDTO).filter_by(id=str(id)).one()
         return self.fabrica_cliente.crear_objeto(cliente_dto, MapeadorCliente())
 
     def obtener_todos(self) -> List[Cliente]:
         id_cliente = 123
         nombre_cliente = "cliente.nombre"
+        apellido_cliente = "cliente.apellido"
         email_cliente = "cliente.email"
 
         cliente = Cliente(
             id=id_cliente,
             nombre=nombre_cliente,
+            apellido=apellido_cliente,
             email=email_cliente
         )
 
@@ -40,11 +40,3 @@ class RepositorioClienteSQLite(RepositorioCliente):
         cliente_dto = self.fabrica_cliente.crear_objeto(cliente, MapeadorCliente())
         db.session.add(cliente_dto)
         db.session.commit()
-
-    def actualizar(self, cliente: Cliente):
-        # TODO
-        raise NotImplementedError
-
-    def eliminar(self, cliente_id: UUID):
-        # TODO
-        raise NotImplementedError
