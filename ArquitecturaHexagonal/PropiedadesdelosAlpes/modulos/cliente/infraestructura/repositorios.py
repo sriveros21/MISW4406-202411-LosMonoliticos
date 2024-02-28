@@ -8,19 +8,18 @@ persistir objetos dominio (agregaciones) en la capa de infraestructura del domin
 from typing import List
 from uuid import UUID
 
-from PropiedadesdelosAlpes.config.db import db
-from PropiedadesdelosAlpes.modulos.cliente.dominio.entidades import Cliente
-from PropiedadesdelosAlpes.modulos.cliente.dominio.fabricas import FabricaClientes
-from PropiedadesdelosAlpes.modulos.cliente.dominio.repositorios import RepositorioClientes
-
 from .dto import Cliente as ClienteDTO
 from .mapeadores import MapeadorClientes
+from ....config.db import db
+from ....modulos.cliente.dominio.entidades import Cliente
+from ....modulos.cliente.dominio.fabricas import FabricaCliente
+from ....modulos.cliente.dominio.repositorios import RepositorioCliente
 
 
-class RepositorioClientesSQLite(RepositorioClientes):
+class RepositorioClientesSQLite(RepositorioCliente):
 
     def __init__(self):
-        self._fabrica_clientes: FabricaClientes = FabricaClientes()
+        self._fabrica_clientes: FabricaCliente = FabricaCliente()
 
     @property
     def fabrica_clientes(self):
