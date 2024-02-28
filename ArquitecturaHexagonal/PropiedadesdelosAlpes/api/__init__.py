@@ -40,5 +40,5 @@ def create_app(configuracion=None):
 
     return app
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     create_app().run(debug=True)

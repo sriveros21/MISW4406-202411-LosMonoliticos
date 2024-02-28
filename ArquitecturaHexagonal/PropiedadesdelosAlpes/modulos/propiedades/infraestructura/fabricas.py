@@ -17,8 +17,7 @@ class FabricaRepositorio(Fabrica):
     def crear_objeto(self, obj: type, mapeador: any = None) -> Repositorio:
         if obj == RepositorioPropiedades.__class__:
             return RepositorioPropiedadesSQLite()
-        else:
-            raise ExcepcionFabrica()
+        raise ExcepcionFabrica()
 
     def obtener_repositorio_propiedades(self) -> RepositorioPropiedades:
         """
