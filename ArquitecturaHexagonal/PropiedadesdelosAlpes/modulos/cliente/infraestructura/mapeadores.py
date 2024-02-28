@@ -21,6 +21,7 @@ class MapeadorCliente(Mapeador):
         cliente = Cliente(
             dto.id_cliente,
             dto.nombre_cliente,
+            dto.apellido_cliente,
             dto.email_cliente
         )
 
