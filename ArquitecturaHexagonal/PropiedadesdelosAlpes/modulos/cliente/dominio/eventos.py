@@ -9,6 +9,7 @@ class ClienteCreado(EventoDominio):
     cliente_id: uuid.UUID = None
     nombre: str = None
     apellido: str = None
+    email: str = None
 
 
 @dataclass
