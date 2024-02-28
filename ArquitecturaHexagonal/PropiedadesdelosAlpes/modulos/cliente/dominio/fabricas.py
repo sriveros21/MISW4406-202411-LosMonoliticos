@@ -4,7 +4,7 @@ from typing import Type
 from .entidades import Cliente
 from .excepciones import TipoObjetoNoExisteEnDominioClienteExcepcion
 from .reglas import NombreValido
-from ....modulos.cliente.infraestructura.mapeadores import MapeadorClientes
+from ....modulos.cliente.infraestructura.mapeadores import MapeadorCliente
 from ....seedwork.dominio.fabricas import Fabrica
 from ....seedwork.dominio.repositorios import Mapeador, Repositorio
 
@@ -12,7 +12,7 @@ from ....seedwork.dominio.repositorios import Mapeador, Repositorio
 @dataclass
 class FabricaCliente(Fabrica):
     repositorio_cliente: Repositorio
-    mapeador: Type[Mapeador] = MapeadorClientes
+    mapeador: Type[Mapeador] = MapeadorCliente
 
     def crear_desde_dto(self, dto: any) -> Cliente:
         # Assuming dto is an instance of a data transfer object for Propiedad

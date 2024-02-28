@@ -3,7 +3,7 @@ from .mapeadores import MapeadorCliente
 from ....modulos.cliente.dominio.entidades import Cliente
 from ....modulos.cliente.dominio.fabricas import FabricaCliente
 from ....modulos.cliente.infraestructura.fabricas import FabricaRepositorio
-from ....modulos.cliente.infraestructura.repositorios import RepositorioClientes
+from ....modulos.cliente.infraestructura.repositorios import RepositorioCliente
 from ....seedwork.aplicacion.servicios import Servicio
 
 
@@ -24,11 +24,11 @@ class ServicioCliente(Servicio):
     def crear_cliente(self, cliente_dto: ClienteDTO) -> ClienteDTO:
         cliente: Cliente = self.fabrica_cliente.crear_objeto(cliente_dto, MapeadorCliente())
 
-        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioClientes.__class__)
+        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioCliente.__class__)
         repositorio.agregar(cliente)
 
         return self.fabrica_cliente.crear_objeto(cliente, MapeadorCliente())
 
     def obtener_cliente_por_id(self, id) -> ClienteDTO:
-        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioClientes.__class__)
+        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioCliente.__class__)
         return repositorio.obtener_por_id(id).__dict__

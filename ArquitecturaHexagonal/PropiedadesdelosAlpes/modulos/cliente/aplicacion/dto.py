@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from ....seedwork.aplicacion.dto import DTO
 
@@ -19,9 +19,8 @@ class IdentificacionDTO(DTO):
     tipo: str
     numero: str
 
+
 @dataclass(frozen=True)
 class ClienteDTO(DTO):
-
-    id_cliente = db.Column(db.Integer, primary_key=True, nullable=False)
-    nombre_cliente = db.Column(db.String, primary_key=False, nullable=False)
-    email_cliente = db.Column(db.String, primary_key=False, nullable=False)
+    nombre: str = field(default_factory=str)
+    apellido: str = field(default_factory=str)

@@ -1,7 +1,7 @@
-""" Repositorios para el manejo de persistencia de objetos de dominio en la capa de infrastructura del dominio de clientes
+""" Repositorios para el manejo de persistencia de objetos de dominio en la capa de infrastructura del dominio de cliente
 
 En este archivo usted encontrará las diferentes repositorios para
-persistir objetos dominio (agregaciones) en la capa de infraestructura del dominio de clientes
+persistir objetos dominio (agregaciones) en la capa de infraestructura del dominio de cliente
 
 """
 
@@ -9,25 +9,25 @@ from typing import List
 from uuid import UUID
 
 from .dto import Cliente as ClienteDTO
-from .mapeadores import MapeadorClientes
+from .mapeadores import MapeadorCliente
 from ....config.db import db
 from ....modulos.cliente.dominio.entidades import Cliente
 from ....modulos.cliente.dominio.fabricas import FabricaCliente
 from ....modulos.cliente.dominio.repositorios import RepositorioCliente
 
 
-class RepositorioClientesSQLite(RepositorioCliente):
+class RepositorioClienteSQLite(RepositorioCliente):
 
     def __init__(self):
-        self._fabrica_clientes: FabricaCliente = FabricaCliente()
+        self._fabrica_cliente: FabricaCliente = FabricaCliente()
 
     @property
-    def fabrica_clientes(self):
-        return self._fabrica_clientes
+    def fabrica_cliente(self):
+        return self._fabrica_cliente
 
     def obtener_por_id(self, id: UUID) -> Cliente:
         cliente_dto = db.session.query(ClienteDTO).filter_by(id=str(id)).one()
-        return self.fabrica_clientes.crear_objeto(cliente_dto, MapeadorClientes())
+        return self.fabrica_cliente.crear_objeto(cliente_dto, MapeadorCliente())
 
     def obtener_todos(self) -> List[Cliente]:
         id_cliente = 123
@@ -43,7 +43,7 @@ class RepositorioClientesSQLite(RepositorioCliente):
         return [cliente]
 
     def agregar(self, cliente: Cliente):
-        cliente_dto = self.fabrica_clientes.crear_objeto(cliente, MapeadorClientes())
+        cliente_dto = self.fabrica_cliente.crear_objeto(cliente, MapeadorCliente())
         db.session.add(cliente_dto)
         db.session.commit()
 
