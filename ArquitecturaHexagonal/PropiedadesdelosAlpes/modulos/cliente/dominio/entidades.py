@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
 from datetime import datetime
 
-from .objetos_valor import NombreCompleto, EmailContacto, Identificacion, FechaRegistro
 from ....seedwork.dominio.entidades import Entidad
+from ....seedwork.dominio.objetos_valor import NombreCompleto, EmailContacto, Identificacion, FechaRegistro
 
 
 @dataclass
