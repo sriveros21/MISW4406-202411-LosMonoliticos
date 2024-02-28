@@ -1,17 +1,21 @@
 from dataclasses import dataclass, field
 
-from ....seedwork.aplicacion.dto import DTO
+from PropiedadesdelosAlpes.seedwork.aplicacion.dto import DTO
 
 
 @dataclass(frozen=True)
-class NombreCompletoDTO(DTO):
+class NombreDTO(DTO):
     nombre: str
+
+
+@dataclass(frozen=True)
+class ApellidoDTO(DTO):
     apellido: str
 
 
 @dataclass(frozen=True)
-class EmailContactoDTO(DTO):
-    correo: str
+class EmailDTO(DTO):
+    email: str
 
 
 @dataclass(frozen=True)
@@ -22,6 +26,6 @@ class IdentificacionDTO(DTO):
 
 @dataclass(frozen=True)
 class ClienteDTO(DTO):
-    nombre: str = field(default_factory=str)
-    apellido: str = field(default_factory=str)
-    email: str = field(default_factory=str)
+    nombre: NombreDTO = field(default_factory=NombreDTO)
+    apellido: ApellidoDTO = field(default_factory=ApellidoDTO)
+    email: EmailDTO = field(default_factory=EmailDTO)

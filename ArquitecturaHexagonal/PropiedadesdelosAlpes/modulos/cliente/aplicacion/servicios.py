@@ -1,10 +1,11 @@
+from PropiedadesdelosAlpes.modulos.cliente.dominio.entidades import Cliente
+from PropiedadesdelosAlpes.modulos.cliente.dominio.fabricas import FabricaCliente
+from PropiedadesdelosAlpes.modulos.cliente.infraestructura.fabricas import FabricaRepositorio
+from PropiedadesdelosAlpes.modulos.cliente.infraestructura.repositorios import RepositorioCliente
+from PropiedadesdelosAlpes.seedwork.aplicacion.servicios import Servicio
+
 from .dto import ClienteDTO
 from .mapeadores import MapeadorCliente
-from ....modulos.cliente.dominio.entidades import Cliente
-from ....modulos.cliente.dominio.fabricas import FabricaCliente
-from ....modulos.cliente.infraestructura.fabricas import FabricaRepositorio
-from ....modulos.cliente.infraestructura.repositorios import RepositorioCliente
-from ....seedwork.aplicacion.servicios import Servicio
 
 
 class ServicioCliente(Servicio):
