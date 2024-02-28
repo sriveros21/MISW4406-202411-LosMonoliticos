@@ -8,7 +8,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 import PropiedadesdelosAlpes.modulos.auditorias.dominio.objetos_valor as ov
-from PropiedadesdelosAlpes.seedwork.dominio.entidades import AgregacionRaiz, Entidad
+from ....seedwork.dominio.entidades import AgregacionRaiz, Entidad
 
 #Revisar si esta lleva Id
 @dataclass

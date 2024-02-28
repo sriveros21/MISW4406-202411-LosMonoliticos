@@ -7,7 +7,7 @@ from ..modulos.auditorias.aplicacion.mapeadores import MapeadorAuditoriaDTOJson
 import PropiedadesdelosAlpes.seedwork.presentacion.api as api
 from flask import redirect, render_template,session, url_for
 from PropiedadesdelosAlpes.modulos.auditorias.aplicacion.comandos.crear_auditoria import CrearAuditoria
-from PropiedadesdelosAlpes.modulos.auditorias.aplicacion.queries.obtener_auditoria import ObtenerAuditoria, ObtenerReserva
+from PropiedadesdelosAlpes.modulos.auditorias.aplicacion.queries.obtener_auditoria import ObtenerAuditoria
 from PropiedadesdelosAlpes.seedwork.aplicacion.comandos import ejecutar_commando
 from PropiedadesdelosAlpes.seedwork.aplicacion.queries import ejecutar_query
 

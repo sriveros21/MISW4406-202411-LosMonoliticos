@@ -8,13 +8,10 @@ from datetime import datetime
 
 class MapeadorAuditoriaDTOJson(AppMap):
     def externo_a_dto(self, externo: dict) -> AuditoriaDTO:
-        auditoria_dto = AuditoriaDTO()
-        auditoria_dto.codigo=externo.get('codigo')
-        auditoria_dto.fecha=externo.get('fecha')
-        auditoria_dto.auditor=externo.get('auditor')
-        auditoria_dto.fase =externo.get('fase')
-        auditoria_dto.hallazgos=externo.get('hallazgos')
-        auditoria_dto.objetivo=externo.get('objetivo')
+        auditoria_dto = AuditoriaDTO(
+        externo.get('codigo'), externo.get('fecha'),
+        externo.get('auditor'),externo.get('fase'),
+        externo.get('hallazgos'), externo.get('objetivo'))
 
         return auditoria_dto
 
@@ -44,5 +41,5 @@ class MapeadorAuditoria(RepMap):
         )
 
     def dto_a_entidad(self, dto: AuditoriaDTO) -> Auditoria:
-        auditoria = Auditoria()
+        auditoria:Auditoria=dto
         return auditoria

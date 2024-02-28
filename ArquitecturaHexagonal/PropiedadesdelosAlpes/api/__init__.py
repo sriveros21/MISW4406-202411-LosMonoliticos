@@ -35,9 +35,10 @@ def create_app(configuracion=None):
         db.create_all()  # Create database tables for our data models
 
     # Import and register your blueprints
-    from . import cliente, propiedades
+    from . import cliente, propiedades, auditorias
     app.register_blueprint(cliente.bp)
     app.register_blueprint(propiedades.bp)
+    app.register_blueprint(auditorias.bp)
 
     @app.route("/health")
     def health():
