@@ -15,3 +15,8 @@ class EmailContacto(ObjetoValor):
 @dataclass(frozen=True)
 class FechaRegistro(ObjetoValor):
     fecha: datetime
+
+@dataclass(frozen=True)
+class Identificacion(ObjetoValor):
+    numero: str
+    tipo: str

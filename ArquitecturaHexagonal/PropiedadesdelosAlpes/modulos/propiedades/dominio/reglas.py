@@ -1,5 +1,6 @@
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.reglas import ReglaNegocio
-from .objetos_valor import Ubicacion, Propiedad, Dimensiones
+from ....seedwork.dominio.reglas import ReglaNegocio
+from ....seedwork.dominio.objetos_valor import Ubicacion, Dimension
+from .entidades import Propiedad
 from datetime import datetime
 
 class UbicacionValida(ReglaNegocio):
@@ -24,7 +25,7 @@ class MinimoUnaPropiedad(ReglaNegocio):
         return len(self.propiedades) > 0
     
 class ReglaDimensionesValidas(ReglaNegocio):
-    def __init__(self, dimensiones: Dimensiones, mensaje='Las dimensiones propuestas son incorrectas'):
+    def __init__(self, dimensiones: Dimension, mensaje='Las dimensiones propuestas son incorrectas'):
         super().__init__(mensaje)
         self.dimensiones = dimensiones
 
