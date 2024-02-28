@@ -1,11 +1,12 @@
 import uuid
 from dataclasses import dataclass
 
+from PropiedadesdelosAlpes.modulos.cliente.aplicacion.mapeadores import MapeadorCliente
+from PropiedadesdelosAlpes.modulos.cliente.infraestructura.repositorios import RepositorioCliente
+from PropiedadesdelosAlpes.seedwork.aplicacion.queries import Query, QueryResultado
+from PropiedadesdelosAlpes.seedwork.aplicacion.queries import ejecutar_query as query
+
 from .base import ClienteQueryBaseHandler
-from .....modulos.cliente.aplicacion.mapeadores import MapeadorCliente
-from .....modulos.cliente.infraestructura.repositorios import RepositorioCliente
-from .....seedwork.aplicacion.queries import Query, QueryResultado
-from .....seedwork.aplicacion.queries import ejecutar_query as query
 
 
 @dataclass

@@ -1,19 +1,13 @@
-""" Repositorios para el manejo de persistencia de objetos de dominio en la capa de infrastructura del dominio de cliente
-
-En este archivo usted encontrará las diferentes repositorios para
-persistir objetos dominio (agregaciones) en la capa de infraestructura del dominio de cliente
-
-"""
-
 from typing import List
 from uuid import UUID
+
+from PropiedadesdelosAlpes.modulos.cliente.dominio.entidades import Cliente
+from PropiedadesdelosAlpes.modulos.cliente.dominio.fabricas import FabricaCliente
+from PropiedadesdelosAlpes.modulos.cliente.dominio.repositorios import RepositorioCliente
 
 from .dto import Cliente as ClienteDTO
 from .mapeadores import MapeadorCliente
 from ....config.db import db
-from ....modulos.cliente.dominio.entidades import Cliente
-from ....modulos.cliente.dominio.fabricas import FabricaCliente
-from ....modulos.cliente.dominio.repositorios import RepositorioCliente
 
 
 class RepositorioClienteSQLite(RepositorioCliente):

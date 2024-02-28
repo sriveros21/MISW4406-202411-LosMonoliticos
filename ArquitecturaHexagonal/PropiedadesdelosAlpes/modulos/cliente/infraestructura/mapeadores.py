@@ -1,13 +1,7 @@
-""" Mapeadores para la capa de infrastructura del dominio de propiedades
-
-En este archivo usted encontrará los diferentes mapeadores
-encargados de la transformación entre formatos de dominio y DTOs
-
-"""
+from PropiedadesdelosAlpes.modulos.cliente.dominio.entidades import Cliente
+from PropiedadesdelosAlpes.seedwork.dominio.repositorios import Mapeador
 
 from .dto import Cliente as ClienteDTO
-from ....modulos.cliente.dominio.entidades import Cliente
-from ....seedwork.dominio.repositorios import Mapeador
 
 
 class MapeadorCliente(Mapeador):

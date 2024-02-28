@@ -1,6 +1,5 @@
+from PropiedadesdelosAlpes.seedwork.infraestructura.schema.v1.comandos import ComandoIntegracion
 from pulsar.schema import *
-
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.infraestructura.schema.v1.comandos import ComandoIntegracion
 
 
 class ComandoCrearClientePayLoad(ComandoIntegracion):

@@ -1,7 +1,7 @@
 import uuid
 from dataclasses import dataclass
 
-from ....seedwork.dominio.eventos import (EventoDominio)
+from PropiedadesdelosAlpes.seedwork.dominio.eventos import (EventoDominio)
 
 
 @dataclass

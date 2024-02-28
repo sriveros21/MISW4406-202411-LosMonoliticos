@@ -2,11 +2,10 @@ import logging
 import traceback
 
 import pulsar
+from PropiedadesdelosAlpes.modulos.cliente.infraestructura.schema.v1.comandos import ComandoCrearCliente
+from PropiedadesdelosAlpes.modulos.cliente.infraestructura.schema.v1.eventos import ClienteCreado
+from PropiedadesdelosAlpes.seedwork.infraestructura import utils
 from pulsar.schema import *
-
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.cliente.infraestructura.schema.v1.comandos import ComandoCrearCliente
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.cliente.infraestructura.schema.v1.eventos import ClienteCreado
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.infraestructura import utils
 
 
 def suscribirse_a_eventos():

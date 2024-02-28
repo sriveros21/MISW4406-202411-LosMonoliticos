@@ -1,11 +1,12 @@
 from dataclasses import dataclass
 
+from PropiedadesdelosAlpes.modulos.cliente.aplicacion.dto import ClienteDTO
+from PropiedadesdelosAlpes.modulos.cliente.dominio.entidades import Cliente
+from PropiedadesdelosAlpes.seedwork.aplicacion.comandos import Comando
+from PropiedadesdelosAlpes.seedwork.aplicacion.comandos import ejecutar_commando as comando
+from PropiedadesdelosAlpes.seedwork.infraestructura.uow import UnidadTrabajoPuerto
+
 from .base import CrearClienteBaseHandler
-from .....modulos.cliente.aplicacion.dto import ClienteDTO
-from .....modulos.cliente.dominio.entidades import Cliente
-from .....seedwork.aplicacion.comandos import Comando
-from .....seedwork.aplicacion.comandos import ejecutar_commando as comando
-from .....seedwork.infraestructura.uow import UnidadTrabajoPuerto
 
 
 @dataclass

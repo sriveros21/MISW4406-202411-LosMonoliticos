@@ -1,4 +1,4 @@
-from ....seedwork.dominio.excepciones import ExcepcionFabrica
+from PropiedadesdelosAlpes.seedwork.dominio.excepciones import ExcepcionFabrica
 
 
 class TipoObjetoNoExisteEnDominioClienteExcepcion(ExcepcionFabrica):

@@ -1,6 +1,6 @@
 from abc import ABC
 
-from ....seedwork.dominio.repositorios import Repositorio
+from PropiedadesdelosAlpes.seedwork.dominio.repositorios import Repositorio
 
 
 class RepositorioCliente(Repositorio, ABC):

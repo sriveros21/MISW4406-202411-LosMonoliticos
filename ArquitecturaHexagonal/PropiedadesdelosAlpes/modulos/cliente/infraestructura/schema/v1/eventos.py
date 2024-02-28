@@ -1,6 +1,5 @@
+from PropiedadesdelosAlpes.seedwork.infraestructura.schema.v1.eventos import EventoIntegracion
 from pulsar.schema import *
-
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.infraestructura.schema.v1.eventos import EventoIntegracion
 
 
 class ClienteCreadoPayLoad(Record):

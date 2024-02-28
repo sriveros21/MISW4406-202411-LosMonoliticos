@@ -1,9 +1,8 @@
 import pulsar
+from PropiedadesdelosAlpes.modulos.cliente.infraestructura.schema.v1.comandos import ComandoCrearCliente, ComandoCrearClientePayLoad
+from PropiedadesdelosAlpes.modulos.cliente.infraestructura.schema.v1.eventos import ClienteCreado, ClienteCreadoPayLoad
+from PropiedadesdelosAlpes.seedwork.infraestructura import utils
 from pulsar.schema import *
-
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.cliente.infraestructura.schema.v1.comandos import ComandoCrearCliente, ComandoCrearClientePayLoad
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.cliente.infraestructura.schema.v1.eventos import ClienteCreado, ClienteCreadoPayLoad
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.infraestructura import utils
 
 
 class Despachador:

@@ -1,6 +1,6 @@
-from .....modulos.cliente.dominio.fabricas import FabricaCliente
-from .....modulos.cliente.infraestructura.fabricas import FabricaRepositorio
-from .....seedwork.aplicacion.queries import QueryHandler
+from PropiedadesdelosAlpes.modulos.cliente.dominio.fabricas import FabricaCliente
+from PropiedadesdelosAlpes.modulos.cliente.infraestructura.fabricas import FabricaRepositorio
+from PropiedadesdelosAlpes.seedwork.aplicacion.queries import QueryHandler
 
 
 class ClienteQueryBaseHandler(QueryHandler):
