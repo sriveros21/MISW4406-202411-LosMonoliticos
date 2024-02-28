@@ -5,12 +5,15 @@ objetos complejos en la capa de infraestructura del dominio de propiedades
 
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+
+from PropiedadesdelosAlpes.modulos.cliente.dominio.repositorios import RepositorioClientes
 from PropiedadesdelosAlpes.seedwork.dominio.fabricas import Fabrica
 from PropiedadesdelosAlpes.seedwork.dominio.repositorios import Repositorio
-from PropiedadesdelosAlpes.modulos.cliente.dominio.repositorios import RepositorioClientes
-from .repositorios import RepositorioClientesSQLite
+
 from .excepciones import ExcepcionFabrica
+from .repositorios import RepositorioClientesSQLite
+
 
 @dataclass
 class FabricaRepositorio(Fabrica):
@@ -19,3 +22,10 @@ class FabricaRepositorio(Fabrica):
             return RepositorioClientesSQLite()
         else:
             raise ExcepcionFabrica()
+
+    def obtener_repositorio_propiedades(self) -> RepositorioClientes:
+        """
+        Returns an instance of RepositorioPropiedades.
+        This method simplifies accessing the properties repository.
+        """
+        return RepositorioClientesSQLite()

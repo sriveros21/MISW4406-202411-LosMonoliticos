@@ -5,14 +5,16 @@ persistir objetos dominio (agregaciones) en la capa de infraestructura del domin
 
 """
 
+from typing import List
+from uuid import UUID
+
 from PropiedadesdelosAlpes.config.db import db
-from PropiedadesdelosAlpes.modulos.cliente.dominio.repositorios import RepositorioClientes
 from PropiedadesdelosAlpes.modulos.cliente.dominio.entidades import Cliente
 from PropiedadesdelosAlpes.modulos.cliente.dominio.fabricas import FabricaClientes
+from PropiedadesdelosAlpes.modulos.cliente.dominio.repositorios import RepositorioClientes
+
 from .dto import Cliente as ClienteDTO
 from .mapeadores import MapeadorClientes
-from uuid import UUID
-from typing import List
 
 
 class RepositorioClientesSQLite(RepositorioClientes):
