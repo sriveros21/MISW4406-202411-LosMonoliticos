@@ -24,3 +24,4 @@ class IdentificacionDTO(DTO):
 class ClienteDTO(DTO):
     nombre: str = field(default_factory=str)
     apellido: str = field(default_factory=str)
+    email: str = field(default_factory=str)
