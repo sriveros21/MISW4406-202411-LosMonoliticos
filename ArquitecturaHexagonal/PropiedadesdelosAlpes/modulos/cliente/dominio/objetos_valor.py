@@ -5,14 +5,18 @@ from PropiedadesdelosAlpes.seedwork.dominio.objetos_valor import ObjetoValor
 
 
 @dataclass(frozen=True)
-class NombreCompleto(ObjetoValor):
+class Nombre(ObjetoValor):
     nombre: str
+
+
+@dataclass(frozen=True)
+class Apellido(ObjetoValor):
     apellido: str
 
 
 @dataclass(frozen=True)
-class EmailContacto(ObjetoValor):
-    correo: str
+class Email(ObjetoValor):
+    email: str
 
 
 @dataclass(frozen=True)
