@@ -1,7 +1,7 @@
 import datetime
 from dataclasses import dataclass
 
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.objetos_valor import ObjetoValor
+from PropiedadesdelosAlpes.seedwork.dominio.objetos_valor import ObjetoValor
 
 
 @dataclass(frozen=True)

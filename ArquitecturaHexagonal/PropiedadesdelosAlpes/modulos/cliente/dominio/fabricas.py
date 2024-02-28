@@ -1,12 +1,13 @@
 from dataclasses import dataclass
 from typing import Type
 
+from PropiedadesdelosAlpes.modulos.cliente.infraestructura.mapeadores import MapeadorCliente
+from PropiedadesdelosAlpes.seedwork.dominio.fabricas import Fabrica
+from PropiedadesdelosAlpes.seedwork.dominio.repositorios import Mapeador, Repositorio
+
 from .entidades import Cliente
 from .excepciones import TipoObjetoNoExisteEnDominioClienteExcepcion
 from .reglas import NombreValido
-from ....modulos.cliente.infraestructura.mapeadores import MapeadorCliente
-from ....seedwork.dominio.fabricas import Fabrica
-from ....seedwork.dominio.repositorios import Mapeador, Repositorio
 
 
 @dataclass
