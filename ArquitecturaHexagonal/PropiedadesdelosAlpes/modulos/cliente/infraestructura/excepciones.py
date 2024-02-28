@@ -5,7 +5,7 @@ a la capa de infraestructura del dominio de cliente
 
 """
 
-from PropiedadesdelosAlpes.seedwork.dominio.excepciones import ExcepcionFabrica
+from ....seedwork.dominio.excepciones import ExcepcionFabrica
 
 
 class NoExisteImplementacionParaTipoFabricaExcepcion(ExcepcionFabrica):

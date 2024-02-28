@@ -7,12 +7,11 @@ objetos complejos en la capa de infraestructura del dominio de propiedades
 
 from dataclasses import dataclass
 
-from PropiedadesdelosAlpes.modulos.cliente.dominio.repositorios import RepositorioCliente
-from PropiedadesdelosAlpes.seedwork.dominio.fabricas import Fabrica
-from PropiedadesdelosAlpes.seedwork.dominio.repositorios import Repositorio
-
 from .excepciones import ExcepcionFabrica
 from .repositorios import RepositorioClienteSQLite
+from ....modulos.cliente.dominio.repositorios import RepositorioCliente
+from ....seedwork.dominio.fabricas import Fabrica
+from ....seedwork.dominio.repositorios import Repositorio
 
 
 @dataclass
