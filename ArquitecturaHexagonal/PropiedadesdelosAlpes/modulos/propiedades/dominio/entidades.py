@@ -12,7 +12,7 @@ import PropiedadesdelosAlpes.modulos.propiedades.dominio.objetos_valor as ov
 class Edificacion(Entidad, ABC):
     id: ov.IdentificadorPropiedad = field(default_factory=ov.IdentificadorPropiedad)
     dimensiones: Dimension = field(default_factory=Dimension)
-    tipo: str  # Minorista, Oficina, Industrial, Especializado
+    tipo: str = field(default_factory=str)
     pisos: List[ov.Piso] = field(default_factory=list)
 
     @abstractmethod

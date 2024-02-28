@@ -1,6 +1,6 @@
-from PropiedadesdelosAlpes.seedwork.aplicacion.dto import AppMap
+from PropiedadesdelosAlpes.seedwork.aplicacion.dto import Mapeador as AppMap
 from PropiedadesdelosAlpes.seedwork.dominio.repositorios import Mapeador as RepMap
-from PropiedadesdelosAlpes.modulos.propiedades.dominio.entidades import Locacion, Propiedad
+from PropiedadesdelosAlpes.modulos.propiedades.dominio.entidades import Propiedad
 from PropiedadesdelosAlpes.modulos.propiedades.dominio.objetos_valor import InformacionGeoespacial , IdentificadorPropiedad, EstadoPropiedad , TipoPropiedad , Precio
 from .dto import EdificacionDTO, PisoDTO, PropiedadDTO, TerrenoDTO
 from typing import List
