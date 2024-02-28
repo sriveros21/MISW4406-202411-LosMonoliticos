@@ -1,7 +1,7 @@
-"""DTOs para la capa de infrastructura del dominio de clientes
+"""DTOs para la capa de infrastructura del dominio de cliente
 
 En este archivo usted encontrará los DTOs (modelos anémicos) de
-la infraestructura del dominio de clientes
+la infraestructura del dominio de cliente
 
 """
 

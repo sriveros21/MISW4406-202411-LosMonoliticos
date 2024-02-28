@@ -1,7 +1,7 @@
-""" Excepciones para la capa de infrastructura del dominio de clientes
+""" Excepciones para la capa de infrastructura del dominio de cliente
 
 En este archivo usted encontrará los Excepciones relacionadas
-a la capa de infraestructura del dominio de clientes
+a la capa de infraestructura del dominio de cliente
 
 """
 

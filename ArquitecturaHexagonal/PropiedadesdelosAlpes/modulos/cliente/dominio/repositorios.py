@@ -4,5 +4,5 @@ from ....seedwork.dominio.repositorios import Repositorio
 
 
 class RepositorioCliente(Repositorio, ABC):
-    # Métodos específicos para manejar clientes
+    # Métodos específicos para manejar cliente
     pass
