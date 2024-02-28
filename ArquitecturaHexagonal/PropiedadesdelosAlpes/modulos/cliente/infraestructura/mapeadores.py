@@ -5,8 +5,6 @@ from .dto import Cliente as ClienteDTO
 
 
 class MapeadorCliente(Mapeador):
-    _FORMATO_FECHA = '%Y-%m-%dT%H:%M:%SZ'
-
     def obtener_tipo(self) -> type:
         return Cliente.__class__
 
@@ -14,6 +12,7 @@ class MapeadorCliente(Mapeador):
         cliente_dto = ClienteDTO()
         cliente_dto.id_cliente = entidad.id
         cliente_dto.nombre_cliente = entidad.nombre
+        cliente_dto.apellido_cliente = entidad.apellido
         cliente_dto.email_cliente = entidad.email
 
         return cliente_dto
