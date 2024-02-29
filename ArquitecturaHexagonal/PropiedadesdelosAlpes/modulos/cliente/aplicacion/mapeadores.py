@@ -6,16 +6,9 @@ from .dto import ClienteDTO
 
 
 class MapeadorClienteDTOJson(AppMap):
+
     def externo_a_dto(self, cliente: dict) -> ClienteDTO:
-        # cliente_dto = ClienteDTO()
-        # cliente_dto.nombre = cliente.get('nombre')
-        # cliente_dto.apellido = cliente.get('apellido')
-        # cliente_dto.email = cliente.get('email')
-
-        cliente_dto = ClienteDTO(
-            cliente.get('nombre'), cliente.get('apellidos'), cliente.get('email')
-        )
-
+        cliente_dto = ClienteDTO(cliente.get('nombre'), cliente.get('apellido'), cliente.get('email'))
         return cliente_dto
 
     def dto_a_externo(self, dto: ClienteDTO) -> dict:
@@ -23,6 +16,7 @@ class MapeadorClienteDTOJson(AppMap):
 
 
 class MapeadorCliente(RepMap):
+
     def obtener_tipo(self) -> type:
         return Cliente.__class__
 

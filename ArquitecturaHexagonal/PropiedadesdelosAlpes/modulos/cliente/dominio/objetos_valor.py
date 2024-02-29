@@ -1,4 +1,3 @@
-import datetime
 from dataclasses import dataclass
 
 from PropiedadesdelosAlpes.seedwork.dominio.objetos_valor import ObjetoValor
@@ -17,14 +16,3 @@ class Apellido(ObjetoValor):
 @dataclass(frozen=True)
 class Email(ObjetoValor):
     email: str
-
-
-@dataclass(frozen=True)
-class FechaRegistro(ObjetoValor):
-    fecha: datetime
-
-
-@dataclass(frozen=True)
-class Identificacion(ObjetoValor):
-    tipo: str
-    numero: str

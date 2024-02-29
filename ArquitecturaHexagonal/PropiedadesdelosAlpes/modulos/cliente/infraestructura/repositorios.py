@@ -23,16 +23,16 @@ class RepositorioClienteSQLite(RepositorioCliente):
         return self.fabrica_cliente.crear_objeto(cliente_dto, MapeadorCliente())
 
     def obtener_todos(self) -> List[Cliente]:
-        id_cliente = 123
-        nombre_cliente = "cliente.nombre"
-        apellido_cliente = "cliente.apellido"
-        email_cliente = "cliente.email"
+        id = 123
+        nombre = "cliente.nombre"
+        apellido = "cliente.apellido"
+        email = "cliente.email"
 
         cliente = Cliente(
-            id=id_cliente,
-            nombre=nombre_cliente,
-            apellido=apellido_cliente,
-            email=email_cliente
+            id=id,
+            nombre=nombre,
+            apellido=apellido,
+            email=email
         )
 
         return [cliente]
