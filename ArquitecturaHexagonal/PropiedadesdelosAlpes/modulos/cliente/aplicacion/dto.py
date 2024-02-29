@@ -19,13 +19,8 @@ class EmailDTO(DTO):
 
 
 @dataclass(frozen=True)
-class IdentificacionDTO(DTO):
-    tipo: str
-    numero: str
-
-
-@dataclass(frozen=True)
 class ClienteDTO(DTO):
+    id: int = field(default_factory=str)
     nombre: str = field(default_factory=str)
     apellido: str = field(default_factory=str)
     email: str = field(default_factory=str)
