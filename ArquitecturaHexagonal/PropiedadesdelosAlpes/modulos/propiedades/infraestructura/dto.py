@@ -18,8 +18,7 @@ class Propiedad(db.Model):
     __tablename__ = "propiedades"
     id_propiedad = db.Column(db.String, primary_key=True, nullable=False)
     nombre = db.Column(db.String, primary_key=False, nullable=False)
-    latitude: float
-    longitude: float 
+    ubicacion = db.Column(db.String, nullable=False)
     dimensiones = db.Column(db.Float, nullable=False)
     tipo = db.Column(db.String, nullable=False)
     estado = db.Column(db.String, nullable=False)
