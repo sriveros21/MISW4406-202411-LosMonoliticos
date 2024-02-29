@@ -16,9 +16,12 @@ Base = db.declarative_base()
 
 class Propiedad(db.Model):
     __tablename__ = "propiedades"
-    id_propiedad = db.Column(db.Integer, primary_key=True, nullable=False)
-    nombre_propiedad = db.Column(db.String, primary_key=False, nullable=False)
-    tamano_propiedad = db.Column(db.Integer, primary_key=False, nullable=False)
-    tipo_construccion = db.Column(db.String, primary_key=False, nullable=False)
-    ubicacion_propiedad = db.Column(db.String, primary_key=False, nullable=False)
-    estado_propiedad = db.Column(db.Boolean, primary_key=False, nullable=False)
+    id_propiedad = db.Column(db.String, primary_key=True, nullable=False)
+    nombre = db.Column(db.String, primary_key=False, nullable=False)
+    ubicacion = db.Column(db.String, nullable=False)
+    dimensiones = db.Column(db.Float, nullable=False)
+    tipo = db.Column(db.String, nullable=False)
+    estado = db.Column(db.String, nullable=False)
+    edificaciones = relationship("Edificacion", backref="propiedad")
+    terreno_id = db.Column(db.String, db.ForeignKey('terrenos.id'))
+    terreno = relationship("Terreno", back_populates="propiedad")
