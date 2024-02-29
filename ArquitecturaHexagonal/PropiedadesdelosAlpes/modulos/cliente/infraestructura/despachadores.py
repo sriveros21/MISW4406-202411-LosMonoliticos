@@ -14,9 +14,10 @@ class Despachador:
 
     def publicar_evento(self, evento, topico):
         payload = ClienteCreadoPayLoad(
-            id_cliente=str(evento.cliente_id),
+            id_cliente=str(evento.id_cliente),
             nombre=evento.nombre,
-            apellido=evento.apellido
+            apellido=evento.apellido,
+            email=evento.email
         )
         evento_integracion = ClienteCreado(data=payload)
         self._publicar_mensaje(evento_integracion, topico, ClienteCreado)

@@ -22,6 +22,7 @@ class MapeadorCliente(RepMap):
 
     def entidad_a_dto(self, entidad: Cliente) -> ClienteDTO:
         return ClienteDTO(
+            id_cliente=str(entidad.id),
             nombre=entidad.nombre.valor,
             apellido=entidad.apellido.valor,
             email=entidad.email.valor

@@ -4,6 +4,11 @@ from PropiedadesdelosAlpes.seedwork.dominio.objetos_valor import ObjetoValor
 
 
 @dataclass(frozen=True)
+class IdentificadorCliente:
+    identificador: str
+
+
+@dataclass(frozen=True)
 class Nombre(ObjetoValor):
     nombre: str
 

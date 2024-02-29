@@ -5,7 +5,7 @@ from PropiedadesdelosAlpes.seedwork.dominio.eventos import (EventoDominio)
 
 @dataclass
 class ClienteCreado(EventoDominio):
-    id: str = None
+    id_cliente: str = None
     nombre: str = None
     apellido: str = None
     email: str = None

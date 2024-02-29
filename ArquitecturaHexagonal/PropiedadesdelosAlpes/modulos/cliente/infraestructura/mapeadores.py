@@ -1,7 +1,9 @@
 from PropiedadesdelosAlpes.modulos.cliente.dominio.entidades import Cliente
+from PropiedadesdelosAlpes.modulos.cliente.dominio.objetos_valor import IdentificadorCliente, Nombre, Apellido, Email
 from PropiedadesdelosAlpes.seedwork.dominio.repositorios import Mapeador
 
 from .dto import Cliente as ClienteDTO
+from ..dominio.objetos_valor import Apellido
 
 
 class MapeadorCliente(Mapeador):
@@ -11,7 +13,7 @@ class MapeadorCliente(Mapeador):
 
     def entidad_a_dto(self, entidad: Cliente) -> ClienteDTO:
         cliente_dto = ClienteDTO()
-        cliente_dto.id = entidad.id
+        cliente_dto.id_cliente = entidad.id_cliente
         cliente_dto.nombre = entidad.nombre
         cliente_dto.apellido = entidad.apellido
         cliente_dto.email = entidad.email
@@ -19,11 +21,14 @@ class MapeadorCliente(Mapeador):
         return cliente_dto
 
     def dto_a_entidad(self, dto: ClienteDTO) -> Cliente:
-        cliente = Cliente(
-            dto.id,
-            dto.nombre,
-            dto.apellido,
-            dto.email
-        )
+        id_cliente = IdentificadorCliente(identificador=dto.id_cliente)
+        nombre = Nombre(nombre=dto.nombre)
+        apellido = Apellido(apellido=dto.apellido)
+        email = Email(email=dto.email)
 
-        return cliente
+        return Cliente(
+            id_cliente=id_cliente,
+            nombre=nombre,
+            apellido=apellido,
+            email=email
+        )
