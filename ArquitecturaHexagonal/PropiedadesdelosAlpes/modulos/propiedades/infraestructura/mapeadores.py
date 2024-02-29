@@ -24,7 +24,7 @@ class MapeadorPropiedades(Mapeador):
         propiedad_dto.nombre = entidad.nombre
         propiedad_dto.dimensiones = entidad.dimensiones
         propiedad_dto.tipo = entidad.tipo
-        propiedad_dto.longitude = entidad.ubicacion
+        propiedad_dto.ubicacion = entidad.ubicacion
         propiedad_dto.estado = entidad.estado
 
         return propiedad_dto
@@ -33,7 +33,7 @@ class MapeadorPropiedades(Mapeador):
     def dto_a_entidad(self, dto: PropiedadDTO) -> Propiedad:
         id = IdentificadorPropiedad(identificador=dto.id_propiedad)
         nombre = Nombre(valor=dto.nombre)
-        ubicacion = Ubicacion(latitud=dto.latitude, longitud=dto.longitude)
+        ubicacion = Ubicacion(direccion=dto.ubicacion)
         dimensiones = Dimension(dto.dimensiones)
         tipo = TipoPropiedad(dto.tipo)  
         estado = EstadoPropiedad(dto.estado) 
@@ -47,7 +47,7 @@ class MapeadorPropiedades(Mapeador):
         return Propiedad(
             id=id,
             nombre=nombre,
-            ubicacion = Ubicacion(latitud=dto.latitude, longitud=dto.longitude),
+            ubicacion = ubicacion,
             dimensiones=dimensiones,
             tipo=tipo,
             estado=estado,
