@@ -28,11 +28,14 @@ class MapeadorAuditorias(Mapeador):
 
         return auditoria_dto
 
-    
+    #cambiando esto
     def dto_a_entidad(self, dto: AuditoriaDTO) -> Auditoria:
+
+        #nombre_auditor:NombreAuditor=dto.nombre_auditor
         auditoria = Auditoria(
             dto.codigo_auditoria,
             dto.fecha_auditoria,
+            dto.nombre_auditor,
             dto.nombre_auditor,
             dto.fase_auditoria,
             dto.hallazgos_auditoria,

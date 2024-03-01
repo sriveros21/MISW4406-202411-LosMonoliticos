@@ -31,12 +31,12 @@ class MapeadorAuditoria(RepMap):
             #fecha_creacion=entidad.fecha_creacion.strftime("%Y-%m-%d"),
             #fecha_actualizacion=entidad.fecha_actualizacion.strftime("%Y-%m-%d"),
             #id=str(entidad.id),
-            codigo=entidad.codigo.valor,
-            fecha=entidad.fecha.valor,
-            auditor=entidad.auditor.valor,
-            fase=entidad.fase.valor,
-            hallazgos=entidad.hallazgos.valor,
-            objetivos=entidad.objetivo.valor
+            codigo_auditoria=entidad.codigo.valor,
+            fecha_auditoria=entidad.fecha.valor,
+            nombre_auditor=entidad.auditor.valor,
+            fase_auditoria=entidad.fase.valor,
+            hallazgos_auditoria=entidad.hallazgos.valor,
+            objetivo_auditoria=entidad.objetivo.valor
 
         )
 
