@@ -4,13 +4,14 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import List
 
+from sqlalchemy_utils.types import uuid
+
 from ....seedwork.dominio.entidades import Entidad, AgregacionRaiz
 from ....seedwork.dominio.objetos_valor import Ubicacion, Dimension
 import PropiedadesdelosAlpes.modulos.propiedades.dominio.objetos_valor as ov
 
 @dataclass
 class Edificacion(Entidad, ABC):
-    id: ov.IdentificadorPropiedad = field(default_factory=ov.IdentificadorPropiedad)
     dimensiones: Dimension = field(default_factory=Dimension)
     tipo: str = field(default_factory=str)
     pisos: List[ov.Piso] = field(default_factory=list)
