@@ -15,8 +15,8 @@ def crear_cliente():
         map_cliente = MapeadorClienteDTOJson()
         cliente_dto = map_cliente.externo_a_dto(cliente_dict)
 
-        sp = ServicioCliente()
-        dto_final = sp.crear_cliente(cliente_dto)
+        sc = ServicioCliente()
+        dto_final = sc.crear_cliente(cliente_dto)
 
         return Response(map_cliente.dto_a_externo(dto_final), status=200, mimetype='application/json')
     except ExcepcionDominio as e:
@@ -26,8 +26,8 @@ def crear_cliente():
 @bp.route('/cliente/<id>', methods=('GET',))
 def obtener_cliente(id):
     try:
-        sp = ServicioCliente()
-        cliente_dto = sp.obtener_cliente_por_id(id)
+        sc = ServicioCliente()
+        cliente_dto = sc.obtener_cliente_por_id(id)
 
         if cliente_dto:
             map_cliente = MapeadorClienteDTOJson()
