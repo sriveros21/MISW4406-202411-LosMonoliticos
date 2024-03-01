@@ -23,5 +23,5 @@ class Propiedad(db.Model):
     tipo = db.Column(db.String, nullable=False)
     estado = db.Column(db.String, nullable=False)
     edificaciones = relationship("Edificacion", backref="propiedad")
-    terreno_id = db.Column(db.String, db.ForeignKey('terrenos.id'))
+    #terreno_id = db.Column(db.String, db.ForeignKey('terrenos.id'))
     terreno = relationship("Terreno", back_populates="propiedad")

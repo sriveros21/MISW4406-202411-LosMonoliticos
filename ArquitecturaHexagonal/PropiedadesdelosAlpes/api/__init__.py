@@ -8,9 +8,17 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 # Initialize the database variable here
 db = SQLAlchemy()
 
+
 def import_domain_models():
     # Import DTOs from the infrastructure layer to ensure they are recognized by SQLAlchemy
+    import PropiedadesdelosAlpes.modulos.cliente.infraestructura.dto
     import PropiedadesdelosAlpes.modulos.propiedades.infraestructura.dto
+
+
+def registrar_handles():
+    import PropiedadesdelosAlpes.modulos.cliente.aplicacion
+    import PropiedadesdelosAlpes.modulos.propiedades.aplicacion
+
 
 def create_app(configuracion=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -25,12 +33,16 @@ def create_app(configuracion=None):
 
     from PropiedadesdelosAlpes.config.db import db
 
+    import_domain_models()
+    registrar_handles()
+
     with app.app_context():
-        import_domain_models()
         db.create_all()  # Create database tables for our data models
 
     # Import and register your blueprints
-    from . import cliente, propiedades
+    from . import cliente
+    from . import propiedades
+
     app.register_blueprint(cliente.bp)
     app.register_blueprint(propiedades.bp)
 
@@ -40,5 +52,5 @@ def create_app(configuracion=None):
 
     return app
 
-#if __name__ == "__main__":
-    create_app().run(debug=True)
+    # if __name__ == "__main__":
+    # create_app().run(debug=True)
