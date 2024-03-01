@@ -36,7 +36,6 @@ class MapeadorAuditorias(Mapeador):
             dto.codigo_auditoria,
             dto.fecha_auditoria,
             dto.nombre_auditor,
-            dto.nombre_auditor,
             dto.fase_auditoria,
             dto.hallazgos_auditoria,
             dto.objetivo_auditoria
