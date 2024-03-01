@@ -20,13 +20,19 @@ class MapeadorPropiedadDTOJson(AppMap):
                 id=str(edificacion.get('id')),
                 tipo=edificacion.get('tipo'),
                 dimensiones=edificacion.get('dimensiones'),
-                pisos=[PisoDTO(descripcion=piso.get('descripcion'), metros_cuadrados=piso.get('metros_cuadrados')) for piso in edificacion.get('pisos')]
+                pisos=edificacion.get('pisos'),
             ) for edificacion in propiedad.get('edificaciones')
         ]
 
-        propiedad_dto = PropiedadDTO(propiedad.get('nombre'),propiedad.get('ubicacion'),propiedad.get('dimensiones'),
-                                     propiedad.get('tipo'), propiedad.get('estado'), edificaciones=edificaciones_dto,
-                                    terreno=terreno_dto)  
+        propiedad_dto = PropiedadDTO(
+            propiedad.get('id'),
+            propiedad.get('nombre'),
+            propiedad.get('ubicacion'),
+            propiedad.get('dimensiones'),
+            propiedad.get('tipo'),
+            propiedad.get('estado'),
+            edificaciones=edificaciones_dto,
+            terreno=terreno_dto)
 
         return propiedad_dto
     

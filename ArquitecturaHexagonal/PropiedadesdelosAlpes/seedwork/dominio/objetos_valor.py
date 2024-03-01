@@ -26,7 +26,7 @@ class Direccion(ObjetoValor):
 
 @dataclass(frozen=True)
 class Ubicacion(ObjetoValor):
-    direccion: Direccion
+    direccion: str
     latitud: float
     longitud: float
 

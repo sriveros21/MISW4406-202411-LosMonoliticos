@@ -33,8 +33,14 @@ class MapeadorPropiedades(Mapeador):
     def dto_a_entidad(self, dto: PropiedadDTO) -> Propiedad:
         id = IdentificadorPropiedad(identificador=dto.id_propiedad)
         nombre = Nombre(valor=dto.nombre)
-        ubicacion = Ubicacion(direccion=dto.ubicacion)
-        dimensiones = Dimension(dto.dimensiones)
+        ubicacion = Ubicacion(
+            direccion=dto.ubicacion["direccion"],
+            latitud=dto.ubicacion["latitud"],
+            longitud=dto.ubicacion["longitud"])
+        dimensiones = Dimension(
+            width=dto.dimensiones["width"],
+            length=dto.dimensiones["length"],
+            unit=dto.dimensiones["unit"])
         tipo = TipoPropiedad(dto.tipo)  
         estado = EstadoPropiedad(dto.estado) 
         
@@ -56,10 +62,13 @@ class MapeadorPropiedades(Mapeador):
         )
     
     def map_edificacion_dto_to_domain(self, edificacion_dto: EdificacionDTO) -> Edificacion:
-        pisos = [Piso(descripcion=piso.descripcion, metros_cuadrados=piso.metros_cuadrados) for piso in edificacion_dto.pisos]
+        pisos = edificacion_dto.pisos
         
         if edificacion_dto.tipo == "Minorista":
-            return Minorista(id=edificacion_dto.id, dimensiones=Dimension(edificacion_dto.dimensiones), tipo=edificacion_dto.tipo, pisos=pisos)
+            return Minorista(dimensiones=Dimension(
+            width=edificacion_dto.dimensiones["width"],
+            length=edificacion_dto.dimensiones["length"],
+            unit=edificacion_dto.dimensiones["unit"]), tipo=edificacion_dto.tipo, pisos=pisos)
         elif edificacion_dto.tipo == "Oficina":
             return Oficina(id=edificacion_dto.id, dimensiones=Dimension(edificacion_dto.dimensiones), tipo=edificacion_dto.tipo, pisos=pisos)
         elif edificacion_dto.tipo == "Industrial":
