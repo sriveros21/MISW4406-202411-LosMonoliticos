@@ -35,9 +35,9 @@ class ObjetivoAuditoria(Enum):
 #Revisar Enums
 @dataclass(frozen=True)
 class AuditoriaDTO(DTO):
-    codigo: CodigoAuditoriaDTO =field(default_factory=CodigoAuditoriaDTO)
-    fecha: FechaAuditoriaDTO =field(default_factory=FechaAuditoriaDTO)
-    auditor: NombreAuditorDTO =field(default_factory=NombreAuditorDTO)
-    fase: FaseAuditoria =field(default_factory=FaseAuditoria)
-    hallazgos: HallazgosAuditoriaDTO = field(default_factory=HallazgosAuditoriaDTO)
-    objetivo: ObjetivoAuditoria =field(default_factory=ObjetivoAuditoria)
+    codigo_auditoria: CodigoAuditoriaDTO =field(default_factory=CodigoAuditoriaDTO)
+    fecha_auditoria: FechaAuditoriaDTO =field(default_factory=FechaAuditoriaDTO)
+    nombre_auditor: NombreAuditorDTO =field(default_factory=NombreAuditorDTO)
+    fase_auditoria: FaseAuditoria =field(default_factory=FaseAuditoria)
+    hallazgos_auditoria: HallazgosAuditoriaDTO = field(default_factory=HallazgosAuditoriaDTO)
+    objetivo_auditoria: ObjetivoAuditoria =field(default_factory=ObjetivoAuditoria)

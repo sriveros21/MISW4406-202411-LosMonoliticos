@@ -15,13 +15,15 @@ class Repositorio(ABC):
     def agregar(self, entidad: Entidad):
         pass
 
-    @abstractmethod
-    def actualizar(self, entidad: Entidad):
-        pass
+    ####TESTING COMENTING THESE LINES Can't instantiate abstract class RepositorioAuditoriasSQLite with abstract methods actualizar, eliminar
 
-    @abstractmethod
-    def eliminar(self, entidad_id: UUID):
-        pass
+    # @abstractmethod
+    # def actualizar(self, entidad: Entidad):
+    #     pass
+
+    # @abstractmethod
+    # def eliminar(self, entidad_id: UUID):
+    #     pass
 
 class Mapeador(ABC):
     @abstractmethod
