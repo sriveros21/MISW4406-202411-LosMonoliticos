@@ -21,7 +21,7 @@ class Despachador:
 
     def publicar_evento(self, evento, topico):
         payload = PropiedadCreadaPayload(
-            id_propiedad=str(evento.propiedad_id),
+            id=str(evento.propiedad_id),
             nombre=evento.nombre,
             ubicacion=evento.ubicacion,
             fecha_creacion=int(unix_time_millis(evento.fecha_evento))

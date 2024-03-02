@@ -13,6 +13,7 @@ def import_domain_models():
     # Import DTOs from the infrastructure layer to ensure they are recognized by SQLAlchemy
     import PropiedadesdelosAlpes.modulos.cliente.infraestructura.dto
     import PropiedadesdelosAlpes.modulos.propiedades.infraestructura.dto
+    import PropiedadesdelosAlpes.modulos.propiedades.aplicacion.dto
 
 
 def registrar_handles():
@@ -37,12 +38,23 @@ def create_app(configuracion=None):
     registrar_handles()
 
     with app.app_context():
-        db.create_all()  # Create database tables for our data models
+        db.create_all()
+        from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.fabricas import FabricaRepositorio
+        from PropiedadesdelosAlpes.modulos.propiedades.aplicacion.servicios import ServicioPropiedad
+        from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.mapeadores import MapeadorPropiedades
+
+        fabrica_repositorio = FabricaRepositorio(db_session=db.session)
+        repositorio_propiedades = fabrica_repositorio.crear_repositorio_propiedades()
+        mapeador_propiedad = MapeadorPropiedades(db.session)
+        app.extensions['repositorio_propiedades'] = repositorio_propiedades
+        app.extensions['mapeador_propiedad'] = mapeador_propiedad
+
+        # Storing ServicioPropiedad in app.extensions for global access
+        servicio_propiedad = ServicioPropiedad(repositorio=repositorio_propiedades, mapeador=mapeador_propiedad)
+        app.extensions['servicio_propiedad'] = servicio_propiedad
 
     # Import and register your blueprints
-    from . import cliente
-    from . import propiedades
-
+    from . import cliente, propiedades
     app.register_blueprint(cliente.bp)
     app.register_blueprint(propiedades.bp)
 
@@ -52,5 +64,5 @@ def create_app(configuracion=None):
 
     return app
 
-    # if __name__ == "__main__":
-    # create_app().run(debug=True)
+#if __name__ == "__main__":
+    create_app().run(debug=True)

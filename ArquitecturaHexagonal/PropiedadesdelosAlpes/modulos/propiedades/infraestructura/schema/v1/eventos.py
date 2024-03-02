@@ -2,10 +2,10 @@ from pulsar.schema import *
 from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.infraestructura.schema.v1.eventos import EventoIntegracion
 
 class PropiedadCreadaPayload(Record):
-    id_propiedad = String()
+    id = String()
     nombre = String()
     ubicacion = String()
-    dimensiones = String()
+    dimension = String()
     tipo = String()
     estado = String()
 
