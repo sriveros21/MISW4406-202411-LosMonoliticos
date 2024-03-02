@@ -1,20 +1,23 @@
 from dataclasses import dataclass
 
+from PropiedadesdelosAlpes.modulos.cliente.dominio.fabricas import FabricaCliente
 from PropiedadesdelosAlpes.modulos.cliente.dominio.repositorios import RepositorioCliente
-from PropiedadesdelosAlpes.seedwork.dominio.fabricas import Fabrica
-from PropiedadesdelosAlpes.seedwork.dominio.repositorios import Repositorio
+from PropiedadesdelosAlpes.modulos.cliente.infraestructura.mapeadores import MapeadorCliente
+from sqlalchemy.orm import Session
 
-from .excepciones import ExcepcionFabrica
 from .repositorios import RepositorioClienteSQLite
 
 
 @dataclass
-class FabricaRepositorio(Fabrica):
-    def crear_objeto(self, obj: type, mapeador: any = None) -> Repositorio:
-        if obj == RepositorioCliente.__class__:
-            return RepositorioClienteSQLite()
-        else:
-            raise ExcepcionFabrica()
+class FabricaRepositorioCliente:
+
+    def __init__(self, db_session: Session):
+        self.db_session = db_session
+
+    def crear_repositorio_cliente(self) -> RepositorioClienteSQLite:
+        mapeador_cliente = MapeadorCliente(db_session=self.db_session)
+        fabrica_cliente = FabricaCliente()
+        return RepositorioClienteSQLite(db_session=self.db_session, mapeador=mapeador_cliente, fabrica=fabrica_cliente)
 
     def obtener_repositorio_propiedades(self) -> RepositorioCliente:
         """

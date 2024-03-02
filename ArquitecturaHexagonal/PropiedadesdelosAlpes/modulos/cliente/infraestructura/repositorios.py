@@ -1,43 +1,38 @@
 from typing import List
 from uuid import UUID
 
+from PropiedadesdelosAlpes.config.db import db
 from PropiedadesdelosAlpes.modulos.cliente.dominio.entidades import Cliente
 from PropiedadesdelosAlpes.modulos.cliente.dominio.fabricas import FabricaCliente
 from PropiedadesdelosAlpes.modulos.cliente.dominio.repositorios import RepositorioCliente
 
 from .dto import Cliente as ClienteDTO
 from .mapeadores import MapeadorCliente
-from ....config.db import db
 
 
 class RepositorioClienteSQLite(RepositorioCliente):
-    def __init__(self):
-        self._fabrica_cliente: FabricaCliente = FabricaCliente()
+    def __init__(self, db_session, mapeador: MapeadorCliente, fabrica: FabricaCliente):
+        self.db_session = db_session
+        self.mapeador = mapeador
+        self.fabrica = fabrica
 
     @property
     def fabrica_cliente(self):
-        return self._fabrica_cliente
+        return self._fabrica
 
     def obtener_por_id(self, id: UUID) -> Cliente:
         cliente_dto = db.session.query(ClienteDTO).filter_by(id=str(id)).one()
-        return self.fabrica_cliente.crear_objeto(cliente_dto, MapeadorCliente())
+        return self.mapeador.dto_a_entidad(cliente_dto)
 
     def obtener_todos(self) -> List[Cliente]:
-        id_cliente = 123
-        nombre = "cliente.nombre"
-        apellido = "cliente.apellido"
-        email = "cliente.email"
-
-        cliente = Cliente(
-            id_cliente=id_cliente,
-            nombre=nombre,
-            apellido=apellido,
-            email=email
-        )
-
-        return [cliente]
+        cliente_dto = db.session.query(ClienteDTO).all()
+        return [self.mapeador.dto_a_entidad(dto) for dto in cliente_dto]
 
     def agregar(self, cliente: Cliente):
-        cliente_dto = self.fabrica_cliente.crear_objeto(cliente, MapeadorCliente())
-        db.session.add(cliente_dto)
-        db.session.commit()
+        print("Agregando cliente")
+        print(cliente)
+        cliente_dto = self.fabrica.crear_objeto(cliente, self.mapeador)
+        print(cliente_dto)
+        print(self.mapeador)
+        self.db_session.add(cliente_dto)
+        self.db_session.commit()

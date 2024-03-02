@@ -13,6 +13,7 @@ from .base import CrearClienteBaseHandler
 
 @dataclass
 class CrearCliente(Comando):
+    id_cliente: str
     nombre: NombreDTO
     apellido: ApellidoDTO
     email: EmailDTO
@@ -21,6 +22,7 @@ class CrearCliente(Comando):
 class CrearClienteHandler(CrearClienteBaseHandler):
     def handle(self, comando: CrearCliente):
         cliente_dto = ClienteDTO(
+            id_cliente=comando.id_cliente,
             nombre=comando.nombre,
             apellido=comando.apellido,
             email=comando.email
