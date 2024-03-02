@@ -34,8 +34,8 @@ class Propiedad(AgregacionRaiz):
     nombre: ov.Nombre = field(default_factory=ov.Nombre)
     ubicacion: Ubicacion = field(default_factory=Ubicacion)
     dimension: Dimension = field(default_factory=Dimension)
-    tipo: ov.TipoPropiedad = field(default_factory=ov.TipoPropiedad)
-    estado: ov.EstadoPropiedad = field(default_factory=ov.EstadoPropiedad)
+    tipo: ov.TipoPropiedad = field(default_factory=ov.TipoPropiedad.COMERCIAL)
+    estado: ov.EstadoPropiedad = field(default_factory=ov.EstadoPropiedad.DISPONIBLE)
     edificaciones: List[Edificacion] = field(default_factory=list)
     terreno: Terreno = field(default_factory=Terreno)
 
