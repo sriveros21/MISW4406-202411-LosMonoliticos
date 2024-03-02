@@ -4,14 +4,12 @@ from datetime import datetime
 from enum import Enum
 
 
-@dataclass(frozen=True)
-class EstadoPropiedad(Enum):
+class EstadoPropiedad(str,Enum):
     DISPONIBLE = "Disponible"
     NO_DISPONIBLE = "No Disponible"
     EN_REPARACION = "En Reparación"
 
-@dataclass(frozen=True)
-class TipoPropiedad(Enum):
+class TipoPropiedad(str, Enum):
     RESIDENCIAL = "Residencial"
     COMERCIAL = "Comercial"
     INDUSTRIAL = "Industrial"

@@ -22,6 +22,7 @@ class ServicioPropiedad(Servicio):
     def obtener_propiedad_por_id(self, id: UUID) -> PropiedadDTO:
         propiedad = self.repositorio.obtener_por_id(id)
         if propiedad:
+            print("MIRENME HE INGRESADO AQUI")
             return self.mapeador.entidad_a_dto(propiedad)
         return None
 
