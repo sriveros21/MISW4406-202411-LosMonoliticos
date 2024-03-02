@@ -13,4 +13,4 @@ class ClienteCreado(EventoDominio):
 
 @dataclass
 class ClienteConsultado(EventoDominio):
-    id: str = None
+    id_cliente: str = None

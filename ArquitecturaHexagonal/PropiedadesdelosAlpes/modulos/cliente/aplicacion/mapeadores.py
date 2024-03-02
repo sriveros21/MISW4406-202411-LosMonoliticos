@@ -17,7 +17,12 @@ class MapeadorClienteDTOJson(AppMap):
         return cliente_dto
 
     def dto_a_externo(self, dto: ClienteDTO) -> dict:
-        return dto.__dict__
+        return {
+            "id_cliente": dto.id_cliente,
+            "nombre": dto.nombre,
+            "apellido": dto.apellido,
+            "email": dto.email
+        }
 
 
 class MapeadorCliente(RepMap):
@@ -25,7 +30,6 @@ class MapeadorCliente(RepMap):
     def obtener_tipo(self) -> type:
         return Cliente.__class__
 
-    @staticmethod
     def entidad_a_dto(self, entidad: Cliente) -> ClienteDTO:
         cliente_dto = ClienteDTO(
             id_cliente=str(entidad.id_cliente),

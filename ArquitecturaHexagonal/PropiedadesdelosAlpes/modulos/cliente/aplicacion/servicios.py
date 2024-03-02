@@ -19,8 +19,9 @@ class ServicioCliente(Servicio):
         self.repositorio.agregar(cliente)
         return self.mapeador.entidad_a_dto(cliente)
 
-    def obtener_cliente_por_id(self, id: UUID) -> ClienteDTO:
-        cliente = self.repositorio.obtener_por_id(id)
+    def obtener_cliente_por_id(self, id_cliente: UUID) -> ClienteDTO:
+        cliente = self.repositorio.obtener_por_id(id_cliente)
         if cliente:
+            print("Ingreso cliente>aplicacion>servicios")
             return self.mapeador.entidad_a_dto(cliente)
         return None

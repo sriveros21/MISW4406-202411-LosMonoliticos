@@ -1,5 +1,4 @@
 from typing import List
-from uuid import UUID
 
 from PropiedadesdelosAlpes.config.db import db
 from PropiedadesdelosAlpes.modulos.cliente.dominio.entidades import Cliente
@@ -20,9 +19,10 @@ class RepositorioClienteSQLite(RepositorioCliente):
     def fabrica_cliente(self):
         return self._fabrica
 
-    def obtener_por_id(self, id: UUID) -> Cliente:
-        cliente_dto = db.session.query(ClienteDTO).filter_by(id=str(id)).one()
-        return self.mapeador.dto_a_entidad(cliente_dto)
+    def obtener_por_id(self, id_cliente: str) -> Cliente:
+        cliente_dto = db.session.query(ClienteDTO).filter_by(id_cliente=str(id_cliente)).one()
+        print("OBJETO DB CONSULTA 2", cliente_dto)
+        return self.fabrica.crear_objeto(cliente_dto, self.mapeador)
 
     def obtener_todos(self) -> List[Cliente]:
         cliente_dto = db.session.query(ClienteDTO).all()
