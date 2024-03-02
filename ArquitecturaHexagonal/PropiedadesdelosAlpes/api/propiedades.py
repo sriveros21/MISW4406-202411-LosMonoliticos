@@ -1,6 +1,5 @@
-from flask import Blueprint, request, Response, json
+from flask import Blueprint, current_app, request, Response, json
 from ..modulos.propiedades.aplicacion.servicios import ServicioPropiedad
-from ..modulos.propiedades.aplicacion.dto import PropiedadDTO
 from ..seedwork.dominio.excepciones import ExcepcionDominio
 from ..modulos.propiedades.aplicacion.mapeadores import MapeadorPropiedadDTOJson
 
@@ -13,8 +12,10 @@ def crear_propiedad():
 
         map_propiedad = MapeadorPropiedadDTOJson()
         propiedad_dto = map_propiedad.externo_a_dto(propiedad_dict)
-
-        sp = ServicioPropiedad()
+        print(propiedad_dto)  # Print the value of propiedad_dto
+        repositorio = current_app.extensions['repositorio_propiedades']
+        mapeador = current_app.extensions['mapeador_propiedad']
+        sp = ServicioPropiedad(repositorio=repositorio, mapeador=mapeador)
         dto_final = sp.crear_propiedad(propiedad_dto)
 
         return Response(map_propiedad.dto_a_externo(dto_final), status=200, mimetype='application/json')
@@ -24,7 +25,9 @@ def crear_propiedad():
 @bp.route('/propiedad/<id>', methods=('GET',))
 def obtener_propiedad(id):
     try:
-        sp = ServicioPropiedad()
+        repositorio = current_app.extensions['repositorio_propiedades']
+        mapeador = current_app.extensions['mapeador_propiedad']
+        sp = ServicioPropiedad(repositorio=repositorio, mapeador=mapeador)
         propiedad_dto = sp.obtener_propiedad_por_id(id)
         
         if propiedad_dto:

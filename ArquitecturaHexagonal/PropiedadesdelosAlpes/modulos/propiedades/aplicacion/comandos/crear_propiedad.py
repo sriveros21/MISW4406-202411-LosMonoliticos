@@ -13,7 +13,7 @@ from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.propiedades.infraestruc
 class CrearPropiedad(Comando):
     nombre: str
     ubicacion: str
-    dimensiones: str
+    dimension: str
     tipo: str
     estado: str
 
@@ -23,7 +23,7 @@ class CrearPropiedadHandler(CrearPropiedadBaseHandler):
         propiedad_dto = PropiedadDTO(
                 nombre=comando.nombre,
                 ubicacion=comando.ubicacion,
-                dimensiones=comando.dimensiones,
+                dimension=comando.dimension,
                 tipo=comando.tipo,
                 estado=comando.estado)
 

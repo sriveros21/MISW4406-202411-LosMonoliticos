@@ -17,16 +17,7 @@ class Dimension:
     unit: str
 
 @dataclass(frozen=True)
-class Direccion(ObjetoValor):
-    calle: str
-    numero: str
-    ciudad: str
-    estado: str
-    codigo_postal: str
-
-@dataclass(frozen=True)
 class Ubicacion(ObjetoValor):
-    direccion: str
     latitud: float
     longitud: float
 

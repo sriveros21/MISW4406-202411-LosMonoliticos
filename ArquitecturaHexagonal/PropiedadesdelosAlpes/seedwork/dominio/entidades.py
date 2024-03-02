@@ -18,11 +18,3 @@ class Entidad:
 @dataclass
 class AgregacionRaiz(Entidad, ValidarReglasMixin):
     pass
-
-@dataclass
-class Locacion(Entidad):
-    # Asumiendo que Locacion sea una clase con atributos adicionales
-    direccion: str = field(default_factory=str)
-
-    def __str__(self) -> str:
-        return f"Locacion: {self.direccion}"
