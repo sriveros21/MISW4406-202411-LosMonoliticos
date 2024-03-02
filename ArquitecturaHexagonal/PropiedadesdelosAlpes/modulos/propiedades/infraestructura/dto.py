@@ -48,19 +48,9 @@ class Edificacion(db.Model):
 
 class Piso(db.Model):
     __tablename__ = 'pisos'
-    id_piso = Column(String, primary_key=True)
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     edificacion_id = Column(String, ForeignKey('edificaciones.id'))
     numero = Column(Integer, nullable=False)
-# class TipoPropiedad(Enum):
-#     RESIDENCIAL = "Residencial"
-#     COMERCIAL = "Comercial"
-#     INDUSTRIAL = "Industrial"
-#     ESPECIALIZADO = "Especializado"
-
-# class EstadoPropiedad(Enum):
-#     DISPONIBLE = "Disponible"
-#     NO_DISPONIBLE = "No Disponible"
-#     EN_REPARACION = "En Reparación"
 
 class Propiedad(db.Model):
     __tablename__ = "propiedades"
