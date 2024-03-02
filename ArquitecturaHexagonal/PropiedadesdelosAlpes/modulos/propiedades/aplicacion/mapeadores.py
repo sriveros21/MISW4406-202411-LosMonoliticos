@@ -6,54 +6,58 @@ from typing import List
 from datetime import datetime
 
 class MapeadorPropiedadDTOJson(AppMap):
-    def externo_a_dto(self, propiedad: dict) -> PropiedadDTO:
-        terreno_raw = propiedad.get('terreno')
+    def _procesar_terreno(self, terreno: dict) -> TerrenoDTO:
+        dimension_dto = DimensionDTO(
+            width=terreno['dimension']['width'],
+            length=terreno['dimension']['length'],
+            unit=terreno['dimension']['unit']
+        )
         terreno_dto = TerrenoDTO(
-            id=terreno_raw.get('id'),
-            dimension=DimensionDTO(
-                width=terreno_raw['dimensiones']['width'],
-                length=terreno_raw['dimensiones']['length'],
-                unit=terreno_raw['dimensiones']['unit']
-            ),
-            lote=terreno_raw.get('lote')
+            id=terreno.get('id'),
+            dimension=dimension_dto,
+            lote=terreno.get('lote')
         )
-        
- 
-        edificaciones_dto = [
-            EdificacionDTO(
-                id=str(edificacion.get('id')),
+        return terreno_dto
+    
+    def _procesar_edificaciones(self, edificaciones: List[dict]) -> List[EdificacionDTO]:
+        edificaciones_dto = []
+        for edificacion in edificaciones:
+            dimension_dto = DimensionDTO(
+                width=edificacion['dimension']['width'],
+                length=edificacion['dimension']['length'],
+                unit=edificacion['dimension']['unit']
+            )
+            pisos_dto = [PisoDTO(numero=piso['numero']) for piso in edificacion.get('pisos', [])]
+            edificacion_dto = EdificacionDTO(
+                id=edificacion.get('id'),
                 tipo=edificacion.get('tipo'),
-                dimension=DimensionDTO(
-                    width=edificacion['dimensiones']['width'],
-                    length=edificacion['dimensiones']['length'],
-                    unit=edificacion['dimensiones']['unit']
-                ),
-                pisos=[PisoDTO(numero=piso['numero']) for piso in edificacion.get('pisos')],
-            ) for edificacion in propiedad.get('edificaciones', [])
-        ]
-
-        ubicacion_raw = propiedad.get('ubicacion')
+                dimension=dimension_dto,
+                pisos=pisos_dto
+            )
+            edificaciones_dto.append(edificacion_dto)
+        return edificaciones_dto
+    
+    def externo_a_dto(self, externo: dict) -> PropiedadDTO:
+        terreno_dto = self._procesar_terreno(externo.get('terreno', {}))
+        edificaciones_dto = self._procesar_edificaciones(externo.get('edificaciones', []))
         ubicacion_dto = UbicacionDTO(
-            latitud=ubicacion_raw['latitud'],
-            longitud=ubicacion_raw['longitud']
+            latitud=externo['ubicacion']['latitud'],
+            longitud=externo['ubicacion']['longitud']
         )
-
-
         propiedad_dto = PropiedadDTO(
-            id=propiedad.get('id'),
-            nombre=propiedad.get('nombre'),
+            id=externo.get('id'),
+            nombre = str(externo['nombre']),
             ubicacion=ubicacion_dto,
             dimension=DimensionDTO(
-                width=propiedad['dimensiones']['width'],
-                length=propiedad['dimensiones']['length'],
-                unit=propiedad['dimensiones']['unit']
+                width=externo['dimension']['width'],
+                length=externo['dimension']['length'],
+                unit=externo['dimension']['unit']
             ),
-            tipo=propiedad.get('tipo'),
-            estado=propiedad.get('estado'),
+            tipo=externo.get('tipo'),
+            estado=externo.get('estado'),
             edificaciones=edificaciones_dto,
             terreno=terreno_dto
         )
-
         return propiedad_dto
     
     def dto_a_externo(self, dto: PropiedadDTO) -> dict:
@@ -62,47 +66,47 @@ class MapeadorPropiedadDTOJson(AppMap):
 class MapeadorPropiedad(RepMap):
     
     @staticmethod
-    def entidad_a_dto(propiedad: Propiedad) -> PropiedadDTO:
-        edificaciones_dto: List[EdificacionDTO] = [
+    def entidad_a_dto(self, entidad: Propiedad) -> PropiedadDTO:
+        terreno_dto = TerrenoDTO(
+            id=str(entidad.terreno.id),
+            dimension=DimensionDTO(
+                width=entidad.terreno.dimension.width,
+                length=entidad.terreno.dimension.length,
+                unit=entidad.terreno.dimension.unit
+            ),
+            lote=entidad.terreno.lote
+        )
+        edificaciones_dto = [
             EdificacionDTO(
-                id=str(edificacion.id.identificador),
-                tipo=edificacion.tipo.value,
+                id=str(edificacion.id),
+                tipo=edificacion.tipo,
                 dimension=DimensionDTO(
                     width=edificacion.dimension.width,
                     length=edificacion.dimension.length,
                     unit=edificacion.dimension.unit
                 ),
                 pisos=[PisoDTO(numero=piso.numero) for piso in edificacion.pisos]
-            ) for edificacion in propiedad.edificaciones
+            ) for edificacion in entidad.edificaciones
         ]
-
-        terreno_dto = TerrenoDTO(
-            id=str(propiedad.terreno.id),
-            dimension=DimensionDTO(
-                width=propiedad.terreno.dimension.width,
-                length=propiedad.terreno.dimension.length,
-                unit=propiedad.terreno.dimension.unit
-            ),
-            lote=propiedad.terreno.lote.area
+        ubicacion_dto = UbicacionDTO(
+            latitud=entidad.ubicacion.latitud,
+            longitud=entidad.ubicacion.longitud
         )
-
-        return PropiedadDTO(
-            id=propiedad.id,
-            nombre=propiedad.nombre.valor,
-            ubicacion=UbicacionDTO(
-                latitud=propiedad.ubicacion.latitud,
-                longitud=propiedad.ubicacion.longitud
-            ),
+        propiedad_dto = PropiedadDTO(
+            id=str(entidad.id),
+            nombre=entidad.nombre,
+            ubicacion=ubicacion_dto,
             dimension=DimensionDTO(
-                width=propiedad.dimension.width,
-                length=propiedad.dimension.length,
-                unit=propiedad.dimension.unit
+                width=entidad.dimension.width,
+                length=entidad.dimension.length,
+                unit=entidad.dimension.unit
             ),
-            tipo=propiedad.tipo.value,
-            estado=propiedad.estado.value,
+            tipo=entidad.tipo,
+            estado=entidad.estado,
             edificaciones=edificaciones_dto,
             terreno=terreno_dto
         )
+        return propiedad_dto
 
     def dto_a_entidad(self, dto: PropiedadDTO) -> Propiedad:
         propiedad: Propiedad = dto
