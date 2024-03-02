@@ -61,11 +61,47 @@ class MapeadorPropiedadDTOJson(AppMap):
         return propiedad_dto
     
     def dto_a_externo(self, dto: PropiedadDTO) -> dict:
-        return dto.__dict__  
+        return {
+            "id": dto.id,
+            "nombre": dto.nombre,
+            "ubicacion": {
+                "latitud": dto.ubicacion.latitud,
+                "longitud": dto.ubicacion.longitud,
+            },
+            "dimension": {
+                "width": dto.dimension.width,
+                "length": dto.dimension.length,
+                "unit": dto.dimension.unit,
+            },
+            "tipo": dto.tipo,
+            "estado": dto.estado,
+            "terreno": {
+                "id": dto.terreno.id,
+                "dimension": {
+                    "width": dto.terreno.dimension.width,
+                    "length": dto.terreno.dimension.length,
+                    "unit": dto.terreno.dimension.unit,
+                },
+                "lote": dto.terreno.lote,
+            },
+            "edificaciones": [
+                {
+                    "id": ed.id,
+                    "tipo": ed.tipo,
+                    "dimension": {
+                        "width": ed.dimension.width,
+                        "length": ed.dimension.length,
+                        "unit": ed.dimension.unit,
+                    },
+                    "pisos": [{"numero": piso.numero} for piso in ed.pisos],
+                }
+                for ed in dto.edificaciones
+            ],
+        }
+
     
 class MapeadorPropiedad(RepMap):
     
-    @staticmethod
     def entidad_a_dto(self, entidad: Propiedad) -> PropiedadDTO:
         terreno_dto = TerrenoDTO(
             id=str(entidad.terreno.id),

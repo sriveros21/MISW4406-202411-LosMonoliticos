@@ -29,9 +29,10 @@ class RepositorioPropiedadesSQLite(RepositorioPropiedades):
     def fabrica_propiedades(self):
         return self.fabrica
 
-    def obtener_por_id(self, id: UUID) -> Propiedad:
+    def obtener_por_id(self, id: str) -> Propiedad:
         propiedad_dto = db.session.query(PropiedadDTO).filter_by(id=str(id)).one()
-        return self.mapeador.dto_a_entidad(propiedad_dto)
+        print("OBJETO DB CONSULTA 2",propiedad_dto)
+        return self.fabrica.crear_objeto(propiedad_dto, self.mapeador)
 
     def obtener_todos(self) -> List[Propiedad]:
         propiedades_dto = db.session.query(PropiedadDTO).all()
