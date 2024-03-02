@@ -6,7 +6,7 @@ from PropiedadesdelosAlpes.seedwork.dominio.entidades import AgregacionRaiz, Ent
 
 @dataclass
 class Cliente(AgregacionRaiz):
-    id_cliente: ov.IdentificadorCliente = field(default_factory=ov.IdentificadorCliente)
+    id_cliente: str = field(default_factory=str)
     nombre: ov.Nombre = field(default_factory=ov.Nombre)
     apellido: ov.Apellido = field(default_factory=ov.Apellido)
     email: ov.Email = field(default_factory=ov.Email)

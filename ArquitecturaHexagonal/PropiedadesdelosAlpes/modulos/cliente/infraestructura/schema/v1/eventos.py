@@ -6,6 +6,7 @@ class ClienteCreadoPayLoad(Record):
     id_cliente = String()
     nombre = String()
     apellido = String()
+    email = String()
 
 
 class ClienteCreado(EventoIntegracion):

@@ -1,4 +1,4 @@
-from flask import Blueprint, request, Response, json
+from flask import Blueprint, request, Response, json, current_app
 
 from ..modulos.cliente.aplicacion.mapeadores import MapeadorClienteDTOJson
 from ..modulos.cliente.aplicacion.servicios import ServicioCliente
@@ -15,7 +15,10 @@ def crear_cliente():
         map_cliente = MapeadorClienteDTOJson()
         cliente_dto = map_cliente.externo_a_dto(cliente_dict)
 
-        sc = ServicioCliente()
+        print(cliente_dto)  # Print the value of cliente_dto
+        repositorio = current_app.extensions['repositorio_cliente']
+        mapeador = current_app.extensions['mapeador_cliente']
+        sc = ServicioCliente(repositorio=repositorio, mapeador=mapeador)
         dto_final = sc.crear_cliente(cliente_dto)
 
         return Response(map_cliente.dto_a_externo(dto_final), status=200, mimetype='application/json')
@@ -26,7 +29,9 @@ def crear_cliente():
 @bp.route('/cliente/<id>', methods=('GET',))
 def obtener_cliente(id):
     try:
-        sc = ServicioCliente()
+        repositorio = current_app.extensions['repositorio_cliente']
+        mapeador = current_app.extensions['mapeador_cliente']
+        sc = ServicioCliente(repositorio=repositorio, mapeador=mapeador)
         cliente_dto = sc.obtener_cliente_por_id(id)
 
         if cliente_dto:
