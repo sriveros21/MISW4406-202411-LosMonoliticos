@@ -25,9 +25,9 @@ class MinimoUnaPropiedad(ReglaNegocio):
         return len(self.propiedades) > 0
     
 class ReglaDimensionesValidas(ReglaNegocio):
-    def __init__(self, dimensiones: Dimension, mensaje='Las dimensiones propuestas son incorrectas'):
+    def __init__(self, dimension: Dimension, mensaje='Las dimensiones propuestas son incorrectas'):
         super().__init__(mensaje)
-        self.dimensiones = dimensiones
+        self.dimension = dimension
 
     def es_valido(self) -> bool:
         # Logica para validar dimensiones

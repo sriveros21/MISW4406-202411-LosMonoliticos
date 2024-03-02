@@ -4,7 +4,7 @@ from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.infraestructura.schema
 class ComandoCrearPropiedadPayload(ComandoIntegracion):
     nombre = String()
     ubicacion = String() 
-    dimensiones = String() 
+    dimension = String() 
     tipo = String()
     estado = String()
     
