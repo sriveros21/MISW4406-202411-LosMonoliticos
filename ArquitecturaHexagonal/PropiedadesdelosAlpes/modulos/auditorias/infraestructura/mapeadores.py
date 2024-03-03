@@ -34,30 +34,6 @@ class MapeadorAuditorias(Mapeador):
 
     #cambiando esto
     def dto_a_entidad(self, dto: AuditoriaDTO) -> Auditoria:
-        # nombreauditor=dto.nombre_auditor
-        # nombre_auditor_class=NombreAuditor(nombre_auditor=nombreauditor)
-        # #nombre_auditor.nombre_auditor=nombreauditor
-        # print("*******")
-        # print(nombre_auditor_class)
-        # # auditor=NombreAuditor(nombre_auditor=str(dto.nombre_auditor))
-        # fase=FaseAuditoria(dto.fase_auditoria)
-        # print ('*******Fase****')
-        # print (fase)
-        # objetivo=ObjetivoAuditoria(dto.objetivo_auditoria)
-
-        # auditoria = Auditoria(
-        #     dto.codigo_auditoria,
-        #     dto.fecha_auditoria,
-        #     #NombreAuditor(nombre_auditor=nombreauditor),
-        #     #nombre_auditor,
-        #     #dto.nombre_auditor,
-        #     nombre_auditor_class,
-        #     fase,
-        #     dto.hallazgos_auditoria,
-        #     objetivo
-        # )
-        
-        # return auditoria
         id =dto.id
         codigo=CodigoAuditoria(codigo=dto.codigo_auditoria)
         fecha=FechaAuditoria(fecha=dto.fecha_auditoria)
