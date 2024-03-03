@@ -5,6 +5,11 @@ from flask_sqlalchemy import SQLAlchemy
 # Identifies the base directory
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+#Register Handlers
+def registrar_handlers():
+    import PropiedadesdelosAlpes.modulos.auditorias.aplicacion
+    
+
 # Initialize the database variable here
 db = SQLAlchemy()
 
@@ -15,6 +20,8 @@ def import_domain_models():
     import PropiedadesdelosAlpes.modulos.cliente.aplicacion.dto
     import PropiedadesdelosAlpes.modulos.propiedades.infraestructura.dto
     import PropiedadesdelosAlpes.modulos.propiedades.aplicacion.dto
+    import PropiedadesdelosAlpes.modulos.auditorias.infraestructura.dto
+    import PropiedadesdelosAlpes.modulos.auditorias.aplicacion.dto
 
 
 def registrar_handles():
@@ -67,10 +74,26 @@ def create_app(configuracion=None):
         servicio_propiedad = ServicioPropiedad(repositorio=repositorio_propiedades, mapeador=mapeador_propiedad)
         app.extensions['servicio_propiedad'] = servicio_propiedad
 
+
+        ###Configuracion Auditorias
+        from PropiedadesdelosAlpes.modulos.auditorias.infraestructura.fabricas import FabricaRepositorio as FabricaRepositorioAuditorias
+        from PropiedadesdelosAlpes.modulos.auditorias.aplicacion.servicios import ServicioAuditoria
+        from PropiedadesdelosAlpes.modulos.auditorias.infraestructura.mapeadores import MapeadorAuditorias
+
+        fabrica_repositorio_auditorias=FabricaRepositorioAuditorias(db_session=db.session)
+        repositorio_auditorias= fabrica_repositorio_auditorias.crear_repositorio_auditorias()
+        mapeador_auditorias=MapeadorAuditorias(db.session)
+        app.extensions['repositorio_auditorias'] = repositorio_auditorias
+        app.extensions['mapeador_auditorias'] = mapeador_auditorias
+        servicio_auditorias = ServicioAuditoria(repositorio=repositorio_auditorias, mapeador=mapeador_auditorias)
+        app.extensions['servicio_auditorias'] = servicio_auditorias      
+
+
     # Import and register your blueprints
-    from . import cliente, propiedades
+    from . import cliente, propiedades, auditorias
     app.register_blueprint(cliente.bp)
     app.register_blueprint(propiedades.bp)
+    app.register_blueprint(auditorias.bp)
 
     @app.route("/health")
     def health():
