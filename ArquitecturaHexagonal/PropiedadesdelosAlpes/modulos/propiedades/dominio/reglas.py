@@ -2,7 +2,7 @@ from ....seedwork.dominio.reglas import ReglaNegocio
 from ....seedwork.dominio.objetos_valor import Ubicacion, Dimension
 from .entidades import Propiedad
 from datetime import datetime
-
+from typing import List
 class UbicacionValida(ReglaNegocio):
     ubicacion: Ubicacion
 
@@ -15,7 +15,7 @@ class UbicacionValida(ReglaNegocio):
         return True
 
 class MinimoUnaPropiedad(ReglaNegocio):
-    propiedades: 'list[Propiedad]'
+    propiedades: List[Propiedad]
 
     def __init__(self, propiedades, mensaje='Debe haber al menos una propiedad disponible'):
         super().__init__(mensaje)

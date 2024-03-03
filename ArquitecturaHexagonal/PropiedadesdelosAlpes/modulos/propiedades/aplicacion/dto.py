@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from PropiedadesdelosAlpes.seedwork.dominio.objetos_valor import Dimension
 from PropiedadesdelosAlpes.seedwork.aplicacion.dto import DTO
 from typing import List
 
@@ -25,6 +24,7 @@ class EdificacionDTO(DTO):
     tipo: str  # Minorista, Oficina, Industrial, Especializado
     dimension: DimensionDTO
     pisos: List[PisoDTO] = field(default_factory=list)
+
 
 @dataclass(frozen=True)
 class TerrenoDTO(DTO):

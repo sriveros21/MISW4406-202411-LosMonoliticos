@@ -1,9 +1,9 @@
 import pulsar
 from pulsar.schema import *
 
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.propiedades.infraestructura.schema.v1.eventos import PropiedadCreada, PropiedadCreadaPayload
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.propiedades.infraestructura.schema.v1.comandos import ComandoCrearPropiedad, ComandoCrearPropiedadPayload
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.infraestructura import utils
+from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.schema.v1.eventos import PropiedadCreada, PropiedadCreadaPayload
+from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.schema.v1.comandos import ComandoCrearPropiedad, ComandoCrearPropiedadPayload
+from PropiedadesdelosAlpes.seedwork.infraestructura import utils
 
 import datetime
 
@@ -24,14 +24,17 @@ class Despachador:
             id=str(evento.propiedad_id),
             nombre=evento.nombre,
             ubicacion=evento.ubicacion,
+            dimension=evento.dimension,
+            tipo=evento.tipo,
+            estado=evento.estado,
             fecha_creacion=int(unix_time_millis(evento.fecha_evento))
         )
         evento_integracion = PropiedadCreada(data=payload)
-        self._publicar_mensaje(evento_integracion, topico, PropiedadCreada)
+        self._publicar_mensaje(evento_integracion, topico, AvroSchema(PropiedadCreada))
 
     def publicar_comando(self, comando, topico):
         payload = ComandoCrearPropiedadPayload(
             id_usuario=str(comando.id_usuario)
         )
         comando_integracion = ComandoCrearPropiedad(data=payload)
-        self._publicar_mensaje(comando_integracion, topico, ComandoCrearPropiedad)
+        self._publicar_mensaje(comando_integracion, topico, AvroSchema(ComandoCrearPropiedad))
