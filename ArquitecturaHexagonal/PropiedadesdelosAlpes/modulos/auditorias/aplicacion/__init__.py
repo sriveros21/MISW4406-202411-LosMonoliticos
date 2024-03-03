@@ -1,4 +1,7 @@
-#from pydispatch import dispatcher
-#from .handlers import HandlerAuditoriaDominio
+from pydispatch import dispatcher
+from .handlers import HandlerAuditoriaIntegracion
 
-#dispatcher.connect(HandlerAuditoriaDominio.handle_auditoria_creada, signal='AuditoriaCreadaDominio')
+from PropiedadesdelosAlpes.modulos.auditorias.dominio.eventos import AuditoriaCreada, FaseAuditoriaCambiada
+
+dispatcher.connect(HandlerAuditoriaIntegracion.handle_auditoria_creada, signal=f'{AuditoriaCreada.__name__}Integracion')
+dispatcher.connect(HandlerAuditoriaIntegracion.handle_auditoria_creada, signal=f'{AuditoriaCreada.__name__}Integracion')
