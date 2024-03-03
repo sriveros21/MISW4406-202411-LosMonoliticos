@@ -17,7 +17,7 @@ class Auditoria(db.Model):
     __tablename__ = "auditorias"
     id = Column(String, primary_key=True)
     codigo_auditoria = Column(String, nullable=False)
-    fecha_auditoria = Column(DateTime,nullable=False)
+    fecha_auditoria = Column(String,nullable=False)
     nombre_auditor= Column(String, nullable=False)
     fase_auditoria = Column(SQLEnum(FaseAuditoria), nullable=False)
     hallazgos_auditoria=Column(String, nullable=False)

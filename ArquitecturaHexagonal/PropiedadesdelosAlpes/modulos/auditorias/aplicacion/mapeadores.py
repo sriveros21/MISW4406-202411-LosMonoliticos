@@ -17,8 +17,15 @@ class MapeadorAuditoriaDTOJson(AppMap):
 
     #Revisar este metodo
     def dto_a_externo(self, dto: AuditoriaDTO) -> dict:
-        return dto.__dict__
-    
+        return {
+            "id": dto.id,
+            "codigo": dto.codigo_auditoria,
+            "fecha": dto.fecha_auditoria,
+            "auditor": dto.nombre_auditor,
+            "fase": dto.fase_auditoria,
+            "hallazgos": dto.hallazgos_auditoria,
+            "objetivo": dto.objetivo_auditoria
+                }
 
 class MapeadorAuditoria(RepMap):
 

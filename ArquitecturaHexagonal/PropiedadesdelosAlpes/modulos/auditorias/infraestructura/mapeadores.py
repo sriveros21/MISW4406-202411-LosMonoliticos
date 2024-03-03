@@ -23,11 +23,11 @@ class MapeadorAuditorias(Mapeador):
 
         auditoria_dto = AuditoriaDTO()
         auditoria_dto.id = entidad.id
-        auditoria_dto.codigo_auditoria = entidad.codigo
-        auditoria_dto.fecha_auditoria = entidad.fecha
-        auditoria_dto.nombre_auditor = entidad.auditor
+        auditoria_dto.codigo_auditoria = entidad.codigo.codigo
+        auditoria_dto.fecha_auditoria = entidad.fecha.fecha
+        auditoria_dto.nombre_auditor = entidad.auditor.nombre_auditor
         auditoria_dto.fase_auditoria = entidad.fase
-        auditoria_dto.hallazgos_auditoria= entidad.hallazgos
+        auditoria_dto.hallazgos_auditoria= entidad.hallazgos.hallazgos_auditoria
         auditoria_dto.objetivo_auditoria= entidad.objetivo
 
         return auditoria_dto
