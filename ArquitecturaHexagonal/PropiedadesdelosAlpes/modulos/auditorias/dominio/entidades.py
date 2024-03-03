@@ -6,16 +6,31 @@ En este archivo se encontraran las entidades del dominio auditoria
 
 from __future__ import annotations
 from dataclasses import dataclass, field
+from enum import Enum
 
 import PropiedadesdelosAlpes.modulos.auditorias.dominio.objetos_valor as ov
 from ....seedwork.dominio.entidades import AgregacionRaiz, Entidad
 
-#Revisar si esta lleva Id
+
+@dataclass(frozen=True)
+class FaseAuditoria(Enum):
+    INICIAL = "Inicial"
+    INTERMEDIA = "Intermedia"
+    FINAL = "Final"    
+
+
+@dataclass(frozen=True)
+class ObjetivoAuditoria(Enum):
+    VALIDAR_COBERTURA = "Validar Cobertura"
+    VALIDAR_CALIDAD = "Validar Calidad"
+    VALIDAR_CONFIABILIDAD = "Validar Confiabilidad"
+
 @dataclass
 class Auditoria(AgregacionRaiz):
+    id: str = field(default_factory=str)
     codigo:ov.CodigoAuditoria = field(default_factory=ov.CodigoAuditoria)
     fecha:ov.FechaAuditoria = field(default_factory=ov.FechaAuditoria)
     auditor:ov.NombreAuditor = field(default_factory=ov.NombreAuditor)
-    fase:ov.FaseAuditoria = field(default_factory=ov.FaseAuditoria)
+    fase:ov.FaseAuditoria = field(default_factory=ov.FaseAuditoria.INICIAL)
     hallazgos:ov.HallazgosAuditoria = field(default_factory=ov.HallazgosAuditoria)
-    objetivo: ov.ObjetivoAuditoria = field(default_factory=ov.ObjetivoAuditoria)
+    objetivo: ov.ObjetivoAuditoria = field(default_factory=ov.ObjetivoAuditoria.VALIDAR_CALIDAD)

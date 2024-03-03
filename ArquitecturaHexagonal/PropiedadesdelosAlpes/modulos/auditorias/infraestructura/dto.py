@@ -5,22 +5,36 @@ de la infraestructura del dominio de auditorias
 
 """
 
+from PropiedadesdelosAlpes.modulos.auditorias.dominio.objetos_valor import FaseAuditoria, ObjetivoAuditoria
 from PropiedadesdelosAlpes.config.db import db
 from sqlalchemy.orm import declarative_base, relationship, backref
-from sqlalchemy import Column, ForeignKey, Integer, Table
+from sqlalchemy import Column, ForeignKey, Integer, Table, String, Float, Enum as SQLEnum, DateTime
+from sqlalchemy import Enum
+from enum import Enum
 
-Base =db.declarative_base()
+# Base =db.declarative_base()
 
-#Revisar esta tabla id string?
+# #Revisar esta tabla id string?
+
+# class Auditoria(db.Model):
+#     __tablename__ = "auditorias"
+#     id= db.Column(db.String, primary_key=True, nullable=False)
+#     codigo_auditoria =  db.Column(db.String, primary_key=False, nullable=False)
+#     fecha_auditoria =  db.Column(db.DateTime, primary_key=False, nullable=False)
+#     nombre_auditor =  db.Column(db.String, primary_key=False, nullable=False)
+#     fase_auditoria =  db.Column(db.String, primary_key=False, nullable=False)
+#     hallazgos_auditoria =  db.Column(db.String, primary_key=False, nullable=False)
+#     objetivo_auditoria =  db.Column(db.String, primary_key=False, nullable=False)
+
+#Esta lleva id?
 
 class Auditoria(db.Model):
     __tablename__ = "auditorias"
-    id= db.Column(db.String, primary_key=True, nullable=False)
-    codigo_auditoria =  db.Column(db.String, primary_key=False, nullable=False)
-    fecha_auditoria =  db.Column(db.DateTime, primary_key=False, nullable=False)
-    nombre_auditor =  db.Column(db.String, primary_key=False, nullable=False)
-    fase_auditoria =  db.Column(db.String, primary_key=False, nullable=False)
-    hallazgos_auditoria =  db.Column(db.String, primary_key=False, nullable=False)
-    objetivo_auditoria =  db.Column(db.String, primary_key=False, nullable=False)
-
+    id = Column(String, primary_key=True)
+    codigo_auditoria = Column(String, nullable=False)
+    fecha_auditoria = Column(DateTime,nullable=False)
+    nombre_auditor= Column(String, nullable=False)
+    fase_auditoria = Column(SQLEnum(FaseAuditoria), nullable=False)
+    hallazgos_auditoria=Column(String, nullable=False)
+    objetivo_auditoria=Column(SQLEnum(ObjetivoAuditoria), nullable=False)
 
