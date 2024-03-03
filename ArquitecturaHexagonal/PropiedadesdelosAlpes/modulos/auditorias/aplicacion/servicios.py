@@ -9,7 +9,8 @@ class ServicioAuditoria(Servicio):
     def __init__(self,repositorio: RepositorioAuditorias, mapeador: MapeadorAuditoria):
         self.repositorio= repositorio
         self.mapeador =mapeador
-        
+    
+    #Este Mapeador esta enviando al de propiedades 
     def crear_auditoria(self, auditoria_dto: AuditoriaDTO) -> AuditoriaDTO:
         auditoria: Auditoria = self.mapeador.dto_a_entidad(auditoria_dto)
         self.repositorio.agregar(auditoria)

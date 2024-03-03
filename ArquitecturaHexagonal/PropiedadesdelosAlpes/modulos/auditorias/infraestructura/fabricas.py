@@ -27,11 +27,6 @@ class FabricaRepositorio:
         fabrica_auditorias = FabricaAuditorias()
         return RepositorioAuditoriasSQLite(db_session=self.db_session, mapeador=mapeador_auditorias, fabrica=fabrica_auditorias)   
 
-    # def crear_objeto(self, obj: type, mapeador: any = None) -> Repositorio:
-    #     if obj == RepositorioAuditorias.__class__:
-    #         return RepositorioAuditoriasSQLite()
-    #     raise ExcepcionFabrica()
-
     def obtener_repositorio_auditorias(self) -> RepositorioAuditorias:
         """
         Returns an instance of RepositorioAuditorias.

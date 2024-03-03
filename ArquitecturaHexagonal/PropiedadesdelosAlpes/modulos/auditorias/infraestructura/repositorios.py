@@ -34,25 +34,6 @@ class RepositorioAuditoriasSQLite(RepositorioAuditorias):
     #Verificar sí aca se incluye el Id
     #Revisar fecha
     def obtener_todos(self) -> List[Auditoria]:
-        # #id= 123
-        # codigo_auditoria = "auditoria.codigo"
-        # fecha_auditoria = "auditoria.fecha"
-        # nombre_auditor= "auditoria.auditor"
-        # fase_auditoria = "auditoria.fase"
-        # hallazgos_auditoria = "auditoria.hallazgos"
-        # objetivo_auditoria= "auditoria.objetivo"
-
-        # auditoria = Auditoria(
-        #     id=id,
-        #     codigo=codigo_auditoria,
-        #     fecha=fecha_auditoria,
-        #     auditor=nombre_auditor,
-        #     fase=fase_auditoria,
-        #     hallazgos=hallazgos_auditoria,
-        #     objetivo=objetivo_auditoria
-        # )
-
-        # return [auditoria]
         auditorias_dto = db.session.query(AuditoriaDTO).all()
         return [self.mapeador.dto_a_entidad(dto) for dto in auditorias_dto]       
 
