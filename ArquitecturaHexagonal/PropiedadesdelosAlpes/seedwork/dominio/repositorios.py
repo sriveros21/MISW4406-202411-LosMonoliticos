@@ -8,10 +8,6 @@ class Repositorio(ABC):
         pass
 
     @abstractmethod
-    def obtener_todos(self) -> 'list[Entidad]':
-        pass
-
-    @abstractmethod
     def agregar(self, entidad: Entidad):
         pass
 

@@ -1,5 +1,5 @@
 from pulsar.schema import *
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.infraestructura.schema.v1.eventos import EventoIntegracion
+from PropiedadesdelosAlpes.seedwork.infraestructura.schema.v1.eventos import EventoIntegracion
 
 class PropiedadCreadaPayload(Record):
     id = String()

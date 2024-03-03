@@ -1,6 +1,8 @@
+from PropiedadesdelosAlpes.seedwork.dominio.objetos_valor import Dimension, Ubicacion
+from PropiedadesdelosAlpes.modulos.propiedades.dominio.objetos_valor import EstadoPropiedad, Nombre, TipoPropiedad, Piso
 from PropiedadesdelosAlpes.seedwork.aplicacion.dto import Mapeador as AppMap
 from PropiedadesdelosAlpes.seedwork.dominio.repositorios import Mapeador as RepMap
-from PropiedadesdelosAlpes.modulos.propiedades.dominio.entidades import Propiedad
+from PropiedadesdelosAlpes.modulos.propiedades.dominio.entidades import Propiedad, Edificacion, Terreno
 from .dto import EdificacionDTO, PisoDTO, PropiedadDTO, TerrenoDTO, DimensionDTO, UbicacionDTO
 from typing import List
 from datetime import datetime
@@ -144,9 +146,48 @@ class MapeadorPropiedad(RepMap):
         )
         return propiedad_dto
 
+    # def dto_a_entidad(self, dto: PropiedadDTO) -> Propiedad:
+    #     propiedad: Propiedad = dto
+    #     return propiedad
+    
     def dto_a_entidad(self, dto: PropiedadDTO) -> Propiedad:
-        propiedad: Propiedad = dto
-        return propiedad
+        return Propiedad(
+            id=dto.id,
+            nombre=Nombre(valor=dto.nombre),
+            ubicacion=Ubicacion(latitud=dto.ubicacion.latitud, longitud=dto.ubicacion.longitud),
+            dimension=Dimension(width=dto.dimension.width, length=dto.dimension.length, unit=dto.dimension.unit),
+            tipo=TipoPropiedad(dto.tipo),
+            estado=EstadoPropiedad(dto.estado),
+            edificaciones=[self.map_edificacion_dto_to_domain(ed) for ed in dto.edificaciones],
+            terreno=self.map_terreno_dto_to_domain(dto.terreno)
+    )
+
+    def map_edificacion_dto_to_domain(self, ed_dto: EdificacionDTO) -> Edificacion:
+        dimension = Dimension(
+        width=ed_dto.dimension.width,
+        length=ed_dto.dimension.length,
+        unit=ed_dto.dimension.unit
+        )
+
+        pisos = [Piso(numero=piso_dto.numero) for piso_dto in ed_dto.pisos]
+        edificacion = Edificacion(
+        id=ed_dto.id, 
+        tipo=ed_dto.tipo,
+        dimension=dimension,
+        pisos=pisos
+        )
+        
+        return edificacion
+
+    def map_terreno_dto_to_domain(self, terreno_dto: TerrenoDTO) -> Terreno:
+        dimension = Dimension(
+            width=terreno_dto.dimension.width,
+            length=terreno_dto.dimension.length,
+            unit=terreno_dto.dimension.unit
+        )
+        lote = terreno_dto.lote
+
+        return Terreno(id=terreno_dto.id, dimension=dimension, lote=lote)
     
     def obtener_tipo(self) -> type:
         return Propiedad.__class__

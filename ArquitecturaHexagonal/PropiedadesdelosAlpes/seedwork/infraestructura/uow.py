@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from enum import Enum
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.entidades import AgregacionRaiz
+from PropiedadesdelosAlpes.seedwork.dominio.entidades import AgregacionRaiz
 
 from pydispatch import dispatcher
 from typing import List
