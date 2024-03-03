@@ -23,7 +23,7 @@ def crear_auditoria():
         auditoria_dto = map_auditoria.externo_a_dto(auditoria_dict)
 
         repositorio = current_app.extensions['repositorio_auditorias']
-        mapeador = current_app.extensions['mapeador_propiedad']
+        mapeador = current_app.extensions['mapeador_auditorias']
 
         sp = ServicioAuditoria(repositorio=repositorio, mapeador=mapeador)
         dto_final = sp.crear_auditoria(auditoria_dto)
