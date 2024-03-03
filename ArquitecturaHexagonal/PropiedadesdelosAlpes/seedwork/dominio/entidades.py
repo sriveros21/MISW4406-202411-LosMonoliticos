@@ -20,4 +20,11 @@ class Entidad:
 
 @dataclass
 class AgregacionRaiz(Entidad, ValidarReglasMixin):
+    eventos:list[EventoDominio] =field(default_factory=list)
+
+    def agregar_evento (self,evento:EventoDominio):
+        self.eventos.append(evento)
+
+    def limpiar_eventos(self):
+        self.eventos =list()
     pass
