@@ -20,18 +20,4 @@ class Entidad:
 
 @dataclass
 class AgregacionRaiz(Entidad, ValidarReglasMixin):
-    eventos: list[EventoDominio] = field(default_factory=list)
-
-    def agregar_evento(self, evento: EventoDominio):
-        self.eventos.append(evento)
-    
-    def limpiar_eventos(self):
-        self.eventos = list()
-
-@dataclass
-class Locacion(Entidad):
-    # Asumiendo que Locacion sea una clase con atributos adicionales
-    direccion: str = field(default_factory=str)
-
-    def __str__(self) -> str:
-        return f"Locacion: {self.direccion}"
+    pass
