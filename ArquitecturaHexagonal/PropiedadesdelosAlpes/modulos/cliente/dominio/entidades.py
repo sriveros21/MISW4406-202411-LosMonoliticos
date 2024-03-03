@@ -1,14 +1,12 @@
-from datetime import datetime
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.dominio.entidades import Entidad
 from dataclasses import dataclass, field
-from .objetos_valor import NombreCompleto, EmailContacto, Identificacion, FechaRegistro
+
+import PropiedadesdelosAlpes.modulos.cliente.dominio.objetos_valor as ov
+from PropiedadesdelosAlpes.seedwork.dominio.entidades import AgregacionRaiz, Entidad
+
 
 @dataclass
-class Usuario(Entidad):
-    nombre: NombreCompleto = field(default_factory=NombreCompleto)
-    email: EmailContacto = field(default_factory=EmailContacto)
-
-@dataclass
-class Inquilino(Usuario):
-    identificacion: Identificacion = field(default_factory=Identificacion)
-    fecha_inicio_contrato: datetime = field(default_factory=datetime.now)
+class Cliente(AgregacionRaiz):
+    id_cliente: str = field(default_factory=str)
+    nombre: ov.Nombre = field(default_factory=ov.Nombre)
+    apellido: ov.Apellido = field(default_factory=ov.Apellido)
+    email: ov.Email = field(default_factory=ov.Email)
