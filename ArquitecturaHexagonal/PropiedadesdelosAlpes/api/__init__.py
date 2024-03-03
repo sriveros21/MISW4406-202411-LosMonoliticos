@@ -17,6 +17,8 @@ def import_domain_models():
     # Import DTOs from the infrastructure layer to ensure they are recognized by SQLAlchemy
     import PropiedadesdelosAlpes.modulos.propiedades.infraestructura.dto
     import PropiedadesdelosAlpes.modulos.propiedades.aplicacion.dto
+    import PropiedadesdelosAlpes.modulos.auditorias.infraestructura.dto
+    import PropiedadesdelosAlpes.modulos.auditorias.aplicacion.dto
 
 def create_app(configuracion=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -46,6 +48,21 @@ def create_app(configuracion=None):
         # Storing ServicioPropiedad in app.extensions for global access
         servicio_propiedad = ServicioPropiedad(repositorio=repositorio_propiedades, mapeador=mapeador_propiedad)
         app.extensions['servicio_propiedad'] = servicio_propiedad
+
+
+        ###Configuracion Auditorias
+        from PropiedadesdelosAlpes.modulos.auditorias.infraestructura.fabricas import FabricaRepositorio as FabricaRepositorioAuditorias
+        from PropiedadesdelosAlpes.modulos.auditorias.aplicacion.servicios import ServicioAuditoria
+        from PropiedadesdelosAlpes.modulos.auditorias.infraestructura.mapeadores import MapeadorAuditorias
+
+        fabrica_repositorio_auditorias=FabricaRepositorioAuditorias(db_session=db.session)
+        repositorio_auditorias= fabrica_repositorio_auditorias.crear_repositorio_auditorias()
+        mapeador_auditorias=MapeadorAuditorias(db.session)
+        app.extensions['repositorio_auditorias'] = repositorio_auditorias
+        app.extensions['mapeador_auditorias'] = mapeador_auditorias
+        servicio_auditorias = ServicioAuditoria(repositorio=repositorio_auditorias, mapeador=mapeador_auditorias)
+        app.extensions['servicio_auditorias'] = servicio_auditorias      
+
 
     # Import and register your blueprints
     from . import cliente, propiedades, auditorias

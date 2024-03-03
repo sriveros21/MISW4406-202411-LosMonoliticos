@@ -1,4 +1,4 @@
-from flask import Blueprint, request, Response, json
+from flask import Blueprint, request, Response, json, current_app, jsonify
 from ..modulos.auditorias.aplicacion.servicios import ServicioAuditoria
 from ..modulos.auditorias.aplicacion.dto import AuditoriaDTO
 from ..seedwork.dominio.excepciones import ExcepcionDominio
@@ -22,10 +22,14 @@ def crear_auditoria():
         map_auditoria = MapeadorAuditoriaDTOJson()
         auditoria_dto = map_auditoria.externo_a_dto(auditoria_dict)
 
-        sp = ServicioAuditoria()
-        dto_final = sp.crear_auditoria(auditoria_dto)
+        repositorio = current_app.extensions['repositorio_auditorias']
+        mapeador = current_app.extensions['mapeador_propiedad']
 
-        return Response(map_auditoria.dto_a_externo(dto_final), status=200, mimetype='application/json')
+        sp = ServicioAuditoria(repositorio=repositorio, mapeador=mapeador)
+        dto_final = sp.crear_auditoria(auditoria_dto)
+        return Response(json.dumps(map_auditoria.dto_a_externo(dto_final)), status=200, mimetype='application/json')
+
+        #return Response(map_auditoria.dto_a_externo(dto_final), status=200, mimetype='application/json')
     except ExcepcionDominio as e:
         return Response(json.dumps({'error': str(e)}), status=400, mimetype='application/json')
 
@@ -52,12 +56,15 @@ def auditoria_asincrona():
 @bp.route('/auditoria/<id>', methods=('GET',))
 def obtener_auditoria(id):
     try:
-        sp = ServicioAuditoria()
+        repositorio = current_app.extensions['repositorio_auditorias']
+        mapeador = current_app.extensions['mapeador_auditorias']       
+        sp = ServicioAuditoria(repositorio=repositorio,mapeador=mapeador)
         auditoria_dto = sp.obtener_auditoria_por_id(id)
         
         if auditoria_dto:
             map_auditoria = MapeadorAuditoriaDTOJson()
-            return Response(map_auditoria.dto_a_externo(auditoria_dto), status=200, mimetype='application/json')
+            return Response(json.dumps(map_auditoria.dto_a_externo(auditoria_dto)), status=200, mimetype='application/json')
+            #return Response(map_auditoria.dto_a_externo(auditoria_dto), status=200, mimetype='application/json')
         else:
             return Response(json.dumps({'error': 'Auditoria no encontrada'}), status=404, mimetype='application/json')
     except ExcepcionDominio as e:

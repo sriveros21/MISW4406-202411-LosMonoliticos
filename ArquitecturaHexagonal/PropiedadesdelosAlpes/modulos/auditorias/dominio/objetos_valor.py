@@ -24,8 +24,8 @@ class CodigoAuditoria(ABC, ObjetoValor):
 class NombreAuditor(ObjetoValor):
     nombre_auditor: str
 
-@dataclass(frozen=True)
-class FaseAuditoria(Enum):
+#@dataclass(frozen=True)
+class FaseAuditoria(str, Enum):
     INICIAL = "Inicial"
     INTERMEDIA = "Intermedia"
     FINAL = "Final"
@@ -34,8 +34,8 @@ class FaseAuditoria(Enum):
 class HallazgosAuditoria(ObjetoValor):
     hallazgos_auditoria: str
 
-@dataclass(frozen=True)
-class ObjetivoAuditoria(Enum):
+#@dataclass(frozen=True)
+class ObjetivoAuditoria(str, Enum):
     VALIDAR_COBERTURA = "Validar Cobertura"
     VALIDAR_CALIDAD = "Validar Calidad"
     VALIDAR_CONFIABILIDAD = "Validar Confiabilidad"

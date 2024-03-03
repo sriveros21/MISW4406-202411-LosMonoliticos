@@ -35,6 +35,7 @@ class ObjetivoAuditoria(Enum):
 #Revisar Enums
 @dataclass(frozen=True)
 class AuditoriaDTO(DTO):
+    id: str = field(default_factory=str)
     codigo_auditoria: CodigoAuditoriaDTO =field(default_factory=CodigoAuditoriaDTO)
     fecha_auditoria: FechaAuditoriaDTO =field(default_factory=FechaAuditoriaDTO)
     nombre_auditor: NombreAuditorDTO =field(default_factory=NombreAuditorDTO)
