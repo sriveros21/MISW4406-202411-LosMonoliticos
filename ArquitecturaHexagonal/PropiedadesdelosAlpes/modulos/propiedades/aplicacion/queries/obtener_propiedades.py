@@ -8,15 +8,14 @@ import uuid
 
 @dataclass
 class ObtenerPropiedad(Query):
-    id: uuid.UUID
+    id: str
 
 class ObtenerPropiedadHandler(PropiedadQueryBaseHandler):
 
     def handle(self, query: ObtenerPropiedad) -> QueryResultado:
-        repositorio: RepositorioPropiedades = self.fabrica_repositorio.obtener_repositorio_propiedades()
-        propiedad = repositorio.obtener_por_id(query.id)
-        propiedad_dto = MapeadorPropiedad.entidad_a_dto(propiedad)
-        return QueryResultado(resultado=propiedad_dto)
+        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioPropiedades.__class__)
+        propiedad = self.fabrica_propiedades.crear_objeto(repositorio.obtener_por_id(query.id), MapeadorPropiedad())
+        return QueryResultado(resultado=propiedad)
 
 @query.register(ObtenerPropiedad)
 def ejecutar_query_obtener_propiedad(query: ObtenerPropiedad):

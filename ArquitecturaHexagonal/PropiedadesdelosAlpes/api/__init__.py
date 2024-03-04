@@ -85,6 +85,22 @@ def create_app(configuracion={}):
         # handler_crear_propiedad = CrearPropiedadHandler(repositorio_propiedades, mapeador_propiedad)
         # app.extensions['handler_crear_propiedad'] = handler_crear_propiedad
 
+        # from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.fabricas import FabricaRepositorio
+        # from PropiedadesdelosAlpes.modulos.propiedades.aplicacion.servicios import ServicioPropiedad
+        # from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.mapeadores import MapeadorPropiedades
+
+        # fabrica_repositorio = FabricaRepositorio(db_session=db.session)
+        # repositorio_propiedades = fabrica_repositorio.crear_repositorio_propiedades()
+        # mapeador_propiedad = MapeadorPropiedades(db.session)
+        # app.extensions['repositorio_propiedades'] = repositorio_propiedades
+        # app.extensions['mapeador_propiedad'] = mapeador_propiedad
+
+        # # Storing ServicioPropiedad in app.extensions for global access
+        # servicio_propiedad = ServicioPropiedad(repositorio=repositorio_propiedades, mapeador=mapeador_propiedad)
+        # app.extensions['servicio_propiedad'] = servicio_propiedad
+        # handler_crear_propiedad = CrearPropiedadHandler(repositorio_propiedades, mapeador_propiedad)
+        # app.extensions['handler_crear_propiedad'] = handler_crear_propiedad
+
     @app.route("/health")
     def health():
         return {"status": "up"}

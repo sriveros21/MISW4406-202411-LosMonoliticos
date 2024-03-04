@@ -30,7 +30,7 @@ class Dimension(db.Model):
 
 class Terreno(db.Model):
     __tablename__ = 'terrenos'
-    id = Column(String, primary_key=True)
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     dimension_id = Column(String, ForeignKey('dimensiones.id'))
     dimension = relationship("Dimension")
     lote = Column(String, nullable=False)
@@ -39,7 +39,7 @@ class Terreno(db.Model):
 
 class Edificacion(db.Model):
     __tablename__ = 'edificaciones'
-    id = Column(String, primary_key=True)
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     propiedad_id = Column(String, ForeignKey('propiedades.id'))
     tipo = Column(String, nullable=False)
     dimension_id = Column(String, ForeignKey('dimensiones.id'))
@@ -54,7 +54,7 @@ class Piso(db.Model):
 
 class Propiedad(db.Model):
     __tablename__ = "propiedades"
-    id = Column(String, primary_key=True)
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
     nombre = Column(String, nullable=False)
     ubicacion_id = Column(String, ForeignKey('ubicaciones.id'))
     ubicacion = relationship("Ubicacion")
