@@ -1,5 +1,5 @@
 from pulsar.schema import *
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.infraestructura.schema.v1.comandos import ComandoIntegracion
+from PropiedadesdelosAlpes.seedwork.infraestructura.schema.v1.comandos import ComandoIntegracion
 
 class ComandoCrearPropiedadPayload(ComandoIntegracion):
     nombre = String()

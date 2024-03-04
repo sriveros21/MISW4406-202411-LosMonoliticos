@@ -26,7 +26,3 @@ class FabricaAuditorias(Fabrica):
             return fabrica_auditorias.crear_objeto(obj, mapeador)
         else:
             raise TipoObjetoNoExisteEnDominioAuditoriasExcepcion()
-
-
-
-

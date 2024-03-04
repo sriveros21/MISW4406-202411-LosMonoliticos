@@ -43,7 +43,13 @@ def auditoria_asincrona():
         map_auditoria = MapeadorAuditoriaDTOJson()
         auditoria_dto = map_auditoria.externo_a_dto(auditoria_dict)
 
-        comando = CrearAuditoria(auditoria_dto.codigo, auditoria_dto.fecha, auditoria_dto.auditor, auditoria_dto.hallazgos, auditoria_dto.objetivo)
+        comando = CrearAuditoria(
+            auditoria_dto.codigo_auditoria, 
+            auditoria_dto.fecha_auditoria, 
+            auditoria_dto.nombre_auditor, 
+            auditoria_dto.fase_auditoria,
+            auditoria_dto.hallazgos_auditoria, 
+            auditoria_dto.objetivo_auditoria)
         
         # TODO Reemplaze es todo código sincrono y use el broker de eventos para propagar este comando de forma asíncrona
         # Revise la clase Despachador de la capa de infraestructura
