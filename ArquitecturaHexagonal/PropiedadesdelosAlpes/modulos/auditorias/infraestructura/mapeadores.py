@@ -12,10 +12,6 @@ from .dto import Auditoria as AuditoriaDTO
 
 class MapeadorAuditorias(Mapeador):
 
-    def __init__(self, db_session):
-        self.db_session = db_session
-    
-    
     def obtener_tipo(self) -> type:
         return Auditoria.__class__
   
@@ -23,18 +19,18 @@ class MapeadorAuditorias(Mapeador):
 
         auditoria_dto = AuditoriaDTO()
         auditoria_dto.id = entidad.id
-        auditoria_dto.codigo_auditoria = entidad.codigo.codigo
-        auditoria_dto.fecha_auditoria = entidad.fecha.fecha
-        auditoria_dto.nombre_auditor = entidad.auditor.nombre_auditor
+        auditoria_dto.codigo_auditoria = entidad.codigo
+        auditoria_dto.fecha_auditoria = entidad.fecha
+        auditoria_dto.nombre_auditor = entidad.auditor
         auditoria_dto.fase_auditoria = entidad.fase
-        auditoria_dto.hallazgos_auditoria= entidad.hallazgos.hallazgos_auditoria
+        auditoria_dto.hallazgos_auditoria= entidad.hallazgos
         auditoria_dto.objetivo_auditoria= entidad.objetivo
 
         return auditoria_dto
 
     #cambiando esto
     def dto_a_entidad(self, dto: AuditoriaDTO) -> Auditoria:
-        id =dto.id
+        id=dto.id
         codigo=CodigoAuditoria(codigo=dto.codigo_auditoria)
         fecha=FechaAuditoria(fecha=dto.fecha_auditoria)
         auditor=NombreAuditor(nombre_auditor=dto.nombre_auditor)

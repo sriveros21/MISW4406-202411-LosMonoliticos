@@ -12,6 +12,7 @@ from PropiedadesdelosAlpes.modulos.auditorias.infraestructura.repositorios impor
 #Revisar el manejo de DTOs aca
 @dataclass
 class CrearAuditoria(Comando):
+    id: str
     codigo_auditoria: CodigoAuditoriaDTO
     fecha_auditoria: FechaAuditoriaDTO
     nombre_auditor: NombreAuditorDTO
@@ -23,13 +24,14 @@ class CrearAuditoriaHandler(CrearAuditoriaBaseHandler):
     
     def handle(self, comando: CrearAuditoria):
         auditoria_dto = AuditoriaDTO(
-                codigo_auditoria=comando.codigo_auditoria,
-                fecha_auditoria=comando.fecha_auditoria,
-                nombre_auditor=comando.nombre_auditor,
-                fase_auditoria=comando.fase_auditoria,
-                hallazgos_auditoria=comando.hallazgos_auditoria,
-                objetivo_auditoria=comando.objetivo_auditoria
-                )
+            id=comando.id,
+            codigo_auditoria=comando.codigo_auditoria,
+            fecha_auditoria=comando.fecha_auditoria,
+            nombre_auditor=comando.nombre_auditor,
+            fase_auditoria=comando.fase_auditoria,
+            hallazgos_auditoria=comando.hallazgos_auditoria,
+            objetivo_auditoria=comando.objetivo_auditoria
+            )
 
         auditoria: Auditoria = self.fabrica_auditorias.crear_objeto(auditoria_dto, MapeadorAuditoria())
         auditoria.crear_auditoria(auditoria)

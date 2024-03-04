@@ -15,7 +15,7 @@ def unix_time_millis(dt):
 class Despachador:
     def _publicar_mensaje(self, mensaje, topico, schema):
         cliente = pulsar.Client(f'pulsar://{utils.broker_host()}:6650')
-        publicador = cliente.create_producer(topico, schema=AvroSchema(EventoAuditoriaCreada))
+        publicador = cliente.create_producer(topico, schema=AvroSchema(schema))
         publicador.send(mensaje)
         cliente.close()
 
@@ -23,7 +23,7 @@ class Despachador:
         # TODO Debe existir un forma de crear el Payload en Avro con base al tipo del evento
         payload = AuditoriaCreadaPayload(
             codigo=str(evento.codigo), 
-            fecha_creacion=int(unix_time_millis(evento.fecha_creacion))
+            fecha_creacion=int(unix_time_millis(evento.fecha_evento))
         )
         evento_integracion = EventoAuditoriaCreada(data=payload)
         self._publicar_mensaje(evento_integracion, topico, AvroSchema(EventoAuditoriaCreada))
@@ -35,3 +35,4 @@ class Despachador:
         )
         comando_integracion = ComandoCrearAuditoria(data=payload)
         self._publicar_mensaje(comando_integracion, topico, AvroSchema(ComandoCrearAuditoria))
+

@@ -20,6 +20,6 @@ class Auditoria(db.Model):
     fecha_auditoria = Column(String,nullable=False)
     nombre_auditor= Column(String, nullable=False)
     fase_auditoria = Column(SQLEnum(FaseAuditoria), nullable=False)
-    hallazgos_auditoria=Column(String, nullable=False)
-    objetivo_auditoria=Column(SQLEnum(ObjetivoAuditoria), nullable=False)
+    hallazgos_auditoria = Column(String, nullable=False)
+    objetivo_auditoria = Column(SQLEnum(ObjetivoAuditoria), nullable=False)
 

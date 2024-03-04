@@ -12,32 +12,23 @@ from PropiedadesdelosAlpes.modulos.auditorias.dominio.fabricas import FabricaAud
 from .dto import Auditoria as AuditoriaDTO
 from .mapeadores import MapeadorAuditorias
 
+from uuid import UUID
 from typing import List
 
 class RepositorioAuditoriasSQLite(RepositorioAuditorias):
 
-    def __init__(self, db_session, mapeador: MapeadorAuditorias, fabrica: FabricaAuditorias):
-        self.db_session=db_session
-        self.mapeador =mapeador
-        self.fabrica=fabrica
-        #self._fabrica_auditorias: FabricaAuditorias = FabricaAuditorias()
+    def __init__(self):
+        self._fabrica_auditorias: FabricaAuditorias = FabricaAuditorias()
 
     @property
     def fabrica_auditorias(self):
-        return self.fabrica
-    
-    #Revisar consistencia del tipo del id
-    def obtener_por_id(self, id: str) -> Auditoria:
-        auditoria_dto = db.session.query(AuditoriaDTO).filter_by(id=id).one()
-        return self.fabrica_auditorias.crear_objeto(auditoria_dto, self.mapeador)
+        return self._fabrica_auditorias
 
-    #Verificar sí aca se incluye el Id
-    #Revisar fecha
-    def obtener_todos(self) -> List[Auditoria]:
-        auditorias_dto = db.session.query(AuditoriaDTO).all()
-        return [self.mapeador.dto_a_entidad(dto) for dto in auditorias_dto]       
+    def obtener_por_id(self, id: UUID) -> Auditoria:
+        auditoria_dto = db.session.query(AuditoriaDTO).filter_by(id=str(id)).one()
+        return self.fabrica_auditorias.crear_objeto(auditoria_dto, MapeadorAuditorias())
 
     def agregar(self, auditoria: Auditoria):
-        auditoria_dto = self.fabrica_auditorias.crear_objeto(auditoria, self.mapeador)
+        auditoria_dto = self.fabrica_auditorias.crear_objeto(auditoria, MapeadorAuditorias())
         db.session.add(auditoria_dto)
         db.session.commit()
