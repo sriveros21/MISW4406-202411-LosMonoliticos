@@ -8,19 +8,15 @@ from ..dominio.objetos_valor import Apellido
 
 class MapeadorCliente(Mapeador):
 
-    def __init__(self, db_session):
-        self.db_session = db_session
-
     def obtener_tipo(self) -> type:
         return ClienteEntidad.__class__
 
-    def entidad_a_dto(self, cliente: ClienteEntidad) -> ClienteDTO:
-        cliente_dto = ClienteDTO(
-            id_cliente=cliente.id_cliente,
-            nombre=cliente.nombre.nombre,
-            apellido=cliente.apellido.apellido,
-            email=cliente.email.email
-        )
+    def entidad_a_dto(self, entidad: ClienteEntidad) -> ClienteDTO:
+        cliente_dto = ClienteDTO()
+        cliente_dto.id_cliente = ''.join(map(str, entidad.id_cliente))
+        cliente_dto.nombre = entidad.nombre.nombre
+        cliente_dto.apellido = entidad.apellido.apellido
+        cliente_dto.email = entidad.email.email
         return cliente_dto
 
     def dto_a_entidad(self, dto: ClienteDTO) -> ClienteEntidad:
