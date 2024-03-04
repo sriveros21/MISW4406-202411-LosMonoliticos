@@ -20,9 +20,5 @@ class Piso(ObjetoValor):
     numero: int
 
 @dataclass(frozen=True)
-class Lote(ObjetoValor):
-    area: float
-
-@dataclass(frozen=True)
 class Nombre(ObjetoValor):
     valor: str

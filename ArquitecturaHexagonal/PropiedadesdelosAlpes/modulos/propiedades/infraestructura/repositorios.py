@@ -18,28 +18,22 @@ from typing import List
 
 class RepositorioPropiedadesSQLite(RepositorioPropiedades):
 
-    def __init__(self, db_session, mapeador: MapeadorPropiedades, fabrica: FabricaPropiedades):
-        self.db_session = db_session
-        self.mapeador = mapeador
-        self.fabrica = fabrica
-        #self._fabrica_propiedades = FabricaPropiedades()
-        #self.mapeador_propiedades = MapeadorPropiedades(db.session)
+    def __init__(self):
+        self._fabrica_propiedades: FabricaPropiedades = FabricaPropiedades()
 
     @property
     def fabrica_propiedades(self):
-        return self.fabrica
+        return self._fabrica_propiedades
 
-    def obtener_por_id(self, id: str) -> Propiedad:
+    def obtener_por_id(self, id: UUID) -> Propiedad:
         propiedad_dto = db.session.query(PropiedadDTO).filter_by(id=str(id)).one()
-        print("OBJETO DB CONSULTA 2",propiedad_dto)
-        return self.fabrica.crear_objeto(propiedad_dto, self.mapeador)
+        return self.fabrica_propiedades.crear_objeto(propiedad_dto, MapeadorPropiedades())
 
     def agregar(self, propiedad: Propiedad):
-        print("Agregando propiedad")
-        print(propiedad)
-        #propiedad_dto = self.mapeador.entidad_a_dto(propiedad)
-        propiedad_dto = self.fabrica.crear_objeto(propiedad, self.mapeador)
-        print(propiedad_dto)
-        print(self.mapeador)
-        self.db_session.add(propiedad_dto)
-        self.db_session.commit()
+        #mapeador = MapeadorPropiedades()
+        #propiedad_dto = mapeador.entidad_a_dto(propiedad)
+        propiedad_dto = self.fabrica_propiedades.crear_objeto(propiedad, MapeadorPropiedades())
+        print(f"Propiedad DTO: {propiedad_dto}")
+        #propiedad_dto = self.fabrica_propiedades.crear_objeto(propiedad, MapeadorPropiedades())
+        db.session.add(propiedad_dto)
+        db.session.commit()

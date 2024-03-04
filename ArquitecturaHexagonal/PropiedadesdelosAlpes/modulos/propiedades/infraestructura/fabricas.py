@@ -16,19 +16,9 @@ from .excepciones import ExcepcionFabrica
 from sqlalchemy.orm import Session
 
 @dataclass
-class FabricaRepositorio:
-    def __init__(self, db_session: Session):
-        self.db_session = db_session
-    
-    def crear_repositorio_propiedades(self) -> RepositorioPropiedadesSQLite:
-        mapeador_propiedades = MapeadorPropiedades(db_session=self.db_session)
-        fabrica_propiedades = FabricaPropiedades()
-        return RepositorioPropiedadesSQLite(db_session=self.db_session, mapeador=mapeador_propiedades, fabrica=fabrica_propiedades)
-
-
-    def obtener_repositorio_propiedades(self) -> RepositorioPropiedades:
-        """
-        Returns an instance of RepositorioPropiedades.
-        This method simplifies accessing the properties repository.
-        """
-        return RepositorioPropiedadesSQLite()
+class FabricaRepositorio(Fabrica):
+    def crear_objeto(self, obj: type, mapeador: any = None) -> Repositorio:
+        if obj == RepositorioPropiedades.__class__:
+            return RepositorioPropiedadesSQLite()
+        else:
+            raise ExcepcionFabrica()
