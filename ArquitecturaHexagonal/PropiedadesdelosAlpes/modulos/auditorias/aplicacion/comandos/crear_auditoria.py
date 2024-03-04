@@ -12,7 +12,7 @@ from PropiedadesdelosAlpes.modulos.auditorias.infraestructura.repositorios impor
 #Revisar el manejo de DTOs aca
 @dataclass
 class CrearAuditoria(Comando):
-    id: str
+    id_auditoria: str
     codigo_auditoria: CodigoAuditoriaDTO
     fecha_auditoria: FechaAuditoriaDTO
     nombre_auditor: NombreAuditorDTO
@@ -24,7 +24,7 @@ class CrearAuditoriaHandler(CrearAuditoriaBaseHandler):
     
     def handle(self, comando: CrearAuditoria):
         auditoria_dto = AuditoriaDTO(
-            id=comando.id,
+            id_auditoria=comando.id_auditoria,
             codigo_auditoria=comando.codigo_auditoria,
             fecha_auditoria=comando.fecha_auditoria,
             nombre_auditor=comando.nombre_auditor,
