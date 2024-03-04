@@ -1,8 +1,11 @@
+from PropiedadesdelosAlpes.modulos.cliente.aplicacion.comandos.crear_cliente import CrearCliente
+from PropiedadesdelosAlpes.modulos.cliente.aplicacion.consultas.consultar_cliente import ObtenerCliente
+from PropiedadesdelosAlpes.modulos.cliente.aplicacion.mapeadores import MapeadorClienteDTOJson
+from PropiedadesdelosAlpes.modulos.cliente.aplicacion.servicios import ServicioCliente
+from PropiedadesdelosAlpes.seedwork.aplicacion.comandos import ejecutar_commando
+from PropiedadesdelosAlpes.seedwork.aplicacion.queries import ejecutar_query
+from PropiedadesdelosAlpes.seedwork.dominio.excepciones import ExcepcionDominio
 from flask import Blueprint, request, Response, json, current_app
-
-from ..modulos.cliente.aplicacion.mapeadores import MapeadorClienteDTOJson
-from ..modulos.cliente.aplicacion.servicios import ServicioCliente
-from ..seedwork.dominio.excepciones import ExcepcionDominio
 
 bp = Blueprint('cliente', __name__, url_prefix='/cliente')
 
@@ -15,13 +18,11 @@ def crear_cliente():
         map_cliente = MapeadorClienteDTOJson()
         cliente_dto = map_cliente.externo_a_dto(cliente_dict)
 
-        print(cliente_dto)  # Print the value of cliente_dto
         repositorio = current_app.extensions['repositorio_cliente']
         mapeador = current_app.extensions['mapeador_cliente']
+
         sc = ServicioCliente(repositorio=repositorio, mapeador=mapeador)
         dto_final = sc.crear_cliente(cliente_dto)
-        print(dto_final)  # Print the value of dto_final
-
         return Response(json.dumps(map_cliente.dto_a_externo(dto_final)), status=200, mimetype='application/json')
     except ExcepcionDominio as e:
         return Response(json.dumps({'error': str(e)}), status=400, mimetype='application/json')
@@ -34,7 +35,6 @@ def obtener_cliente(id_cliente):
         mapeador = current_app.extensions['mapeador_cliente']
         sc = ServicioCliente(repositorio=repositorio, mapeador=mapeador)
         cliente_dto = sc.obtener_cliente_por_id(id_cliente)
-        print("CLIENTE DTO", cliente_dto)  # Print the value of cliente_dto
 
         if cliente_dto:
             map_cliente = MapeadorClienteDTOJson()
@@ -43,3 +43,35 @@ def obtener_cliente(id_cliente):
             return Response(json.dumps({'error': 'Cliente no encontrado'}), status=404, mimetype='application/json')
     except ExcepcionDominio as e:
         return Response(json.dumps({'error': str(e)}), status=400, mimetype='application/json')
+
+
+@bp.route('/cliente-comando', methods=['POST', ])
+def cliente_asincrono():
+    try:
+        cliente_dict = request.get_json()
+
+        map_cliente = MapeadorClienteDTOJson()
+        cliente_dto = map_cliente.externo_a_dto(cliente_dict)
+
+        comando = CrearCliente(
+            cliente_dto.id_cliente,
+            cliente_dto.nombre,
+            cliente_dto.apellido,
+            cliente_dto.email)
+
+        ejecutar_commando(comando)
+        return Response('{}', status=202, mimetype='application/json')
+    except ExcepcionDominio as e:
+        return Response(json.dumps(dict(error=str(e))), status=400, mimetype='application/json')
+
+
+@bp.route('/cliente-query', methods=('GET',))
+@bp.route('/cliente-query/<id>', methods=('GET',))
+def dar_cliente_usando_query(id=None):
+    if id:
+        query_resultado = ejecutar_query(ObtenerCliente(id))
+        map_cliente = MapeadorClienteDTOJson()
+
+        return map_cliente.dto_a_externo(query_resultado.resultado)
+    else:
+        return [{'message': 'GET!'}]

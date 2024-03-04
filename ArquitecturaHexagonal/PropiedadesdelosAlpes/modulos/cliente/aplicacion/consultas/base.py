@@ -1,11 +1,11 @@
 from PropiedadesdelosAlpes.modulos.cliente.dominio.fabricas import FabricaCliente
-from PropiedadesdelosAlpes.modulos.cliente.infraestructura.fabricas import FabricaRepositorio
+from PropiedadesdelosAlpes.modulos.cliente.infraestructura.fabricas import FabricaRepositorioCliente
 from PropiedadesdelosAlpes.seedwork.aplicacion.queries import QueryHandler
 
 
 class ClienteQueryBaseHandler(QueryHandler):
     def __init__(self):
-        self._fabrica_repositorio: FabricaRepositorio = FabricaRepositorio()
+        self._fabrica_repositorio: FabricaRepositorioCliente = FabricaRepositorioCliente()
         self._fabrica_cliente: FabricaCliente = FabricaCliente()
 
     @property
