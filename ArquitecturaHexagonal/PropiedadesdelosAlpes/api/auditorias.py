@@ -44,7 +44,7 @@ def auditoria_asincrona():
         auditoria_dto = map_auditoria.externo_a_dto(auditoria_dict)
 
         comando = CrearAuditoria(
-            auditoria_dto.id,
+            auditoria_dto.id_auditoria,
             auditoria_dto.codigo_auditoria, 
             auditoria_dto.fecha_auditoria, 
             auditoria_dto.nombre_auditor, 

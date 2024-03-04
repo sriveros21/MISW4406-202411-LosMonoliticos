@@ -29,7 +29,7 @@ class ObjetivoAuditoria(Enum):
 
 @dataclass
 class Auditoria(AgregacionRaiz):
-    id:str = field(default_factory=str)
+    id_auditoria:str = field(default_factory=str)
     codigo:ov.CodigoAuditoria = field(default_factory=ov.CodigoAuditoria)
     fecha:ov.FechaAuditoria = field(default_factory=ov.FechaAuditoria)
     auditor:ov.NombreAuditor = field(default_factory=ov.NombreAuditor)
@@ -38,7 +38,7 @@ class Auditoria(AgregacionRaiz):
     objetivo: ov.ObjetivoAuditoria = field(default_factory=ov.ObjetivoAuditoria.VALIDAR_CALIDAD)
 
     def crear_auditoria(self, auditoria: Auditoria):
-        self.id = auditoria.id,
+        self.id_auditoria = auditoria.id_auditoria,
         self.codigo = auditoria.codigo
         self.fecha = auditoria.fecha
         self.auditor = auditoria.auditor

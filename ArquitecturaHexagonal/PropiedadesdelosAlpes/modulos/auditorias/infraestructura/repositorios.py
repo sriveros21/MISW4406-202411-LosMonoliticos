@@ -25,7 +25,7 @@ class RepositorioAuditoriasSQLite(RepositorioAuditorias):
         return self._fabrica_auditorias
 
     def obtener_por_id(self, id: UUID) -> Auditoria:
-        auditoria_dto = db.session.query(AuditoriaDTO).filter_by(id=str(id)).one()
+        auditoria_dto = db.session.query(AuditoriaDTO).filter_by(id_auditoria=str(id)).one()
         return self.fabrica_auditorias.crear_objeto(auditoria_dto, MapeadorAuditorias())
 
     def agregar(self, auditoria: Auditoria):
