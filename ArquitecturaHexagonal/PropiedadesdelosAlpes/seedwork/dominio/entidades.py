@@ -7,6 +7,8 @@ from datetime import datetime
 import uuid
 from typing import List
 
+
+
 @dataclass
 class Entidad:
     id: uuid.UUID = field(hash=True)

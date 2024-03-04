@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from uuid import UUID
+
 from .entidades import Entidad
+
 
 class Repositorio(ABC):
     @abstractmethod
@@ -10,6 +12,7 @@ class Repositorio(ABC):
     @abstractmethod
     def agregar(self, entidad: Entidad):
         pass
+
 
 class Mapeador(ABC):
     @abstractmethod

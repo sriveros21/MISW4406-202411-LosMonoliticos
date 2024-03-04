@@ -1,21 +1,27 @@
-""" Fábricas para la creación de objetos en la capa de infrastructura del dominio de propiedades
+from dataclasses import dataclass
 
-En este archivo usted encontrará las diferentes fábricas para crear
-objetos complejos en la capa de infraestructura del dominio de propiedades
+from PropiedadesdelosAlpes.modulos.cliente.dominio.fabricas import FabricaCliente
+from PropiedadesdelosAlpes.modulos.cliente.dominio.repositorios import RepositorioCliente
+from PropiedadesdelosAlpes.modulos.cliente.infraestructura.mapeadores import MapeadorCliente
+from sqlalchemy.orm import Session
 
-"""
+from .repositorios import RepositorioClienteSQLite
 
-from dataclasses import dataclass, field
-from PropiedadesdelosAlpes.seedwork.dominio.fabricas import Fabrica
-from PropiedadesdelosAlpes.seedwork.dominio.repositorios import Repositorio
-from PropiedadesdelosAlpes.modulos.cliente.dominio.repositorios import RepositorioClientes
-from .repositorios import RepositorioClientesSQLite
-from .excepciones import ExcepcionFabrica
 
 @dataclass
-class FabricaRepositorio(Fabrica):
-    def crear_objeto(self, obj: type, mapeador: any = None) -> Repositorio:
-        if obj == RepositorioClientes.__class__:
-            return RepositorioClientesSQLite()
-        else:
-            raise ExcepcionFabrica()
+class FabricaRepositorioCliente:
+
+    def __init__(self, db_session: Session):
+        self.db_session = db_session
+
+    def crear_repositorio_cliente(self) -> RepositorioClienteSQLite:
+        mapeador_cliente = MapeadorCliente(db_session=self.db_session)
+        fabrica_cliente = FabricaCliente()
+        return RepositorioClienteSQLite(db_session=self.db_session, mapeador=mapeador_cliente, fabrica=fabrica_cliente)
+
+    def obtener_repositorio_propiedades(self) -> RepositorioCliente:
+        """
+        Returns an instance of RepositorioPropiedades.
+        This method simplifies accessing the properties repository.
+        """
+        return RepositorioClienteSQLite()

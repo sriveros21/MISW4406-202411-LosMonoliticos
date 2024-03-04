@@ -7,21 +7,33 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 def register_handlers():
     import PropiedadesdelosAlpes.modulos.propiedades.aplicacion
+    import PropiedadesdelosAlpes.modulos.cliente.aplicacion
+    import PropiedadesdelosAlpes.modulos.auditorias.aplicacion
 
 def import_domain_models():
     # Import DTOs from the infrastructure layer to ensure they are recognized by SQLAlchemy
     import PropiedadesdelosAlpes.modulos.propiedades.infraestructura.dto
     import PropiedadesdelosAlpes.modulos.propiedades.aplicacion.dto
+    import PropiedadesdelosAlpes.modulos.cliente.infraestructura.dto
+    import PropiedadesdelosAlpes.modulos.cliente.aplicacion.dto
+    import PropiedadesdelosAlpes.modulos.auditorias.infraestructura.dto
+    import PropiedadesdelosAlpes.modulos.auditorias.aplicacion.dto
 
 def register_event_consumers():
     import threading
     import PropiedadesdelosAlpes.modulos.propiedades.infraestructura.consumidores as propiedades
+    import PropiedadesdelosAlpes.modulos.cliente.infraestructura.consumidores as cliente
+    import PropiedadesdelosAlpes.modulos.auditorias.infraestructura.consumidores as auditorias
 
     #SUBSCRIBING TO EVENTS
     threading.Thread(target=propiedades.suscribirse_a_eventos).start()
+    threading.Thread(target=auditorias.suscribirse_a_eventos).start()
+    threading.Thread(target=cliente.suscribirse_a_eventos).start()
 
     #SUBSCRIBING TO COMMANDS
     threading.Thread(target=propiedades.suscribirse_a_comandos).start()
+    threading.Thread(target=auditorias.suscribirse_a_comandos).start()
+    threading.Thread(target=cliente.suscribirse_a_comandos).start()
 
 def create_app(configuracion={}):
     
@@ -49,8 +61,29 @@ def create_app(configuracion={}):
             register_event_consumers()
         
     from . import propiedades
+    from . import cliente
+    from . import auditorias
 
     app.register_blueprint(propiedades.bp)
+    app.register_blueprint(cliente.bp)
+    app.register_blueprint(auditorias.bp)
+
+
+        # from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.fabricas import FabricaRepositorio
+        # from PropiedadesdelosAlpes.modulos.propiedades.aplicacion.servicios import ServicioPropiedad
+        # from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.mapeadores import MapeadorPropiedades
+
+        # fabrica_repositorio = FabricaRepositorio(db_session=db.session)
+        # repositorio_propiedades = fabrica_repositorio.crear_repositorio_propiedades()
+        # mapeador_propiedad = MapeadorPropiedades(db.session)
+        # app.extensions['repositorio_propiedades'] = repositorio_propiedades
+        # app.extensions['mapeador_propiedad'] = mapeador_propiedad
+
+        # # Storing ServicioPropiedad in app.extensions for global access
+        # servicio_propiedad = ServicioPropiedad(repositorio=repositorio_propiedades, mapeador=mapeador_propiedad)
+        # app.extensions['servicio_propiedad'] = servicio_propiedad
+        # handler_crear_propiedad = CrearPropiedadHandler(repositorio_propiedades, mapeador_propiedad)
+        # app.extensions['handler_crear_propiedad'] = handler_crear_propiedad
 
         # from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.fabricas import FabricaRepositorio
         # from PropiedadesdelosAlpes.modulos.propiedades.aplicacion.servicios import ServicioPropiedad
