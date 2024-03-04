@@ -34,10 +34,6 @@ class RepositorioPropiedadesSQLite(RepositorioPropiedades):
         print("OBJETO DB CONSULTA 2",propiedad_dto)
         return self.fabrica.crear_objeto(propiedad_dto, self.mapeador)
 
-    def obtener_todos(self) -> List[Propiedad]:
-        propiedades_dto = db.session.query(PropiedadDTO).all()
-        return [self.mapeador.dto_a_entidad(dto) for dto in propiedades_dto]
-
     def agregar(self, propiedad: Propiedad):
         print("Agregando propiedad")
         print(propiedad)

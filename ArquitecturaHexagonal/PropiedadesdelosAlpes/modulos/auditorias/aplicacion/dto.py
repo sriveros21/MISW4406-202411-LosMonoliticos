@@ -13,11 +13,11 @@ class CodigoAuditoriaDTO(DTO):
 
 @dataclass(frozen=True)
 class NombreAuditorDTO(DTO):
-    nombre_auditor: str
+    nombre_auditor:str
 
 @dataclass(frozen=True)
 class HallazgosAuditoriaDTO(DTO):
-    hallazgos_auditoria: str
+    hallazgos_auditoria:str
 
 #Revisar estos Enums como quedan
 @dataclass(frozen=True)

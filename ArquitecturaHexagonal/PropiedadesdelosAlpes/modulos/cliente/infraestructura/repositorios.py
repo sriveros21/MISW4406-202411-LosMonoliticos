@@ -24,10 +24,6 @@ class RepositorioClienteSQLite(RepositorioCliente):
         print("OBJETO DB CONSULTA 2", cliente_dto)
         return self.fabrica.crear_objeto(cliente_dto, self.mapeador)
 
-    def obtener_todos(self) -> List[Cliente]:
-        cliente_dto = db.session.query(ClienteDTO).all()
-        return [self.mapeador.dto_a_entidad(dto) for dto in cliente_dto]
-
     def agregar(self, cliente: Cliente):
         print("Agregando cliente")
         print(cliente)

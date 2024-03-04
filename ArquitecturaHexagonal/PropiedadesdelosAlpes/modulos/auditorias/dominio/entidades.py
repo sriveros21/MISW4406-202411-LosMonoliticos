@@ -11,6 +11,7 @@ from enum import Enum
 import PropiedadesdelosAlpes.modulos.auditorias.dominio.objetos_valor as ov
 from PropiedadesdelosAlpes.modulos.auditorias.dominio.eventos import AuditoriaCreada
 from ....seedwork.dominio.entidades import AgregacionRaiz, Entidad
+import uuid
 
 
 @dataclass(frozen=True)
@@ -28,7 +29,7 @@ class ObjetivoAuditoria(Enum):
 
 @dataclass
 class Auditoria(AgregacionRaiz):
-    id: str = field(default_factory=str)
+    id:str = field(default_factory=str)
     codigo:ov.CodigoAuditoria = field(default_factory=ov.CodigoAuditoria)
     fecha:ov.FechaAuditoria = field(default_factory=ov.FechaAuditoria)
     auditor:ov.NombreAuditor = field(default_factory=ov.NombreAuditor)
@@ -37,6 +38,7 @@ class Auditoria(AgregacionRaiz):
     objetivo: ov.ObjetivoAuditoria = field(default_factory=ov.ObjetivoAuditoria.VALIDAR_CALIDAD)
 
     def crear_auditoria(self, auditoria: Auditoria):
+        self.id = auditoria.id,
         self.codigo = auditoria.codigo
         self.fecha = auditoria.fecha
         self.auditor = auditoria.auditor
