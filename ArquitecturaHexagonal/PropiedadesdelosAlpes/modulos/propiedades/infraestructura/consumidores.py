@@ -3,9 +3,9 @@ from pulsar.schema import *
 import logging
 import traceback
 
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.propiedades.infraestructura.schema.v1.eventos import PropiedadCreada
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.modulos.propiedades.infraestructura.schema.v1.comandos import ComandoCrearPropiedad
-from ArquitecturaHexagonal.PropiedadesdelosAlpes.seedwork.infraestructura import utils
+from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.schema.v1.eventos import PropiedadCreada
+from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.schema.v1.comandos import ComandoCrearPropiedad
+from PropiedadesdelosAlpes.seedwork.infraestructura import utils
 
 def suscribirse_a_eventos():
     cliente = None

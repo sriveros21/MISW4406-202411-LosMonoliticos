@@ -12,23 +12,23 @@ from PropiedadesdelosAlpes.modulos.auditorias.infraestructura.repositorios impor
 #Revisar el manejo de DTOs aca
 @dataclass
 class CrearAuditoria(Comando):
-    codigo: CodigoAuditoriaDTO
-    fecha: FechaAuditoriaDTO
-    auditor: NombreAuditorDTO
-    fase: FaseAuditoria
-    hallazgos:HallazgosAuditoriaDTO
-    objetivo: ObjetivoAuditoria
+    codigo_auditoria: CodigoAuditoriaDTO
+    fecha_auditoria: FechaAuditoriaDTO
+    nombre_auditor: NombreAuditorDTO
+    fase_auditoria: FaseAuditoria
+    hallazgos_auditoria: HallazgosAuditoriaDTO
+    objetivo_auditoria: ObjetivoAuditoria
 
 class CrearAuditoriaHandler(CrearAuditoriaBaseHandler):
     
     def handle(self, comando: CrearAuditoria):
         auditoria_dto = AuditoriaDTO(
-                codigo=comando.codigo,
-                fecha=comando.fecha,
-                auditor=comando.auditor,
-                fase=comando.fase,
-                hallazgos=comando.hallazgos,
-                objetivo=comando.objetivo
+                codigo_auditoria=comando.codigo_auditoria,
+                fecha_auditoria=comando.fecha_auditoria,
+                nombre_auditor=comando.nombre_auditor,
+                fase_auditoria=comando.fase_auditoria,
+                hallazgos_auditoria=comando.hallazgos_auditoria,
+                objetivo_auditoria=comando.objetivo_auditoria
                 )
 
         auditoria: Auditoria = self.fabrica_auditorias.crear_objeto(auditoria_dto, MapeadorAuditoria())
@@ -39,3 +39,8 @@ class CrearAuditoriaHandler(CrearAuditoriaBaseHandler):
         UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, auditoria)
         UnidadTrabajoPuerto.savepoint()
         UnidadTrabajoPuerto.commit()
+
+@comando.register(CrearAuditoria)
+def ejecutar_comando_crear_auditoria(comando: CrearAuditoria):
+    handler = CrearAuditoriaHandler()
+    handler.handle(comando)
