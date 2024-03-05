@@ -12,11 +12,10 @@ class Cliente(AgregacionRaiz):
     apellido: ov.Apellido = field(default_factory=ov.Apellido)
     email: ov.Email = field(default_factory=ov.Email)
 
+    def crear_cliente(self, cliente: Cliente):
+        self.id_cliente = cliente.id_cliente,
+        self.nombre = cliente.nombre,
+        self.apellido = cliente.apellido,
+        self.email = cliente.email
 
-def crear_cliente(self, cliente: Cliente):
-    self.id_cliente = cliente.id_cliente,
-    self.nombre = cliente.nombre,
-    self.apellido = cliente.apellido,
-    self.email = cliente.email
-
-    self.agregar_evento(ClienteCreado(id_cliente=self.id_cliente, nombre=self.nombre, apellido=self.apellido, email=self.email))
+        self.agregar_evento(ClienteCreado(id_cliente=self.id_cliente, nombre=self.nombre, apellido=self.apellido, email=self.email))
