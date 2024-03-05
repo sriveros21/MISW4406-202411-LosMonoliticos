@@ -11,7 +11,7 @@ Los escenarios de calidad que se pretender probar con el desarrollo del proyecto
 - Disponibilidad : Recuperación ante Desastres
 - Interoperabilidad : 
 
-###Estructura del Proyecto.
+### Estructura del Proyecto.
 
 Para efectos de la Entrega 4 se cuenta con la siguiente estructura del Proyecto:
 
@@ -23,6 +23,9 @@ Para efectos de la Entrega 4 se cuenta con la siguiente estructura del Proyecto:
 -   Seedwork: inlcuye todas las funcionales de uso común dentro de la aplicación.
 -   Requirements.txt
 
+### Como desplegar la aplicación
+
+Para desplegar cada uno de los modulos se debe ubicar en la raiz del proyecto y ejecutar el comando: docker-compose --profile pulsar up. Una vez pulsar levante, se procede a correr el siguiente comando para levantar la aplicación: flask --app ArquitecturaHexagonal/PropiedadesdelosAlpes/api/ --debug run.
 
 ### Archivos relacionados con la definición del Dominio (Etapa Inicial del Proyecto):
 - Dentro de la carpeta `src/main/cml` se encuentran los archivos utilizados para desarrollar y construir el diagrama de contexto, ya que mediante la funcionalidad de Gitpod se puede generar los archivos con el menu de opciones, dando click en la opción `Generate graphical context map`. Acá se tienen dos archivos, uno es para la construcción del AS_IS de nombre `propiedadesDeLosAlpes.cml` y otro para la construcción del TO_BE de nombre `propiedadesDeLosAlpes_tobe.cml`. El archivo de `demo.cml` es para fines de ejemplo.
