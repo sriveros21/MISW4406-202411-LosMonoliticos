@@ -11,4 +11,7 @@ class NombreValido(ReglaNegocio):
         self.nombre = nombre
 
     def es_valido(self) -> bool:
-        return True
+        if len(self.nombre) >= 2:
+            return True
+        else:
+            return False

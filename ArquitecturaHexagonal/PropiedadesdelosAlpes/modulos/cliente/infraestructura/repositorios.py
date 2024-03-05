@@ -1,4 +1,4 @@
-from typing import List
+from uuid import UUID
 
 from PropiedadesdelosAlpes.config.db import db
 from PropiedadesdelosAlpes.modulos.cliente.dominio.entidades import Cliente
@@ -10,25 +10,18 @@ from .mapeadores import MapeadorCliente
 
 
 class RepositorioClienteSQLite(RepositorioCliente):
-    def __init__(self, db_session, mapeador: MapeadorCliente, fabrica: FabricaCliente):
-        self.db_session = db_session
-        self.mapeador = mapeador
-        self.fabrica = fabrica
+    def __init__(self):
+        self._fabrica_cliente: FabricaCliente = FabricaCliente()
 
     @property
     def fabrica_cliente(self):
-        return self._fabrica
+        return self._fabrica_cliente
 
-    def obtener_por_id(self, id_cliente: str) -> Cliente:
+    def obtener_por_id(self, id_cliente: UUID) -> Cliente:
         cliente_dto = db.session.query(ClienteDTO).filter_by(id_cliente=str(id_cliente)).one()
-        print("OBJETO DB CONSULTA 2", cliente_dto)
-        return self.fabrica.crear_objeto(cliente_dto, self.mapeador)
+        return self.fabrica_cliente.crear_objeto(cliente_dto, MapeadorCliente())
 
     def agregar(self, cliente: Cliente):
-        print("Agregando cliente")
-        print(cliente)
-        cliente_dto = self.fabrica.crear_objeto(cliente, self.mapeador)
-        print(cliente_dto)
-        print(self.mapeador)
-        self.db_session.add(cliente_dto)
-        self.db_session.commit()
+        cliente_dto = self.fabrica_cliente.crear_objeto(cliente, MapeadorCliente())
+        db.session.add(cliente_dto)
+        db.session.commit()
