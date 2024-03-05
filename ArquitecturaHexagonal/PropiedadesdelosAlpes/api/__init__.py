@@ -27,12 +27,12 @@ def register_event_consumers():
 
     #SUBSCRIBING TO EVENTS
     threading.Thread(target=propiedades.suscribirse_a_eventos).start()
-    threading.Thread(target=auditorias.suscribirse_a_eventos).start()
+    threading.Thread(target=auditorias.suscribirse_a_eventos, args=[app]).start()
     threading.Thread(target=cliente.suscribirse_a_eventos).start()
 
     #SUBSCRIBING TO COMMANDS
     threading.Thread(target=propiedades.suscribirse_a_comandos).start()
-    threading.Thread(target=auditorias.suscribirse_a_comandos).start()
+    threading.Thread(target=auditorias.suscribirse_a_comandos, args=[app]).start()
     threading.Thread(target=cliente.suscribirse_a_comandos).start()
 
 def create_app(configuracion={}):
@@ -40,14 +40,15 @@ def create_app(configuracion={}):
     app = Flask(__name__, instance_relative_config=True)
 
     # Database Configuration
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'propiedades_alpes.db')
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.secret_key = 'secret_key'
     app.config['SESSION_TYPE'] = 'filesystem'
     app.config['TESTING'] = configuracion.get('TESTING', False)
 
     # Initialize 'db' with the app
-    from PropiedadesdelosAlpes.config.db import init_db
+    from PropiedadesdelosAlpes.config.db import init_db, database_connection
+    
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_connection(configuracion, basedir=basedir)
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     init_db(app)
 
     from PropiedadesdelosAlpes.config.db import db
@@ -67,39 +68,6 @@ def create_app(configuracion={}):
     app.register_blueprint(propiedades.bp)
     app.register_blueprint(cliente.bp)
     app.register_blueprint(auditorias.bp)
-
-
-        # from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.fabricas import FabricaRepositorio
-        # from PropiedadesdelosAlpes.modulos.propiedades.aplicacion.servicios import ServicioPropiedad
-        # from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.mapeadores import MapeadorPropiedades
-
-        # fabrica_repositorio = FabricaRepositorio(db_session=db.session)
-        # repositorio_propiedades = fabrica_repositorio.crear_repositorio_propiedades()
-        # mapeador_propiedad = MapeadorPropiedades(db.session)
-        # app.extensions['repositorio_propiedades'] = repositorio_propiedades
-        # app.extensions['mapeador_propiedad'] = mapeador_propiedad
-
-        # # Storing ServicioPropiedad in app.extensions for global access
-        # servicio_propiedad = ServicioPropiedad(repositorio=repositorio_propiedades, mapeador=mapeador_propiedad)
-        # app.extensions['servicio_propiedad'] = servicio_propiedad
-        # handler_crear_propiedad = CrearPropiedadHandler(repositorio_propiedades, mapeador_propiedad)
-        # app.extensions['handler_crear_propiedad'] = handler_crear_propiedad
-
-        # from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.fabricas import FabricaRepositorio
-        # from PropiedadesdelosAlpes.modulos.propiedades.aplicacion.servicios import ServicioPropiedad
-        # from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.mapeadores import MapeadorPropiedades
-
-        # fabrica_repositorio = FabricaRepositorio(db_session=db.session)
-        # repositorio_propiedades = fabrica_repositorio.crear_repositorio_propiedades()
-        # mapeador_propiedad = MapeadorPropiedades(db.session)
-        # app.extensions['repositorio_propiedades'] = repositorio_propiedades
-        # app.extensions['mapeador_propiedad'] = mapeador_propiedad
-
-        # # Storing ServicioPropiedad in app.extensions for global access
-        # servicio_propiedad = ServicioPropiedad(repositorio=repositorio_propiedades, mapeador=mapeador_propiedad)
-        # app.extensions['servicio_propiedad'] = servicio_propiedad
-        # handler_crear_propiedad = CrearPropiedadHandler(repositorio_propiedades, mapeador_propiedad)
-        # app.extensions['handler_crear_propiedad'] = handler_crear_propiedad
 
     @app.route("/health")
     def health():

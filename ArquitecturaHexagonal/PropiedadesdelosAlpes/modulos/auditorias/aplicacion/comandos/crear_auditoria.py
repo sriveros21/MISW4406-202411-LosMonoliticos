@@ -7,7 +7,7 @@ from PropiedadesdelosAlpes.seedwork.aplicacion.comandos import ejecutar_commando
 from PropiedadesdelosAlpes.modulos.auditorias.dominio.entidades import Auditoria
 from PropiedadesdelosAlpes.seedwork.infraestructura.uow import UnidadTrabajoPuerto
 from PropiedadesdelosAlpes.modulos.auditorias.aplicacion.mapeadores import MapeadorAuditoria
-from PropiedadesdelosAlpes.modulos.auditorias.infraestructura.repositorios import RepositorioAuditorias
+from PropiedadesdelosAlpes.modulos.auditorias.infraestructura.repositorios import RepositorioAuditorias, RepositorioEventosAuditorias
 
 #Revisar el manejo de DTOs aca
 @dataclass
@@ -36,10 +36,10 @@ class CrearAuditoriaHandler(CrearAuditoriaBaseHandler):
         auditoria: Auditoria = self.fabrica_auditorias.crear_objeto(auditoria_dto, MapeadorAuditoria())
         auditoria.crear_auditoria(auditoria)
 
-        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioAuditorias.__class__)
+        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioAuditorias)
+        repositori_eventos = self.fabrica_repositorio.crear_objeto(RepositorioEventosAuditorias)
 
-        UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, auditoria)
-        UnidadTrabajoPuerto.savepoint()
+        UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, auditoria, repositorio_eventos_func=repositori_eventos.agregar)
         UnidadTrabajoPuerto.commit()
 
 @comando.register(CrearAuditoria)
