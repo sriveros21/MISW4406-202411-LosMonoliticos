@@ -6,6 +6,7 @@
 
 # Log file
 *.log
+apache-pulsar-2.8.1
 
 # BlueJ files
 *.ctxt

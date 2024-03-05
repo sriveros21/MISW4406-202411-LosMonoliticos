@@ -104,7 +104,7 @@ def auditoria_usando_comando():
         auditoria_dict = request.json
 
         map_auditoria = MapeadorAuditoriaDTOJson()
-        reserva_dto = map_auditoria.externo_a_dto(auditoria_dict)
+        auditoria_dto = map_auditoria.externo_a_dto(auditoria_dict)
 
         comando = CrearAuditoria(
             auditoria_dto.id_auditoria,

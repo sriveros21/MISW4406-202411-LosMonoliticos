@@ -11,3 +11,5 @@ class RepositorioAuditorias(Repositorio, ABC):
     # Métodos específicos para manejar propiedades
     pass
 
+class RepositorioEventosAuditorias(Repositorio, ABC):
+    ...
