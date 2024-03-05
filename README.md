@@ -17,8 +17,8 @@ Para efectos de la Entrega 4 se cuenta con la siguiente estructura del Proyecto:
 
 - Se creo una carpeta ArquitecturaHexagonal para almacenar la información correspondiente al código desarrollado para el proyecto.
 - Dentro de la carpeta ArquitecturaHexagonal, se creó la carpeta de PropiedadesdelosAlpes la cual inlcuye las siguientes carpetas:
-  -api:
-  -config:
+  -api: Esta carpeta contiene el archivo __init__.py en el cual se definen las condiciones para la inicialización de la aplicación. Adicionalmente contiene 3 archivos : auditorias.py, cliente.py, propiedades.py en los cuales se definen los endpoints para cada uno de los modulos desarollados como parte de esta entrega.
+  -config: dentro de esta carpeta se encontrará el archivo db.py el cual incluye la información de la configuración de la base de datos usada en el proyecto. Adicionalmente incluye un archivo uow.py que tiene la información de 
   -modulos:
   -seedwork:
   -requirements.txt
