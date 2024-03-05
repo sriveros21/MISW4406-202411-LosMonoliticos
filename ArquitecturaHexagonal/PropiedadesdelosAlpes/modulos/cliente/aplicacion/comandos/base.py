@@ -6,7 +6,7 @@ from PropiedadesdelosAlpes.seedwork.aplicacion.comandos import ComandoHandler
 class CrearClienteBaseHandler(ComandoHandler):
     def __init__(self):
         self._fabrica_repositorio: FabricaRepositorioCliente = FabricaRepositorioCliente()
-        self._fabrica_propiedades: FabricaCliente = FabricaCliente()
+        self._fabrica_cliente: FabricaCliente = FabricaCliente()
 
     @property
     def fabrica_repositorio(self):
