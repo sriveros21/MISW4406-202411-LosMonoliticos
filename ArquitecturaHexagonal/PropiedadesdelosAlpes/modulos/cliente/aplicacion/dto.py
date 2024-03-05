@@ -21,6 +21,6 @@ class EmailDTO(DTO):
 @dataclass(frozen=True)
 class ClienteDTO(DTO):
     id_cliente: str = field(default_factory=str)
-    nombre: str = field(default_factory=str)
+    nombre: NombreDTO = field(default_factory=NombreDTO)
     apellido: ApellidoDTO = field(default_factory=ApellidoDTO)
     email: EmailDTO = field(default_factory=EmailDTO)

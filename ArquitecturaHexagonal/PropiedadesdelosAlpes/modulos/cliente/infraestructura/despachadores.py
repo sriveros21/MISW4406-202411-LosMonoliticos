@@ -15,9 +15,9 @@ class Despachador:
     def publicar_evento(self, evento, topico):
         payload = ClienteCreadoPayLoad(
             id_cliente=str(evento.id_cliente),
-            nombre=evento.nombre,
-            apellido=evento.apellido,
-            email=evento.email
+            nombre=str(evento.nombre),
+            apellido=str(evento.apellido),
+            email=str(evento.email)
         )
         evento_integracion = EventoClienteCreado(data=payload)
         self._publicar_mensaje(evento_integracion, topico, AvroSchema(EventoClienteCreado))
