@@ -14,8 +14,8 @@ class MapeadorCliente(Mapeador):
     def entidad_a_dto(self, entidad: Cliente) -> ClienteDTO:
         cliente_dto = ClienteDTO()
         cliente_dto.id_cliente = ''.join(map(str, entidad.id_cliente))
-        cliente_dto.nombre = entidad.nombre
-        cliente_dto.apellido = entidad.apellido
+        cliente_dto.nombre = ''.join(map(str, entidad.nombre))
+        cliente_dto.apellido = ''.join(map(str, entidad.apellido))
         cliente_dto.email = entidad.email
         return cliente_dto
 
