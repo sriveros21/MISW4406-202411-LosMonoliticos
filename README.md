@@ -17,11 +17,11 @@ Para efectos de la Entrega 4 se cuenta con la siguiente estructura del Proyecto:
 
 - Se creo una carpeta ArquitecturaHexagonal para almacenar la información correspondiente al código desarrollado para el proyecto.
 - Dentro de la carpeta ArquitecturaHexagonal, se creó la carpeta de PropiedadesdelosAlpes la cual inlcuye las siguientes carpetas:
-  -api: Esta carpeta contiene el archivo __init__.py en el cual se definen las condiciones para la inicialización de la aplicación. Adicionalmente contiene 3 archivos : auditorias.py, cliente.py, propiedades.py en los cuales se definen los endpoints para cada uno de los modulos desarollados como parte de esta entrega.
-  -config: dentro de esta carpeta se encontrará el archivo db.py el cual incluye la información de la configuración de la base de datos usada en el proyecto. Adicionalmente incluye un archivo uow.py que tiene la información de la Unidad de trabajo definida para SQLAlchemy.
-  -modulos: incluye la información de los modulos desarrollados para esta entrega que son: auditorias, cliente, propiedades. Cada modulo esta compuesto por las siguientes carpetas (arquitectura cebolla): aplicación, dominio e infraestructura. En relación al patrón CQRS y cla comunicación por eventos se incluyó la siguiente información: carpeta de comandos, carpeta de queries, archivo handlers, detalle archivo __init__.py en el nivel de aplicación; archivo de eventos a nivel dominio, carpeta de schema, archivo de consumidores y archivo de despachadores a nivel de infraestructura.
-  -seedwork: inlcuye todas las funcionales de uso común dentro de la aplicación.
-  -requirements.txt
+-   api: Esta carpeta contiene el archivo __init__.py en el cual se definen las condiciones para la inicialización de la aplicación. Adicionalmente contiene 3 archivos : auditorias.py, cliente.py, propiedades.py en los cuales se definen los endpoints para cada uno de los modulos desarollados como parte de esta entrega.
+-   config: dentro de esta carpeta se encontrará el archivo db.py el cual incluye la información de la configuración de la base de datos usada en el proyecto. Adicionalmente incluye un archivo uow.py que tiene la información de la Unidad de trabajo definida para SQLAlchemy.
+-   modulos: incluye la información de los modulos desarrollados para esta entrega que son: auditorias, cliente, propiedades. Cada modulo esta compuesto por las siguientes carpetas (arquitectura cebolla): aplicación, dominio e infraestructura. En relación al patrón CQRS y cla comunicación por eventos se incluyó la siguiente información: carpeta de comandos, carpeta de queries, archivo handlers, detalle archivo __init__.py en el nivel de aplicación; archivo de eventos a nivel dominio, carpeta de schema, archivo de consumidores y archivo de despachadores a nivel de infraestructura.
+-   Seedwork: inlcuye todas las funcionales de uso común dentro de la aplicación.
+-   Requirements.txt
 
 
 ### Archivos relacionados con la definición del Dominio (Etapa Inicial del Proyecto):
