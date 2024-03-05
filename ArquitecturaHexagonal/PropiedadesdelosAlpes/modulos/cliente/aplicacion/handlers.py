@@ -1,4 +1,4 @@
-from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.despachadores import Despachador
+from PropiedadesdelosAlpes.modulos.cliente.infraestructura.despachadores import Despachador
 from PropiedadesdelosAlpes.seedwork.aplicacion.handlers import Handler
 
 
