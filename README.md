@@ -7,14 +7,24 @@
 ## Instrucciones de uso:
 ## Escenarios de calidad a probar:
 Los escenarios de calidad que se pretender probar con el desarrollo del proyecto son:
-- Escalabilidad
-- Disponibilidad
-- Interoperabilidad
+- Escalabilidad :  Aumentar las capacidades del sistema en respuesta a un aumento en la demanda.
+- Disponibilidad : Recuperación ante Desastres
+- Interoperabilidad : 
 
-Para cada uno de estos atributos de calidad se plantearos 3 escenarios de calidad los cuales son presentados en la entrega 3 del curso.
+###Estructura del Proyecto.
 
-### Estructura de proyecto:
-El proyecto tiene la siguiente estructura:
+Para efectos de la Entrega 4 se cuenta con la siguiente estructura del Proyecto:
+
+- Se creo una carpeta ArquitecturaHexagonal para almacenar la información correspondiente al código desarrollado para el proyecto.
+- Dentro de la carpeta ArquitecturaHexagonal, se creó la carpeta de PropiedadesdelosAlpes la cual inlcuye las siguientes carpetas:
+  -api:
+  -config:
+  -modulos:
+  -seedwork:
+  -requirements.txt
+
+
+### Archivos relacionados con la definición del Dominio (Etapa Inicial del Proyecto):
 - Dentro de la carpeta `src/main/cml` se encuentran los archivos utilizados para desarrollar y construir el diagrama de contexto, ya que mediante la funcionalidad de Gitpod se puede generar los archivos con el menu de opciones, dando click en la opción `Generate graphical context map`. Acá se tienen dos archivos, uno es para la construcción del AS_IS de nombre `propiedadesDeLosAlpes.cml` y otro para la construcción del TO_BE de nombre `propiedadesDeLosAlpes_tobe.cml`. El archivo de `demo.cml` es para fines de ejemplo.
 - Dentro de la carpeta `src-gen` se encuentran las imágenes exportadas mediante la funcionalidad anteriormente descrita, y estas imágenes se exportan en tres formatos: `.png, .svg y .gv`. El archivo `.png` es el más utilizado para visualizar el diagrama de contexto.
 - Dichos diagramas de contexto tambien se clasifican con el mismo nombre para diferenciar el diagrama AS_IS y el diagrama TO_BE.
