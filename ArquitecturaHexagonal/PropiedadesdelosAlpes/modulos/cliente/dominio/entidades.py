@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 
 import PropiedadesdelosAlpes.modulos.cliente.dominio.objetos_valor as ov
