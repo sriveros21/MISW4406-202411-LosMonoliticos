@@ -3,6 +3,8 @@ from dataclasses import dataclass, field
 from ....seedwork.dominio.eventos import (EventoDominio)
 from datetime import datetime
 
+class EventoAuditoria(EventoDominio):
+    ...
 @dataclass
 class AuditoriaCreada(EventoDominio):
     codigo: str = None
