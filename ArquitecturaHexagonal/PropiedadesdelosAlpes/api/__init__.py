@@ -19,7 +19,7 @@ def import_domain_models():
     import PropiedadesdelosAlpes.modulos.auditorias.infraestructura.dto
     import PropiedadesdelosAlpes.modulos.auditorias.aplicacion.dto
 
-def register_event_consumers():
+def register_event_consumers(app):
     import threading
     import PropiedadesdelosAlpes.modulos.propiedades.infraestructura.consumidores as propiedades
     import PropiedadesdelosAlpes.modulos.cliente.infraestructura.consumidores as cliente
@@ -59,7 +59,7 @@ def create_app(configuracion={}):
     with app.app_context():
         db.create_all()
         if not app.config.get('TESTING'):
-            register_event_consumers()
+            register_event_consumers(app)
         
     from . import propiedades
     from . import cliente

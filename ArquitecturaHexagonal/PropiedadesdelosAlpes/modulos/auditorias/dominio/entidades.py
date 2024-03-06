@@ -12,6 +12,7 @@ import PropiedadesdelosAlpes.modulos.auditorias.dominio.objetos_valor as ov
 from PropiedadesdelosAlpes.modulos.auditorias.dominio.eventos import AuditoriaCreada
 from ....seedwork.dominio.entidades import AgregacionRaiz, Entidad
 import uuid
+from datetime import datetime
 
 
 @dataclass(frozen=True)
@@ -29,6 +30,7 @@ class ObjetivoAuditoria(Enum):
 
 @dataclass
 class Auditoria(AgregacionRaiz):
+    id: uuid.UUID = field(hash=True, default=None)
     id_auditoria:str = field(default_factory=str)
     codigo:ov.CodigoAuditoria = field(default_factory=ov.CodigoAuditoria)
     fecha:ov.FechaAuditoria = field(default_factory=ov.FechaAuditoria)
@@ -38,6 +40,7 @@ class Auditoria(AgregacionRaiz):
     objetivo: ov.ObjetivoAuditoria = field(default_factory=ov.ObjetivoAuditoria.VALIDAR_CALIDAD)
 
     def crear_auditoria(self, auditoria: Auditoria):
+        self.id = auditoria.id,
         self.id_auditoria = auditoria.id_auditoria,
         self.codigo = auditoria.codigo
         self.fecha = auditoria.fecha
@@ -46,4 +49,4 @@ class Auditoria(AgregacionRaiz):
         self.hallazgos = auditoria.hallazgos
         self.objetivo = auditoria.objetivo
 
-        self.agregar_evento(AuditoriaCreada(codigo=self.codigo, fecha_creacion=self.fecha))
+        self.agregar_evento(AuditoriaCreada(codigo=self.id_auditoria, fecha_creacion=datetime.now()))

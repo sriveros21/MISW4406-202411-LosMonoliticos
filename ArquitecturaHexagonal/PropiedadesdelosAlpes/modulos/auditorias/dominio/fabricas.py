@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Type
 from .entidades import Auditoria, Entidad
+from PropiedadesdelosAlpes.seedwork.dominio.eventos import EventoDominio
 from .reglas import DebeReportarHallazgos, DebeIncluirCodigoAuditoria
 from .excepciones import TipoObjetoNoExisteEnDominioAuditoriasExcepcion
 from ....modulos.auditorias.infraestructura.mapeadores import MapeadorAuditorias
@@ -11,7 +12,7 @@ from ....seedwork.dominio.repositorios import Mapeador, Repositorio
 @dataclass
 class _FabricaAuditorias(Fabrica):
     def crear_objeto(self, obj: any, mapeador: Mapeador) -> any:
-        if isinstance(obj, Entidad):
+        if isinstance(obj, Entidad) or isinstance(obj, EventoDominio):
             return mapeador.entidad_a_dto(obj)
         else:
             auditoria: Auditoria = mapeador.dto_a_entidad(obj)

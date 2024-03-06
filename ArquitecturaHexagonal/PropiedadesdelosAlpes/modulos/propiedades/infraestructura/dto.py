@@ -17,48 +17,48 @@ from enum import Enum
 
 class Ubicacion(db.Model):
     __tablename__ = 'ubicaciones'
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
     latitud = Column(Float, nullable=False)
     longitud = Column(Float, nullable=False)
 
 class Dimension(db.Model):
     __tablename__ = 'dimensiones'
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
     width = Column(Float, nullable=False)
     length = Column(Float, nullable=False)
-    unit = Column(String, nullable=False)
+    unit = Column(String(60), nullable=False)
 
 class Terreno(db.Model):
     __tablename__ = 'terrenos'
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    dimension_id = Column(String, ForeignKey('dimensiones.id'))
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
+    dimension_id = Column(String(60), ForeignKey('dimensiones.id'))
     dimension = relationship("Dimension")
-    lote = Column(String, nullable=False)
-    propiedad_id = Column(String, ForeignKey('propiedades.id'))
+    lote = Column(String(60), nullable=False)
+    propiedad_id = Column(String(60), ForeignKey('propiedades.id'))
     propiedad = relationship("Propiedad", back_populates="terreno")
 
 class Edificacion(db.Model):
     __tablename__ = 'edificaciones'
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    propiedad_id = Column(String, ForeignKey('propiedades.id'))
-    tipo = Column(String, nullable=False)
-    dimension_id = Column(String, ForeignKey('dimensiones.id'))
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
+    propiedad_id = Column(String(60), ForeignKey('propiedades.id'))
+    tipo = Column(String(60), nullable=False)
+    dimension_id = Column(String(60), ForeignKey('dimensiones.id'))
     dimension = relationship("Dimension")
     pisos = relationship("Piso", backref="edificacion")
 
 class Piso(db.Model):
     __tablename__ = 'pisos'
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    edificacion_id = Column(String, ForeignKey('edificaciones.id'))
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
+    edificacion_id = Column(String(60), ForeignKey('edificaciones.id'))
     numero = Column(Integer, nullable=False)
 
 class Propiedad(db.Model):
     __tablename__ = "propiedades"
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    nombre = Column(String, nullable=False)
-    ubicacion_id = Column(String, ForeignKey('ubicaciones.id'))
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
+    nombre = Column(String(60), nullable=False)
+    ubicacion_id = Column(String(60), ForeignKey('ubicaciones.id'))
     ubicacion = relationship("Ubicacion")
-    dimension_id = Column(String, ForeignKey('dimensiones.id'))
+    dimension_id = Column(String(60), ForeignKey('dimensiones.id'))
     dimension = relationship("Dimension")
     tipo = Column(SQLEnum(TipoPropiedad), nullable=False)
     estado = Column(SQLEnum(EstadoPropiedad), nullable=False)
