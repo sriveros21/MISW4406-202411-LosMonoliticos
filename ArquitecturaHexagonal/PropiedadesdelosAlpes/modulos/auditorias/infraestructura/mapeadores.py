@@ -40,7 +40,7 @@ class MapadeadorEventosAuditoria(Mapeador):
             from .schema.v1.eventos import AuditoriaCreadaPayload, EventoAuditoriaCreada
 
             payload = AuditoriaCreadaPayload(
-                id_auditoria = str(evento.id_auditoria),
+                id_auditoria = str(evento.codigo),
                 fecha_creacion = int(unix_time_millis(evento.fecha_creacion))
             )
             evento_integracion = EventoAuditoriaCreada(id=str(evento.id))
@@ -85,6 +85,7 @@ class MapeadorAuditorias(Mapeador):
     def entidad_a_dto(self, entidad: Auditoria) -> AuditoriaDTO:
 
         auditoria_dto = AuditoriaDTO()
+        auditoria_dto.id = entidad.id
         auditoria_dto.id_auditoria = ''.join(map(str, entidad.id_auditoria))
         auditoria_dto.codigo_auditoria = entidad.codigo
         auditoria_dto.fecha_auditoria = entidad.fecha
@@ -97,6 +98,7 @@ class MapeadorAuditorias(Mapeador):
 
     #cambiando esto
     def dto_a_entidad(self, dto: AuditoriaDTO) -> Auditoria:
+        id = dto.id
         id_auditoria=dto.id_auditoria
         codigo=CodigoAuditoria(codigo=dto.codigo_auditoria)
         fecha=FechaAuditoria(fecha=dto.fecha_auditoria)
@@ -106,6 +108,7 @@ class MapeadorAuditorias(Mapeador):
         objetivo=ObjetivoAuditoria(dto.objetivo_auditoria)
 
         return Auditoria(
+            id=id,
             id_auditoria=id_auditoria,
             codigo=codigo,
             fecha=fecha,

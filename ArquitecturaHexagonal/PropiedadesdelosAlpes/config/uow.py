@@ -1,5 +1,5 @@
-from aeroalpes.config.db import db
-from aeroalpes.seedwork.infraestructura.uow import UnidadTrabajo, Batch
+from PropiedadesdelosAlpes.config.db import db
+from PropiedadesdelosAlpes.seedwork.infraestructura.uow import UnidadTrabajo, Batch
 from pydispatch import dispatcher
 
 import logging

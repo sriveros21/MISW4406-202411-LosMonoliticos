@@ -15,11 +15,12 @@ from enum import Enum
 
 class Auditoria(db.Model):
     __tablename__ = "auditorias"
-    id_auditoria = Column(String, primary_key=True)
-    codigo_auditoria = Column(String, nullable=False)
-    fecha_auditoria = Column(String,nullable=False)
-    nombre_auditor= Column(String, nullable=False)
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id_auditoria = Column(String(60), primary_key=True)
+    codigo_auditoria = Column(String(60), nullable=False)
+    fecha_auditoria = Column(String(60),nullable=False)
+    nombre_auditor= Column(String(60), nullable=False)
     fase_auditoria = Column(SQLEnum(FaseAuditoria), nullable=False)
-    hallazgos_auditoria = Column(String, nullable=False)
+    hallazgos_auditoria = Column(String(60), nullable=False)
     objetivo_auditoria = Column(SQLEnum(ObjetivoAuditoria), nullable=False)
 

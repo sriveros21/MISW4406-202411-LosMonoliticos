@@ -12,10 +12,9 @@ from PropiedadesdelosAlpes.modulos.auditorias.dominio.entidades import Auditoria
 from PropiedadesdelosAlpes.modulos.auditorias.dominio.fabricas import FabricaAuditorias
 from .dto import Auditoria as AuditoriaDTO
 from .mapeadores import MapadeadorEventosAuditoria, MapeadorAuditorias
-
 from uuid import UUID
 from typing import List
-from jsonschema import JsonSchema
+from pulsar.schema import *
 
 class RepositorioAuditoriasSQLite(RepositorioAuditorias):
 
