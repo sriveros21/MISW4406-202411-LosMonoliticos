@@ -9,11 +9,5 @@ class VistaAuditoria(Vista):
 
         if id:
             params['id'] = str(id)
-        
-        if estado:
-            params['estado'] = str(estado)
-        
-        if id_cliente:
-            params['id_cliente'] = str(id_cliente)
             
         return db.session.query(AuditoriaDTO).filter_by(**params)

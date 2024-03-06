@@ -58,7 +58,7 @@ class RepositorioEventosAuditoriaSQLAlchemy(RepositorioEventosAuditorias):
 
             evento_dto = EventoAuditoria()
             evento_dto.id = str(evento.id)
-            evento_dto.id_entidad = str(evento.id_auditoria)
+            evento_dto.id_entidad = str(evento.id)
             evento_dto.fecha_evento = evento.fecha_creacion
             evento_dto.version = str(auditoria_evento.specversion)
             evento_dto.tipo_evento = evento.__class__.__name__

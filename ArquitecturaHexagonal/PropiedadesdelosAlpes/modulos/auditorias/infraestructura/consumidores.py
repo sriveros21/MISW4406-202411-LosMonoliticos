@@ -23,7 +23,7 @@ def suscribirse_a_eventos(app=None):
            # print(f'Evento recibido: {mensaje.value().data}')
 
             ejecutar_proyeccion(ProyeccionAuditoriasTotales(datos.fecha_creacion, ProyeccionAuditoriasTotales.ADD), app=app)
-            ejecutar_proyeccion(ProyeccionAuditoriasLista(datos.id_auditoria, datos.id_cliente, datos.codigo, datos.fecha_creacion, datos.fecha_creacion), app=app)
+            ejecutar_proyeccion(ProyeccionAuditoriasLista(datos.id_auditoria, datos.codigo, datos.fecha), app=app)
             
             consumidor.acknowledge(mensaje)          
 

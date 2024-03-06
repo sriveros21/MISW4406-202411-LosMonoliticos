@@ -16,7 +16,7 @@ from enum import Enum
 class Auditoria(db.Model):
     __tablename__ = "auditorias"
     id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
-    id_auditoria = Column(String(60), primary_key=True)
+    id_auditoria = Column(String(60), primary_key=False)
     codigo_auditoria = Column(String(60), nullable=False)
     fecha_auditoria = Column(String(60),nullable=False)
     nombre_auditor= Column(String(60), nullable=False)
