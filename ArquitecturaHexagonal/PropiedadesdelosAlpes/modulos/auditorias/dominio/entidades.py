@@ -49,4 +49,4 @@ class Auditoria(AgregacionRaiz):
         self.hallazgos = auditoria.hallazgos
         self.objetivo = auditoria.objetivo
 
-        self.agregar_evento(AuditoriaCreada(codigo=self.id_auditoria, fecha_creacion=datetime.now()))
+        self.agregar_evento(AuditoriaCreada(codigo=self.id, fecha_creacion=datetime.now()))

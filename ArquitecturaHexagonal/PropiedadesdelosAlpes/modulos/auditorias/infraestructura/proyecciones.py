@@ -44,11 +44,10 @@ class ProyeccionAuditoriasTotales(ProyeccionAuditoria):
         db.session.commit()
 
 class ProyeccionAuditoriasLista(ProyeccionAuditoria):
-    def __init__(self, id_auditoria, id_cliente, fecha_creacion, fecha_actualizacion):
+    def __init__(self, id_auditoria, codigo, fecha):
         self.id_auditoria = id
-        self.id_cliente = id_cliente
-        self.fecha_creacion = millis_a_datetime(fecha_creacion)
-        self.fecha_actualizacion = millis_a_datetime(fecha_actualizacion)
+        self.codigo = codigo
+        self.fecha = millis_a_datetime(fecha)
     
     def ejecutar(self, db=None):
         if not db:
@@ -61,15 +60,14 @@ class ProyeccionAuditoriasLista(ProyeccionAuditoria):
         # TODO Haga los cambios necesarios para que se consideren los itinerarios, demás entidades y asociaciones
         repositorio.agregar(
             Auditoria(
-                id=str(self.id_auditoria), 
-                id_cliente=str(self.id_cliente),
+                id=str(self.id),
+                id_auditoria=str(self.id_auditoria),
                 codigo=str(self.codigo),
+                fecha=self.fecha_creacion,
                 auditor=str(self.auditor),
                 fase=str(self.fase),
                 hallazgos=str(self.hallazgos),
-                objetivo=str(self.objetivo),
-                fecha_creacion=self.fecha_creacion, 
-                fecha_actualizacion=self.fecha_actualizacion))
+                objetivo=str(self.objetivo)))
         
         db.session.commit()
 
