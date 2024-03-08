@@ -107,9 +107,9 @@ services:
       - SYS_NICE
     restart: always
     environment:
-      - MYSQL_DATABASE=reservas
+      - MYSQL_DATABASE=propiedades_alpes.db
       - MYSQL_ROOT_PASSWORD=adminadmin
-    profiles: ["aeroalpes", "db"]
+    profiles: ["propiedadesdelosalpes", "db"]
     networks:
       - pulsar
     ports:

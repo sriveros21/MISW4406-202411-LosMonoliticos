@@ -16,9 +16,8 @@ class VistaAuditoria(Vista):
         return auditorias
     
     #Revisar sí aca se deben incluir todos los atributos
-    #Aca le agregué el *list*
 
-    def obtener_por(self, id=None, codigo=None, auditor=None, **kwargs) -> list[Auditoria]:
+    def obtener_por(self, id=None, codigo=None, auditor=None, **kwargs) -> [Auditoria]:
         params = dict()
 
         if id:
