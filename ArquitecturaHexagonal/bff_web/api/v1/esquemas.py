@@ -19,7 +19,7 @@ def obtener_auditorias(root) -> typing.List["Auditoria"]:
         auditorias.append(
             Auditoria(
                 id=auditoria.get('id'), 
-                codigo=auditoria.get('dodigo'), 
+                codigo=auditoria.get('codigo'), 
                 auditor=auditoria.get('auditor')
             )
         )
