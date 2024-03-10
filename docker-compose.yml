@@ -109,7 +109,7 @@ services:
       - SYS_NICE
     restart: always
     environment:
-      - MYSQL_DATABASE=propiedades
+      - MYSQL_DATABASE=auditorias
       - MYSQL_ROOT_PASSWORD=adminadmin
     profiles: ["propiedadesdelosalpes", "db"]
     networks:
@@ -121,11 +121,11 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql  
   
   # Servicios de Propiedades de los Alpes
-  propiedadesdelosalpes:
-    container_name: propiedadesdelosalpes
-    hostname: propiedadesdelosalpes
-    image: propiedadesdelosalpes/flask 
-    profiles: ["propiedadesdelosalpes", "monolito"]
+  auditorias:
+    container_name: auditorias
+    hostname: auditorias
+    image: auditorias/flask
+    profiles: ["auditorias", "monolito"]
     networks:
      # - sidecar
       - pulsar
@@ -135,21 +135,7 @@ services:
       - broker
       - db
     environment:
-      - PROPIEDADESDELOSALPES_ADDRESS=propiedadesdelosalpes
+      - PROPIEDADESDELOSALPES_ADDRESS=auditorias
       - PULSAR_ADDRESS=broker
     ports:
       - "5000:5000"
-  # adaptador:
-  #   image: "aeroalpes/adaptador"
-  #   profiles: ["aeroalpes", "monolito"]
-  #   container_name: adaptador
-  #   hostname: adaptador
-  #   depends_on:
-  #     - aeroalpes
-  #   networks:
-  #     - sidecar
-  #   environment:
-  #     - AEROALPES_ADDRESS=aeroalpes
-  #     - PULSAR_ADDRESS=broker
-  #   ports:
-  #     - "50051:50051"
