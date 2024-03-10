@@ -6,7 +6,7 @@ from PropiedadesdelosAlpes.auditoria.modulos.aplicacion.comandos.crear_auditoria
 from PropiedadesdelosAlpes.auditoria.modulos.dominio.eventos.auditorias import AuditoriaCreada
 
 
-class CoordinadorReservas(CoordinadorOrquestacion):
+class CoordinadorAuditorias(CoordinadorOrquestacion):
 
     def inicializar_pasos(self):
         self.pasos = [

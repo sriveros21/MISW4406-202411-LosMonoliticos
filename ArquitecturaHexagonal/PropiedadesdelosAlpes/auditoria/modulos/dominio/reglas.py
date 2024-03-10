@@ -5,7 +5,7 @@ Este archivo contiene las reglas de negocio del dominio auditoria
 """
 
 from typing import Any
-from ....seedwork.dominio.reglas import ReglaNegocio
+from ....auditoria.seedwork.dominio.reglas import ReglaNegocio
 from .objetos_valor import HallazgosAuditoria, CodigoAuditoria
 
 #Revisar estas reglas

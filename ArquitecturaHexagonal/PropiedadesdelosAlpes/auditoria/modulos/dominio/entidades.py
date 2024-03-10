@@ -9,8 +9,8 @@ from dataclasses import dataclass, field
 from enum import Enum
 
 import PropiedadesdelosAlpes.auditoria.modulos.dominio.objetos_valor as ov
-from PropiedadesdelosAlpes.auditoria.modulos.dominio.eventos import AuditoriaCreada
-from ....seedwork.dominio.entidades import AgregacionRaiz, Entidad
+from PropiedadesdelosAlpes.auditoria.modulos.dominio.eventos.auditorias import AuditoriaCreada
+from ....auditoria.seedwork.dominio.entidades import AgregacionRaiz, Entidad
 import uuid
 from datetime import datetime
 

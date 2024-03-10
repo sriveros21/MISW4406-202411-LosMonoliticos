@@ -1,6 +1,6 @@
-from PropiedadesdelosAlpes.auditoria.modulos.dominio.eventos import AuditoriaCreada
+from PropiedadesdelosAlpes.auditoria.modulos.dominio.eventos.auditorias import AuditoriaCreada
 from PropiedadesdelosAlpes.auditoria.seedwork.aplicacion.handlers import Handler
-from PropiedadesdelosAlpes.auditoria.modulos.auditorias.infraestructura.despachadores import Despachador
+from PropiedadesdelosAlpes.auditoria.modulos.infraestructura.despachadores import Despachador
 
 class HandlerAuditoriaIntegracion(Handler):
 
