@@ -13,7 +13,7 @@ tasks:
     command: pip install -r requirements.txt
   - name: Crear imagenes Docker
     init: > 
-      docker build . -f propiedadesdelosalpes.dockerfile -t propiedadesdelosalpes/flask &&
+      docker build . -f auditorias.dockerfile -t auditorias/flask &&
       gp sync-done images
   - name: Crear folder para datos y asigna permisos
     init: > 
@@ -21,7 +21,7 @@ tasks:
       mkdir -p data/zookeeper && 
       mkdir -p data/mysql && 
       sudo chmod -R 777 ./data &&
-      sudo chmod -R 777 ./conectors
+      sudo chmod -R 777 ./connectors
   - name: Pull el Docker compose
     init: gp sync-await images
     command: docker-compose pull
