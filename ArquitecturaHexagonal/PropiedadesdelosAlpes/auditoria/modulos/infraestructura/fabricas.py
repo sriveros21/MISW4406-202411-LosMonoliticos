@@ -13,7 +13,7 @@ from PropiedadesdelosAlpes.auditoria.seedwork.dominio.fabricas import Fabrica
 from PropiedadesdelosAlpes.auditoria.seedwork.dominio.repositorios import Repositorio
 from PropiedadesdelosAlpes.auditoria.seedwork.infraestructura.vistas import Vista
 from PropiedadesdelosAlpes.auditoria.modulos.infraestructura.vistas import VistaAuditoria
-from .repositorios import RepositorioAuditoriasSQLite, RepositorioEventosAuditoriaSQLAlchemy
+from .repositorios import RepositorioAuditoriasSQLAlchemy, RepositorioEventosAuditoriaSQLAlchemy
 from.excepciones import ExcepcionFabrica
 from sqlalchemy.orm import Session
 
@@ -22,7 +22,7 @@ from sqlalchemy.orm import Session
 class FabricaRepositorioAuditorias(Fabrica):
     def crear_objeto(self, obj: type, mapeador: any = None) -> Repositorio:
         if obj == RepositorioAuditorias:
-            return RepositorioAuditoriasSQLite()
+            return RepositorioAuditoriasSQLAlchemy()
         elif obj == RepositorioEventosAuditorias:
             return RepositorioEventosAuditoriaSQLAlchemy()
         else:

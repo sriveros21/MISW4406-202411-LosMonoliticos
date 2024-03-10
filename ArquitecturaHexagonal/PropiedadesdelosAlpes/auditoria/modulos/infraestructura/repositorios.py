@@ -5,7 +5,7 @@ persistir objetos dominio (agregaciones) en la capa de infraestructura del domin
 
 """
 
-from PropiedadesdelosAlpes.auditoria.modulos.dominio.eventos import EventoAuditoria
+from PropiedadesdelosAlpes.auditoria.modulos.dominio.eventos.auditorias import EventoAuditoria
 from PropiedadesdelosAlpes.auditoria.config.db import db
 from PropiedadesdelosAlpes.auditoria.modulos.dominio.repositorios import RepositorioAuditorias, RepositorioEventosAuditorias
 from PropiedadesdelosAlpes.auditoria.modulos.dominio.entidades import Auditoria

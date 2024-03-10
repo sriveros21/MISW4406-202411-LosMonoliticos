@@ -4,7 +4,7 @@ from PropiedadesdelosAlpes.auditoria.modulos.infraestructura.repositorios import
 from PropiedadesdelosAlpes.auditoria.modulos.dominio.entidades import Auditoria
 from dataclasses import dataclass
 from .base import AuditoriaQueryBaseHandler
-from PropiedadesdelosAlpes.modulos.auditorias.aplicacion.mapeadores import MapeadorAuditoria
+from PropiedadesdelosAlpes.auditoria.modulos.aplicacion.mapeadores import MapeadorAuditoria
 import uuid
 
 @dataclass

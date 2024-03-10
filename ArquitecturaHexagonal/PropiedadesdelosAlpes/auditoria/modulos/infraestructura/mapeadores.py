@@ -9,7 +9,7 @@ from PropiedadesdelosAlpes.auditoria.seedwork.dominio.repositorios import Mapead
 from PropiedadesdelosAlpes.auditoria.seedwork.infraestructura.utils import unix_time_millis
 from PropiedadesdelosAlpes.auditoria.modulos.dominio.objetos_valor import FechaAuditoria, CodigoAuditoria, NombreAuditor, FaseAuditoria, HallazgosAuditoria, ObjetivoAuditoria
 from PropiedadesdelosAlpes.auditoria.modulos.dominio.entidades import Auditoria
-from PropiedadesdelosAlpes.auditoria.modulos.dominio.eventos import AuditoriaCreada, FaseAuditoriaCambiada, EventoAuditoria
+from PropiedadesdelosAlpes.auditoria.modulos.dominio.eventos.auditorias import AuditoriaCreada, FaseAuditoriaCambiada, EventoAuditoria
 from .dto import Auditoria as AuditoriaDTO
 from .excepciones import NoExisteImplementacionParaTipoFabricaExcepcion
 

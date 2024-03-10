@@ -4,9 +4,9 @@ from .entidades import Auditoria, Entidad
 from PropiedadesdelosAlpes.auditoria.seedwork.dominio.eventos import EventoDominio
 from .reglas import DebeReportarHallazgos, DebeIncluirCodigoAuditoria
 from .excepciones import TipoObjetoNoExisteEnDominioAuditoriasExcepcion
-from ....modulos.infraestructura.mapeadores import MapeadorAuditorias
-from ....seedwork.dominio.fabricas import Fabrica
-from ....seedwork.dominio.repositorios import Mapeador, Repositorio
+from ....auditoria.modulos.infraestructura.mapeadores import MapeadorAuditorias
+from ....auditoria.seedwork.dominio.fabricas import Fabrica
+from ....auditoria.seedwork.dominio.repositorios import Mapeador, Repositorio
 
 
 @dataclass
