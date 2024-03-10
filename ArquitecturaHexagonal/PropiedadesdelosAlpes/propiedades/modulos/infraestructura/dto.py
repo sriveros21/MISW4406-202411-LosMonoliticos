@@ -1,0 +1,66 @@
+"""DTOs para la capa de infrastructura del dominio de propiedades
+
+En este archivo usted encontrará los DTOs (modelos anémicos) de
+la infraestructura del dominio de propiedades
+
+"""
+
+from PropiedadesdelosAlpes.modulos.propiedades.dominio.objetos_valor import TipoPropiedad, EstadoPropiedad
+from PropiedadesdelosAlpes.config.db import db
+from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String, Float, Integer, ForeignKey, Enum as SQLEnum
+
+import uuid
+from sqlalchemy import Enum
+from enum import Enum
+
+
+class Ubicacion(db.Model):
+    __tablename__ = 'ubicaciones'
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
+    latitud = Column(Float, nullable=False)
+    longitud = Column(Float, nullable=False)
+
+class Dimension(db.Model):
+    __tablename__ = 'dimensiones'
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
+    width = Column(Float, nullable=False)
+    length = Column(Float, nullable=False)
+    unit = Column(String(60), nullable=False)
+
+class Terreno(db.Model):
+    __tablename__ = 'terrenos'
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
+    dimension_id = Column(String(60), ForeignKey('dimensiones.id'))
+    dimension = relationship("Dimension")
+    lote = Column(String(60), nullable=False)
+    propiedad_id = Column(String(60), ForeignKey('propiedades.id'))
+    propiedad = relationship("Propiedad", back_populates="terreno")
+
+class Edificacion(db.Model):
+    __tablename__ = 'edificaciones'
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
+    propiedad_id = Column(String(60), ForeignKey('propiedades.id'))
+    tipo = Column(String(60), nullable=False)
+    dimension_id = Column(String(60), ForeignKey('dimensiones.id'))
+    dimension = relationship("Dimension")
+    pisos = relationship("Piso", backref="edificacion")
+
+class Piso(db.Model):
+    __tablename__ = 'pisos'
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
+    edificacion_id = Column(String(60), ForeignKey('edificaciones.id'))
+    numero = Column(Integer, nullable=False)
+
+class Propiedad(db.Model):
+    __tablename__ = "propiedades"
+    id = Column(String(60), primary_key=True, default=lambda: str(uuid.uuid4()))
+    nombre = Column(String(60), nullable=False)
+    ubicacion_id = Column(String(60), ForeignKey('ubicaciones.id'))
+    ubicacion = relationship("Ubicacion")
+    dimension_id = Column(String(60), ForeignKey('dimensiones.id'))
+    dimension = relationship("Dimension")
+    tipo = Column(SQLEnum(TipoPropiedad), nullable=False)
+    estado = Column(SQLEnum(EstadoPropiedad), nullable=False)
+    edificaciones = relationship("Edificacion", backref="propiedad")
+    terreno = relationship("Terreno", uselist=False, back_populates="propiedad")
