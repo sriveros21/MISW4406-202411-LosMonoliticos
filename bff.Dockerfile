@@ -7,6 +7,6 @@ RUN pip install --no-cache-dir -r bff-requirements.txt
 
 COPY . .
 
-WORKDIR "/src"
+WORKDIR "/ArquitecturaHexagonal"
 
 CMD [ "uvicorn", "bff_web.main:app", "--host", "localhost", "--port", "8003", "--reload"]
