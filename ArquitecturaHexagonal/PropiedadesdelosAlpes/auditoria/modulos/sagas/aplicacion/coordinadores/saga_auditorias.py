@@ -12,7 +12,7 @@ class CoordinadorAuditorias(CoordinadorOrquestacion):
         self.pasos = [
             Inicio(index=0),
             Transaccion(index=1, comando=CrearAuditoria, evento=AuditoriaCreada, error=None, compensacion=None),
-            Fin(index=5)
+            Fin(index=2)
         ]
 
     def iniciar(self):
