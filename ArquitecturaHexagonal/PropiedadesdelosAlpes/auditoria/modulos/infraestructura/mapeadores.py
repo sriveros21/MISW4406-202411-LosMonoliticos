@@ -40,8 +40,14 @@ class MapadeadorEventosAuditoria(Mapeador):
             from .schema.v1.eventos import AuditoriaCreadaPayload, EventoAuditoriaCreada
 
             payload = AuditoriaCreadaPayload(
-                id_auditoria = str(evento.id),
-                fecha_creacion = int(unix_time_millis(evento.fecha_creacion))
+                id = str(evento.id),
+                id_auditoria = str(evento.id_auditoria),
+                fecha_creacion = int(unix_time_millis(evento.fecha_creacion)),
+                codigo = str(evento.codigo),
+                auditor = str(evento.auditor),
+                fase = str(evento.fase),
+                hallazgos = str(evento.hallazgos),
+                objetivo = str(evento.objetivo)
             )
             evento_integracion = EventoAuditoriaCreada(id=str(evento.id))
             evento_integracion.id = str(evento.id)
