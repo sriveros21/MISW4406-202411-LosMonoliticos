@@ -36,12 +36,12 @@ class MapeadorAuditoria(RepMap):
         return AuditoriaDTO(
             _id=str(entidad.id),
             id_auditoria=entidad.id_auditoria,
-            codigo_auditoria=entidad.codigo,
-            fecha_auditoria=entidad.fecha,
-            nombre_auditor=entidad.auditor,
-            fase_auditoria=entidad.fase,
-            hallazgos_auditoria=entidad.hallazgos,
-            objetivo_auditoria=entidad.objetivo
+            codigo_auditoria=entidad.codigo_auditoria,
+            fecha_auditoria=entidad.fecha_auditoria,
+            nombre_auditor=entidad.nombre_auditor,
+            fase_auditoria=entidad.fase_auditoria,
+            hallazgos_auditoria=entidad.hallazgos_auditoria,
+            objetivo_auditoria=entidad.objetivo_auditoria
 
         )
 
@@ -49,9 +49,9 @@ class MapeadorAuditoria(RepMap):
         return Auditoria(
             id=dto.id,
             id_auditoria=dto.id_auditoria,
-            codigo=dto.codigo_auditoria,
-            fecha=dto.fecha_auditoria,
-            auditor=dto.nombre_auditor,
-            fase=dto.fase_auditoria,
-            hallazgos=dto.hallazgos_auditoria,
-            objetivo=dto.objetivo_auditoria)
+            codigo_auditoria=dto.codigo_auditoria,
+            fecha_auditoria=dto.fecha_auditoria,
+            nombre_auditor=dto.nombre_auditor,
+            fase_auditoria=dto.fase_auditoria,
+            hallazgos_auditoria=dto.hallazgos_auditoria,
+            objetivo_auditoria=dto.objetivo_auditoria)

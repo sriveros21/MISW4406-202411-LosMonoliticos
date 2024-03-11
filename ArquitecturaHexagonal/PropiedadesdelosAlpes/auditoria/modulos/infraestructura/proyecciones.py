@@ -23,7 +23,7 @@ class ProyeccionAuditoriasTotales(ProyeccionAuditoria):
     UPDATE = 3
 
     def __init__(self, fecha_auditoria, operacion):
-        self.fecha_auditoria = millis_a_datetime(fecha_auditoria)
+        self.fecha_auditoria = (fecha_auditoria)
         print(f'Fecha Auditoria recibido: {self.fecha_auditoria}')
         self.operacion = operacion
 
@@ -32,7 +32,7 @@ class ProyeccionAuditoriasTotales(ProyeccionAuditoria):
             logging.error('ERROR: DB del app no puede ser nula')
             return
         # NOTE esta no usa repositorios y de una vez aplica los cambios. Es decir, no todo siempre debe ser un repositorio
-        record = db.session.query(AuditoriaDTO).filter_by(fecha_auditoria=self.fecha_auditoria.date()).one_or_none()
+        record = db.session.query(AuditoriaDTO).filter_by(fecha_auditoria=self.fecha_auditoria).one_or_none()
         print("SOY RECORD", record)
 
         if record and self.operacion == self.ADD:
@@ -41,7 +41,7 @@ class ProyeccionAuditoriasTotales(ProyeccionAuditoria):
             record.total -= 1 
             record.total = max(record.total, 0)
         else:
-            db.session.add(Auditoria(fecha=self.fecha_auditoria.date()))
+            db.session.add(Auditoria(fecha_auditoria=self.fecha_auditoria))
         
         db.session.commit()
 
@@ -49,7 +49,7 @@ class ProyeccionAuditoriasLista(ProyeccionAuditoria):
     def __init__(self, id, id_auditoria, fecha_creacion, codigo, auditor, fase, hallazgos, objetivo):
         self.id = id
         self.id_auditoria = id_auditoria
-        self.fecha = millis_a_datetime(fecha_creacion)
+        self.fecha = (fecha_creacion)
         self.codigo = codigo
         self.auditor = auditor
         self.fase = fase
@@ -69,12 +69,12 @@ class ProyeccionAuditoriasLista(ProyeccionAuditoria):
             Auditoria(
                 id=str(self.id_auditoria),
                 id_auditoria=str(self.id_auditoria),
-                codigo=str(self.codigo),
-                fecha=self.fecha_creacion,
-                auditor=str(self.auditor),
-                fase=str(self.fase),
-                hallazgos=str(self.hallazgos),
-                objetivo=str(self.objetivo)))
+                codigo_auditoria=str(self.codigo),
+                fecha_auditoria=self.fecha,
+                nombre_auditor=str(self.auditor),
+                fase_auditoria=str(self.fase),
+                hallazgos_auditoria=str(self.hallazgos),
+                objetivo_auditoria=str(self.objetivo)))
         
         db.session.commit()
 
