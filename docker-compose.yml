@@ -99,8 +99,8 @@ services:
       - ./connectors/pulsar:/pulsar/connectors
     command: bash -c "bin/apply-config-from-env.py conf/broker.conf
       &&  exec bin/pulsar broker"
-
-  # MySQL8
+      
+# MySQL8
   db:
     image: mysql:8
     hostname: mysqldb
@@ -109,7 +109,7 @@ services:
       - SYS_NICE
     restart: always
     environment:
-      - MYSQL_DATABASE=auditorias
+      - MYSQL_DATABASE=propiedades_alpes.db
       - MYSQL_ROOT_PASSWORD=adminadmin
     profiles: ["propiedadesdelosalpes", "db"]
     networks:
@@ -119,13 +119,12 @@ services:
     volumes:
       - ./data/mysql:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql  
-  
   # Servicios de Propiedades de los Alpes
-  auditorias:
-    container_name: auditorias
-    hostname: auditorias
-    image: auditorias/flask
-    profiles: ["auditorias", "monolito"]
+  propiedadesdelosalpes:
+    container_name: propiedadesdelosalpes
+    hostname: propiedadesdelosalpes
+    image: propiedadesdelosalpes/flask 
+    profiles: ["propiedadesdelosalpes", "monolito"]
     networks:
      # - sidecar
       - pulsar
@@ -135,7 +134,23 @@ services:
       - broker
       - db
     environment:
-      - PROPIEDADESDELOSALPES_ADDRESS=auditorias
+      - PROPIEDADESDELOSALPES_ADDRESS=propiedadesdelosalpes
       - PULSAR_ADDRESS=broker
     ports:
       - "5000:5000"
+# Servicio BFF
+  bff:
+    container_name: bff
+    hostname: bff
+    image: propiedadesdelosalpes/bff 
+    profiles: ["propiedadesdelosalpes", "bff"]
+    depends_on:
+      - propiedadesdelosalpes
+      - broker
+    environment:
+      - AEROALPES_ADDRESS=aeroalpes
+      - BROKER_HOST=broker
+    networks:
+      - pulsar
+    ports:
+      - "8003:8003"

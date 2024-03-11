@@ -7,14 +7,27 @@
 ## Instrucciones de uso:
 ## Escenarios de calidad a probar:
 Los escenarios de calidad que se pretender probar con el desarrollo del proyecto son:
-- Escalabilidad
-- Disponibilidad
-- Interoperabilidad
+- Escalabilidad :  Aumentar las capacidades del sistema en respuesta a un aumento en la demanda.
+- Disponibilidad : Recuperación ante Desastres
+- Interoperabilidad : 
 
-Para cada uno de estos atributos de calidad se plantearos 3 escenarios de calidad los cuales son presentados en la entrega 3 del curso.
+### Estructura del Proyecto.
 
-### Estructura de proyecto:
-El proyecto tiene la siguiente estructura:
+Para efectos de la Entrega 4 se cuenta con la siguiente estructura del Proyecto:
+
+- Se creo una carpeta ArquitecturaHexagonal para almacenar la información correspondiente al código desarrollado para el proyecto.
+- Dentro de la carpeta ArquitecturaHexagonal, se creó la carpeta de PropiedadesdelosAlpes la cual inlcuye las siguientes carpetas:
+-   api: Esta carpeta contiene el archivo __init__.py en el cual se definen las condiciones para la inicialización de la aplicación. Adicionalmente contiene 3 archivos : auditorias.py, cliente.py, propiedades.py en los cuales se definen los endpoints para cada uno de los modulos desarollados como parte de esta entrega.
+-   config: dentro de esta carpeta se encontrará el archivo db.py el cual incluye la información de la configuración de la base de datos usada en el proyecto. Adicionalmente incluye un archivo uow.py que tiene la información de la Unidad de trabajo definida para SQLAlchemy.
+-   modulos: incluye la información de los modulos desarrollados para esta entrega que son: auditorias, cliente, propiedades. Cada modulo esta compuesto por las siguientes carpetas (arquitectura cebolla): aplicación, dominio e infraestructura. En relación al patrón CQRS y cla comunicación por eventos se incluyó la siguiente información: carpeta de comandos, carpeta de queries, archivo handlers, detalle archivo __init__.py en el nivel de aplicación; archivo de eventos a nivel dominio, carpeta de schema, archivo de consumidores y archivo de despachadores a nivel de infraestructura.
+-   Seedwork: inlcuye todas las funcionales de uso común dentro de la aplicación.
+-   Requirements.txt
+
+### Como desplegar la aplicación
+
+Para desplegar cada uno de los modulos se debe ubicar en la raiz del proyecto y ejecutar el comando: docker-compose --profile pulsar up. Una vez pulsar levante, se procede a correr el siguiente comando para levantar la aplicación: flask --app ArquitecturaHexagonal/PropiedadesdelosAlpes/api/ --debug run.
+
+### Archivos relacionados con la definición del Dominio (Etapa Inicial del Proyecto):
 - Dentro de la carpeta `src/main/cml` se encuentran los archivos utilizados para desarrollar y construir el diagrama de contexto, ya que mediante la funcionalidad de Gitpod se puede generar los archivos con el menu de opciones, dando click en la opción `Generate graphical context map`. Acá se tienen dos archivos, uno es para la construcción del AS_IS de nombre `propiedadesDeLosAlpes.cml` y otro para la construcción del TO_BE de nombre `propiedadesDeLosAlpes_tobe.cml`. El archivo de `demo.cml` es para fines de ejemplo.
 - Dentro de la carpeta `src-gen` se encuentran las imágenes exportadas mediante la funcionalidad anteriormente descrita, y estas imágenes se exportan en tres formatos: `.png, .svg y .gv`. El archivo `.png` es el más utilizado para visualizar el diagrama de contexto.
 - Dichos diagramas de contexto tambien se clasifican con el mismo nombre para diferenciar el diagrama AS_IS y el diagrama TO_BE.

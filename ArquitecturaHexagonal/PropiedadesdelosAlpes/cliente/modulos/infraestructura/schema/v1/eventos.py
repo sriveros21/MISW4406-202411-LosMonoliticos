@@ -9,5 +9,5 @@ class ClienteCreadoPayLoad(Record):
     email = String()
 
 
-class ClienteCreado(EventoIntegracion):
+class EventoClienteCreado(EventoIntegracion):
     data = ClienteCreadoPayLoad()
