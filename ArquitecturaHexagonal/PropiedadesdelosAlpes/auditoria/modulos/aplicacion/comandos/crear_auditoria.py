@@ -39,19 +39,7 @@ class CrearAuditoriaHandler(CrearAuditoriaBaseHandler):
 
         auditoria: Auditoria = self.fabrica_auditorias.crear_objeto(auditoria_dto, MapeadorAuditoria())
         auditoria.crear_auditoria(auditoria)
-
-
-        print(f'=========================')
-        print(f'=========================')
-        print(f'=========================')
-        print(f'=========================')
-        print(f'=========================')
-        print(f'Data en auditoria: {auditoria}')
-        print(f'=========================')
-        print(f'=========================')
-        print(f'=========================')
-        print(f'=========================')
-
+        
         repositorio = self.fabrica_repositorio.crear_objeto(RepositorioAuditorias)
         repositorio_eventos = self.fabrica_repositorio.crear_objeto(RepositorioEventosAuditorias)
 

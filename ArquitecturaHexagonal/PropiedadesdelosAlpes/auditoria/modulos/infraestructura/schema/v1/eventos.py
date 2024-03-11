@@ -6,7 +6,7 @@ from PropiedadesdelosAlpes.auditoria.seedwork.infraestructura.utils import time_
 class AuditoriaCreadaPayload(Record):
     id = String()
     id_auditoria = String()
-    fecha = int
+    fecha = Long()
     codigo = String()
     auditor = String()
     fase = String()
