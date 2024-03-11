@@ -22,8 +22,9 @@ class ProyeccionAuditoriasTotales(ProyeccionAuditoria):
     DELETE = 2
     UPDATE = 3
 
-    def __init__(self, fecha_creacion, operacion):
-        self.fecha_creacion = millis_a_datetime(fecha_creacion)
+    def __init__(self, fecha_auditoria, operacion):
+        self.fecha_auditoria = millis_a_datetime(fecha_auditoria)
+        print(f'Fecha Auditoria recibido: {self.fecha_auditoria}')
         self.operacion = operacion
 
     def ejecutar(self, db=None):
@@ -31,7 +32,8 @@ class ProyeccionAuditoriasTotales(ProyeccionAuditoria):
             logging.error('ERROR: DB del app no puede ser nula')
             return
         # NOTE esta no usa repositorios y de una vez aplica los cambios. Es decir, no todo siempre debe ser un repositorio
-        record = db.session.query(AuditoriaDTO).filter_by(fecha_creacion=self.fecha_creacion.date()).one_or_none()
+        record = db.session.query(AuditoriaDTO).filter_by(fecha_auditoria=self.fecha_auditoria.date()).one_or_none()
+        print("SOY RECORD", record)
 
         if record and self.operacion == self.ADD:
             record.total += 1
@@ -39,7 +41,7 @@ class ProyeccionAuditoriasTotales(ProyeccionAuditoria):
             record.total -= 1 
             record.total = max(record.total, 0)
         else:
-            db.session.add(AuditoriaDTO(fecha_creacion=self.fecha_creacion.date(), total=1))
+            db.session.add(Auditoria(fecha=self.fecha_auditoria.date()))
         
         db.session.commit()
 

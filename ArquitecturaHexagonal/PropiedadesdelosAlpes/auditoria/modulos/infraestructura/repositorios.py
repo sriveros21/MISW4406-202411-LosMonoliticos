@@ -5,7 +5,7 @@ persistir objetos dominio (agregaciones) en la capa de infraestructura del domin
 
 """
 
-from PropiedadesdelosAlpes.auditoria.modulos.dominio.eventos.auditorias import EventoAuditoria
+from PropiedadesdelosAlpes.auditoria.modulos.infraestructura.dto import EventosAuditoria
 from PropiedadesdelosAlpes.auditoria.config.db import db
 from PropiedadesdelosAlpes.auditoria.modulos.dominio.repositorios import RepositorioAuditorias, RepositorioEventosAuditorias
 from PropiedadesdelosAlpes.auditoria.modulos.dominio.entidades import Auditoria
@@ -68,7 +68,7 @@ class RepositorioEventosAuditoriaSQLAlchemy(RepositorioEventosAuditorias):
             parser_payload = JsonSchema(auditoria_evento.data.__class__)
             json_str = parser_payload.encode(auditoria_evento.data)
 
-            evento_dto = EventoAuditoria()
+            evento_dto = EventosAuditoria()
             evento_dto.id = str(evento.id)
             evento_dto.id_entidad = str(evento.id)
             evento_dto.fecha_evento = evento.fecha_creacion
