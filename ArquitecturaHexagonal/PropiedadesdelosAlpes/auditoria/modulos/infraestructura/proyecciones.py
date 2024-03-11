@@ -4,6 +4,7 @@ from PropiedadesdelosAlpes.auditoria.modulos.infraestructura.fabricas import Fab
 from PropiedadesdelosAlpes.auditoria.modulos.infraestructura.repositorios import RepositorioAuditorias
 from PropiedadesdelosAlpes.auditoria.modulos.dominio.entidades import Auditoria
 from PropiedadesdelosAlpes.auditoria.modulos.infraestructura.dto import Auditoria as AuditoriaDTO
+from PropiedadesdelosAlpes.auditoria.modulos.infraestructura.dto import AuditoriaAnalitica
 
 from PropiedadesdelosAlpes.auditoria.seedwork.infraestructura.utils import millis_a_datetime
 import datetime
@@ -22,8 +23,9 @@ class ProyeccionAuditoriasTotales(ProyeccionAuditoria):
     DELETE = 2
     UPDATE = 3
 
-    def __init__(self, fecha_creacion, operacion):
-        self.fecha_creacion = millis_a_datetime(fecha_creacion)
+    def __init__(self, fecha_auditoria, operacion):
+        self.fecha_auditoria = (fecha_auditoria)
+        print(f'Fecha Auditoria recibido: {self.fecha_auditoria}')
         self.operacion = operacion
 
     def ejecutar(self, db=None):
@@ -31,7 +33,8 @@ class ProyeccionAuditoriasTotales(ProyeccionAuditoria):
             logging.error('ERROR: DB del app no puede ser nula')
             return
         # NOTE esta no usa repositorios y de una vez aplica los cambios. Es decir, no todo siempre debe ser un repositorio
-        record = db.session.query(AuditoriaDTO).filter_by(fecha_creacion=self.fecha_creacion.date()).one_or_none()
+        record = db.session.query(AuditoriaAnalitica).filter_by(fecha_creacion=self.fecha_auditoria).one_or_none()
+        print("SOY RECORD", record)
 
         if record and self.operacion == self.ADD:
             record.total += 1
@@ -39,15 +42,20 @@ class ProyeccionAuditoriasTotales(ProyeccionAuditoria):
             record.total -= 1 
             record.total = max(record.total, 0)
         else:
-            db.session.add(AuditoriaDTO(fecha_creacion=self.fecha_creacion.date(), total=1))
+            db.session.add(AuditoriaAnalitica(fecha_creacion=millis_a_datetime(self.fecha_auditoria), total=1))
         
         db.session.commit()
 
 class ProyeccionAuditoriasLista(ProyeccionAuditoria):
-    def __init__(self, id_auditoria, codigo, fecha):
-        self.id_auditoria = id
+    def __init__(self, id, id_auditoria, fecha_creacion, codigo, auditor, fase, hallazgos, objetivo):
+        self.id = id
+        self.id_auditoria = id_auditoria
+        self.fecha = (fecha_creacion)
         self.codigo = codigo
-        self.fecha = millis_a_datetime(fecha)
+        self.auditor = auditor
+        self.fase = fase
+        self.hallazgos = hallazgos
+        self.objetivo = objetivo
     
     def ejecutar(self, db=None):
         if not db:
@@ -60,14 +68,14 @@ class ProyeccionAuditoriasLista(ProyeccionAuditoria):
         # TODO Haga los cambios necesarios para que se consideren los itinerarios, demás entidades y asociaciones
         repositorio.agregar(
             Auditoria(
-                id=str(self.id),
+                id=str(self.id_auditoria),
                 id_auditoria=str(self.id_auditoria),
-                codigo=str(self.codigo),
-                fecha=self.fecha_creacion,
-                auditor=str(self.auditor),
-                fase=str(self.fase),
-                hallazgos=str(self.hallazgos),
-                objetivo=str(self.objetivo)))
+                codigo_auditoria=str(self.codigo),
+                fecha_auditoria=self.fecha,
+                nombre_auditor=str(self.auditor),
+                fase_auditoria=str(self.fase),
+                hallazgos_auditoria=str(self.hallazgos),
+                objetivo_auditoria=str(self.objetivo)))
         
         db.session.commit()
 

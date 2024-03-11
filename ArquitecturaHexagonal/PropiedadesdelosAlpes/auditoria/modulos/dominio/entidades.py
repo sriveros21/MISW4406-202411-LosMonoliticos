@@ -32,21 +32,30 @@ class ObjetivoAuditoria(Enum):
 class Auditoria(AgregacionRaiz):
     id: uuid.UUID = field(hash=True, default=None)
     id_auditoria:str = field(default_factory=str)
-    codigo:ov.CodigoAuditoria = field(default_factory=ov.CodigoAuditoria)
-    fecha:ov.FechaAuditoria = field(default_factory=ov.FechaAuditoria)
-    auditor:ov.NombreAuditor = field(default_factory=ov.NombreAuditor)
-    fase:ov.FaseAuditoria = field(default_factory=ov.FaseAuditoria.INICIAL)
-    hallazgos:ov.HallazgosAuditoria = field(default_factory=ov.HallazgosAuditoria)
-    objetivo: ov.ObjetivoAuditoria = field(default_factory=ov.ObjetivoAuditoria.VALIDAR_CALIDAD)
+    codigo_auditoria:str = field(default_factory=str)
+    fecha_auditoria:str = field(default_factory=str)
+    nombre_auditor:str = field(default_factory=str)
+    fase_auditoria:str = field(default_factory=str)
+    hallazgos_auditoria:str = field(default_factory=str)
+    objetivo_auditoria: str = field(default_factory=str)
 
     def crear_auditoria(self, auditoria: Auditoria):
         self.id = auditoria.id,
         self.id_auditoria = auditoria.id_auditoria,
-        self.codigo = auditoria.codigo
-        self.fecha = auditoria.fecha
-        self.auditor = auditoria.auditor
-        self.fase = auditoria.fase
-        self.hallazgos = auditoria.hallazgos
-        self.objetivo = auditoria.objetivo
+        self.codigo = auditoria.codigo_auditoria
+        self.fecha = datetime.strptime(auditoria.fecha_auditoria, '%d-%m-%Y %H:%M:%S')
+        self.auditor = auditoria.nombre_auditor
+        self.fase = auditoria.fase_auditoria
+        self.hallazgos = auditoria.hallazgos_auditoria
+        self.objetivo = auditoria.objetivo_auditoria
 
-        self.agregar_evento(AuditoriaCreada(codigo=self.id, fecha_creacion=datetime.now()))
+        self.agregar_evento(AuditoriaCreada(
+            id=self.id, 
+            id_auditoria = self.id_auditoria,
+            codigo=self.codigo, 
+            fecha_creacion=self.fecha,
+            auditor = self.nombre_auditor,
+            fase = self.fase_auditoria,
+            hallazgos = self.hallazgos_auditoria,
+            objetivo = self.objetivo_auditoria,
+            ))

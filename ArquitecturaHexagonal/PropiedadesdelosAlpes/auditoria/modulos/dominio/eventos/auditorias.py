@@ -8,8 +8,14 @@ class EventoAuditoria(EventoDominio):
     
 @dataclass
 class AuditoriaCreada(EventoAuditoria):
+    id: str = None
+    id_auditoria: uuid.UUID = None
     codigo: str = None
     fecha_creacion: datetime = None
+    auditor: str = None
+    fase: str = None
+    hallazgos: str = None
+    objetivo: str = None
 
 #Revisar sí aca la fase debe ponerse con Enum
 @dataclass

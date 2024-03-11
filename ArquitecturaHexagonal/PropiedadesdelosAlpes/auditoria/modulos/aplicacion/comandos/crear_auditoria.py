@@ -14,12 +14,12 @@ from PropiedadesdelosAlpes.auditoria.modulos.infraestructura.repositorios import
 class CrearAuditoria(Comando):
     id: str
     id_auditoria: str
-    codigo_auditoria: CodigoAuditoriaDTO
-    fecha_auditoria: FechaAuditoriaDTO
-    nombre_auditor: NombreAuditorDTO
-    fase_auditoria: FaseAuditoria
-    hallazgos_auditoria: HallazgosAuditoriaDTO
-    objetivo_auditoria: ObjetivoAuditoria
+    codigo_auditoria: str
+    fecha_auditoria: str
+    nombre_auditor: str
+    fase_auditoria: str
+    hallazgos_auditoria: str
+    objetivo_auditoria: str
 
 class CrearAuditoriaHandler(CrearAuditoriaBaseHandler):
     
@@ -35,9 +35,11 @@ class CrearAuditoriaHandler(CrearAuditoriaBaseHandler):
             objetivo_auditoria=comando.objetivo_auditoria
             )
 
+            
+
         auditoria: Auditoria = self.fabrica_auditorias.crear_objeto(auditoria_dto, MapeadorAuditoria())
         auditoria.crear_auditoria(auditoria)
-
+        
         repositorio = self.fabrica_repositorio.crear_objeto(RepositorioAuditorias)
         repositorio_eventos = self.fabrica_repositorio.crear_objeto(RepositorioEventosAuditorias)
 

@@ -35,6 +35,7 @@ def auditoria_usando_comando():
             auditoria_dto.fase_auditoria,
             auditoria_dto.hallazgos_auditoria, 
             auditoria_dto.objetivo_auditoria)
+
         
         # TODO Reemplaze es todo código sincrono y use el broker de eventos para propagar este comando de forma asíncrona
         # Revise la clase Despachador de la capa de infraestructura

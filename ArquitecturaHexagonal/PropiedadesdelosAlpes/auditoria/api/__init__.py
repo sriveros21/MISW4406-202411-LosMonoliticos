@@ -11,7 +11,6 @@ def register_handlers():
 def import_domain_models():
     # Import DTOs from the infrastructure layer to ensure they are recognized by SQLAlchemy
     import PropiedadesdelosAlpes.auditoria.modulos.infraestructura.dto
-    import PropiedadesdelosAlpes.auditoria.modulos.aplicacion.dto
 
 def register_event_consumers(app):
     import threading
