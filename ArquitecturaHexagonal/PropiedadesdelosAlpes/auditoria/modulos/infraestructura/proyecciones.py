@@ -68,7 +68,7 @@ class ProyeccionAuditoriasLista(ProyeccionAuditoria):
         # TODO Haga los cambios necesarios para que se consideren los itinerarios, demás entidades y asociaciones
         repositorio.agregar(
             Auditoria(
-                id=str(self.id_auditoria),
+                id=str(self.id),
                 id_auditoria=str(self.id_auditoria),
                 codigo_auditoria=str(self.codigo),
                 fecha_auditoria=self.fecha,
