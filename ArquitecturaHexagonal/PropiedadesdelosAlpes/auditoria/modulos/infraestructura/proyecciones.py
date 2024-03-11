@@ -4,6 +4,7 @@ from PropiedadesdelosAlpes.auditoria.modulos.infraestructura.fabricas import Fab
 from PropiedadesdelosAlpes.auditoria.modulos.infraestructura.repositorios import RepositorioAuditorias
 from PropiedadesdelosAlpes.auditoria.modulos.dominio.entidades import Auditoria
 from PropiedadesdelosAlpes.auditoria.modulos.infraestructura.dto import Auditoria as AuditoriaDTO
+from PropiedadesdelosAlpes.auditoria.modulos.infraestructura.dto import AuditoriaAnalitica
 
 from PropiedadesdelosAlpes.auditoria.seedwork.infraestructura.utils import millis_a_datetime
 import datetime
@@ -32,7 +33,7 @@ class ProyeccionAuditoriasTotales(ProyeccionAuditoria):
             logging.error('ERROR: DB del app no puede ser nula')
             return
         # NOTE esta no usa repositorios y de una vez aplica los cambios. Es decir, no todo siempre debe ser un repositorio
-        record = db.session.query(AuditoriaDTO).filter_by(fecha_auditoria=self.fecha_auditoria).one_or_none()
+        record = db.session.query(AuditoriaAnalitica).filter_by(fecha_creacion=self.fecha_auditoria).one_or_none()
         print("SOY RECORD", record)
 
         if record and self.operacion == self.ADD:

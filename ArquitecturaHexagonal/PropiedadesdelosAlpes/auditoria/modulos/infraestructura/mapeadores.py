@@ -109,9 +109,9 @@ class MapeadorAuditorias(Mapeador):
         codigo=dto.codigo_auditoria
         fecha=dto.fecha_auditoria
         auditor= dto.nombre_auditor
-        fase=FaseAuditoria(dto.fase_auditoria)
-        hallazgos=HallazgosAuditoria(hallazgos_auditoria=dto.hallazgos_auditoria)
-        objetivo=ObjetivoAuditoria(dto.objetivo_auditoria)
+        fase=dto.fase_auditoria
+        hallazgos=dto.hallazgos_auditoria
+        objetivo=dto.objetivo_auditoria
 
         return Auditoria(
             id=id,

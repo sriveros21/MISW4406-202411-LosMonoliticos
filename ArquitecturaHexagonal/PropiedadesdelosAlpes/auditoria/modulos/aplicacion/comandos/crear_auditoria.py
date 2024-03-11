@@ -17,9 +17,9 @@ class CrearAuditoria(Comando):
     codigo_auditoria: str
     fecha_auditoria: str
     nombre_auditor: str
-    fase_auditoria: FaseAuditoria
-    hallazgos_auditoria: HallazgosAuditoriaDTO
-    objetivo_auditoria: ObjetivoAuditoria
+    fase_auditoria: str
+    hallazgos_auditoria: str
+    objetivo_auditoria: str
 
 class CrearAuditoriaHandler(CrearAuditoriaBaseHandler):
     

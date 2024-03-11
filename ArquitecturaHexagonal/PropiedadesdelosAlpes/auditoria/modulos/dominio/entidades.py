@@ -35,9 +35,9 @@ class Auditoria(AgregacionRaiz):
     codigo_auditoria:str = field(default_factory=str)
     fecha_auditoria:str = field(default_factory=str)
     nombre_auditor:str = field(default_factory=str)
-    fase_auditoria:ov.FaseAuditoria = field(default_factory=ov.FaseAuditoria.INICIAL)
-    hallazgos_auditoria:ov.HallazgosAuditoria = field(default_factory=ov.HallazgosAuditoria)
-    objetivo_auditoria: ov.ObjetivoAuditoria = field(default_factory=ov.ObjetivoAuditoria.VALIDAR_CALIDAD)
+    fase_auditoria:str = field(default_factory=str)
+    hallazgos_auditoria:str = field(default_factory=str)
+    objetivo_auditoria: str = field(default_factory=str)
 
     def crear_auditoria(self, auditoria: Auditoria):
         self.id = auditoria.id,
