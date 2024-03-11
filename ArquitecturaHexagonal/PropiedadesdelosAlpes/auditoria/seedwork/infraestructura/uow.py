@@ -52,7 +52,7 @@ class UnidadTrabajo(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def batches(self) -> List[Batch]:
+    def batches(self) -> list[Batch]:
         raise NotImplementedError
 
     @abstractmethod

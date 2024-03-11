@@ -8,6 +8,7 @@ class EventoAuditoria(EventoDominio):
     
 @dataclass
 class AuditoriaCreada(EventoAuditoria):
+    id_auditoria: uuid.UUID = None
     codigo: str = None
     fecha_creacion: datetime = None
 
