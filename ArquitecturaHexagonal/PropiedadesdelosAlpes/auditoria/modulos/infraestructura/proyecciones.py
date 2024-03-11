@@ -42,7 +42,7 @@ class ProyeccionAuditoriasTotales(ProyeccionAuditoria):
             record.total -= 1 
             record.total = max(record.total, 0)
         else:
-            db.session.add(Auditoria(fecha_auditoria=self.fecha_auditoria))
+            db.session.add(AuditoriaAnalitica(fecha_creacion=millis_a_datetime(self.fecha_auditoria), total=1))
         
         db.session.commit()
 
