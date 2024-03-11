@@ -12,7 +12,6 @@ class AuditoriaCreada(EventoAuditoria):
     id_auditoria: uuid.UUID = None
     codigo: str = None
     fecha_creacion: datetime = None
-    codigo: str = None
     auditor: str = None
     fase: str = None
     hallazgos: str = None

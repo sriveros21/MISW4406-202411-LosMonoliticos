@@ -33,12 +33,12 @@ class RepositorioAuditoriasSQLAlchemy(RepositorioAuditorias):
         # TODO
         raise NotImplementedError
 
-    def agregar(self, reserva: Auditoria):
+    def agregar(self, auditoria: Auditoria):
         auditoria_dto = self.fabrica_auditorias.crear_objeto(auditoria, MapeadorAuditorias())
 
         db.session.add(auditoria_dto)
 
-    def actualizar(self, reserva: Auditoria):
+    def actualizar(self, auditoria: Auditoria):
         # TODO
         raise NotImplementedError
 
