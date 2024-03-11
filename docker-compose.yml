@@ -95,6 +95,8 @@ services:
     ports:
       - "6650:6650"
       - "8080:8080"
+    volumes:
+      - ./connectors/pulsar:/pulsar/connectors
     command: bash -c "bin/apply-config-from-env.py conf/broker.conf
       &&  exec bin/pulsar broker"
       
@@ -117,7 +119,6 @@ services:
     volumes:
       - ./data/mysql:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql  
-  
   # Servicios de Propiedades de los Alpes
   propiedadesdelosalpes:
     container_name: propiedadesdelosalpes
@@ -131,22 +132,25 @@ services:
       SidecarDiscover: "false"
     depends_on:
       - broker
+      - db
     environment:
       - PROPIEDADESDELOSALPES_ADDRESS=propiedadesdelosalpes
       - PULSAR_ADDRESS=broker
     ports:
       - "5000:5000"
-  # adaptador:
-  #   image: "aeroalpes/adaptador"
-  #   profiles: ["aeroalpes", "monolito"]
-  #   container_name: adaptador
-  #   hostname: adaptador
-  #   depends_on:
-  #     - aeroalpes
-  #   networks:
-  #     - sidecar
-  #   environment:
-  #     - AEROALPES_ADDRESS=aeroalpes
-  #     - PULSAR_ADDRESS=broker
-  #   ports:
-  #     - "50051:50051"
+# Servicio BFF
+  bff:
+    container_name: bff
+    hostname: bff
+    image: propiedadesdelosalpes/bff 
+    profiles: ["propiedadesdelosalpes", "bff"]
+    depends_on:
+      - propiedadesdelosalpes
+      - broker
+    environment:
+      - AEROALPES_ADDRESS=aeroalpes
+      - BROKER_HOST=broker
+    networks:
+      - pulsar
+    ports:
+      - "8003:8003"
