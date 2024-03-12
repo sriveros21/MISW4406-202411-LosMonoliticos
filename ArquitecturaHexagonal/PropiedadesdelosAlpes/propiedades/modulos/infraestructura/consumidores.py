@@ -2,7 +2,8 @@ import pulsar,_pulsar
 from pulsar.schema import *
 import logging
 import traceback
-
+from PropiedadesdelosAlpes.propiedades.modulos.infraestructura.proyecciones import ProyeccionPropiedadesLista, ProyeccionPropiedadesTotales
+from PropiedadesdelosAlpes.propiedades.seedwork.infraestructura.proyecciones import ejecutar_proyeccion
 from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.schema.v1.eventos import PropiedadCreada
 from PropiedadesdelosAlpes.modulos.propiedades.infraestructura.schema.v1.comandos import ComandoCrearPropiedad
 from PropiedadesdelosAlpes.seedwork.infraestructura import utils
@@ -17,6 +18,16 @@ def suscribirse_a_eventos():
             mensaje = consumidor.receive()
             print(f'Evento recibido: {mensaje.value().data}')
 
+            ejecutar_proyeccion(ProyeccionPropiedadesTotales(datos.fecha, ProyeccionPropiedadesTotales.ADD), app=app)
+            ejecutar_proyeccion(ProyeccionPropiedadesLista(
+                datos.id,
+                datos.fecha,
+                datos.nombre,
+                datos.ubicacion,
+                datos.dimension,
+                datos.tipo,
+                datos.estado,
+                ), app=app)
             consumidor.acknowledge(mensaje)     
         
         cliente.close()
