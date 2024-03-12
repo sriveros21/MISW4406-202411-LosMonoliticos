@@ -1,6 +1,5 @@
-from PropiedadesdelosAlpes.seedwork.dominio.reglas import ReglaNegocio
-
 from .objetos_valor import Nombre
+from ....cliente.seedwork.dominio.reglas import ReglaNegocio
 
 
 class NombreValido(ReglaNegocio):

@@ -1,4 +1,4 @@
-from PropiedadesdelosAlpes.seedwork.dominio.excepciones import ExcepcionFabrica
+from PropiedadesdelosAlpes.cliente.seedwork.dominio.excepciones import ExcepcionFabrica
 
 
 class NoExisteImplementacionParaTipoFabricaExcepcion(ExcepcionFabrica):

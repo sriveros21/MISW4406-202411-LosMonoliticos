@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 
-from PropiedadesdelosAlpes.modulos.cliente.aplicacion.dto import NombreDTO, ApellidoDTO, EmailDTO, ClienteDTO
-from PropiedadesdelosAlpes.modulos.cliente.aplicacion.mapeadores import MapeadorCliente
-from PropiedadesdelosAlpes.modulos.cliente.dominio.entidades import Cliente
-from PropiedadesdelosAlpes.modulos.cliente.infraestructura.repositorios import RepositorioCliente
-from PropiedadesdelosAlpes.seedwork.aplicacion.comandos import Comando
-from PropiedadesdelosAlpes.seedwork.aplicacion.comandos import ejecutar_commando as comando
-from PropiedadesdelosAlpes.seedwork.infraestructura.uow import UnidadTrabajoPuerto
+from PropiedadesdelosAlpes.cliente.modulos.aplicacion.dto import ClienteDTO
+from PropiedadesdelosAlpes.cliente.modulos.aplicacion.mapeadores import MapeadorCliente
+from PropiedadesdelosAlpes.cliente.modulos.dominio.entidades import Cliente
+from PropiedadesdelosAlpes.cliente.modulos.infraestructura.repositorios import RepositorioCliente, RepositorioEventosCliente
+from PropiedadesdelosAlpes.cliente.seedwork.aplicacion.comandos import Comando
+from PropiedadesdelosAlpes.cliente.seedwork.aplicacion.comandos import ejecutar_commando as comando
+from PropiedadesdelosAlpes.cliente.seedwork.infraestructura.uow import UnidadTrabajoPuerto
 
 from .base import CrearClienteBaseHandler
 
@@ -14,9 +14,9 @@ from .base import CrearClienteBaseHandler
 @dataclass
 class CrearCliente(Comando):
     id_cliente: str
-    nombre: NombreDTO
-    apellido: ApellidoDTO
-    email: EmailDTO
+    nombre: str
+    apellido: str
+    email: str
 
 
 class CrearClienteHandler(CrearClienteBaseHandler):
@@ -31,10 +31,10 @@ class CrearClienteHandler(CrearClienteBaseHandler):
         cliente: Cliente = self.fabrica_cliente.crear_objeto(cliente_dto, MapeadorCliente())
         cliente.crear_cliente(cliente)
 
-        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioCliente.__class__)
+        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioCliente)
+        repositorio_eventos = self.fabrica_cliente.crear_objeto(RepositorioEventosCliente)
 
-        UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, cliente)
-        UnidadTrabajoPuerto.savepoint()
+        UnidadTrabajoPuerto.registrar_batch(repositorio.agregar, cliente, repositorio_eventos_func=repositorio_eventos.agregar)
         UnidadTrabajoPuerto.commit()
 
 

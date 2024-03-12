@@ -5,10 +5,10 @@ networks:
   sidecar:
     driver: bridge
 services:
-# Start zookeeper
+  # Start zookeeper
   zookeeper:
     image: apachepulsar/pulsar:latest
-    profiles: ["pulsar"]
+    profiles: [ "pulsar" ]
     container_name: zookeeper
     restart: on-failure
     networks:
@@ -22,17 +22,17 @@ services:
              bin/generate-zookeeper-config.sh conf/zookeeper.conf && \
              exec bin/pulsar zookeeper"
     healthcheck:
-      test: ["CMD", "bin/pulsar-zookeeper-ruok.sh"]
+      test: [ "CMD", "bin/pulsar-zookeeper-ruok.sh" ]
       interval: 10s
       timeout: 5s
       retries: 30
 
-# Init cluster metadata
+  # Init cluster metadata
   pulsar-init:
     container_name: pulsar-init
     hostname: pulsar-init
     image: apachepulsar/pulsar:latest
-    profiles: ["pulsar"]
+    profiles: [ "pulsar" ]
     networks:
       - pulsar
     command: >
@@ -46,10 +46,10 @@ services:
       zookeeper:
         condition: service_healthy
 
-# Start bookie
+  # Start bookie
   bookie:
     image: apachepulsar/pulsar:latest
-    profiles: ["pulsar"]
+    profiles: [ "pulsar" ]
     container_name: bookie
     restart: on-failure
     networks:
@@ -63,16 +63,16 @@ services:
         condition: service_healthy
       pulsar-init:
         condition: service_completed_successfully
-  # Map the local directory to the container to avoid bookie startup failure due to insufficient container disks.
+    # Map the local directory to the container to avoid bookie startup failure due to insufficient container disks.
     volumes:
       - ./data/bookkeeper:/pulsar/data/bookkeeper
     command: bash -c "bin/apply-config-from-env.py conf/bookkeeper.conf
       && exec bin/pulsar bookie"
 
-# Start broker
+  # Start broker
   broker:
     image: apachepulsar/pulsar:latest
-    profiles: ["pulsar"]
+    profiles: [ "pulsar" ]
     container_name: broker
     hostname: broker
     restart: on-failure
@@ -111,23 +111,23 @@ services:
     environment:
       - MYSQL_DATABASE=auditorias
       - MYSQL_ROOT_PASSWORD=adminadmin
-    profiles: ["propiedadesdelosalpes", "db"]
+    profiles: [ "propiedadesdelosalpes", "db" ]
     networks:
       - pulsar
     ports:
       - '3306:3306'
     volumes:
       - ./data/mysql:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
   
   # Servicios de Propiedades de los Alpes
   auditorias:
     container_name: auditorias
     hostname: auditorias
     image: auditorias/flask
-    profiles: ["auditorias", "monolito"]
+    profiles: [ "auditorias", "monolito" ]
     networks:
-     # - sidecar
+      # - sidecar
       - pulsar
     labels:
       SidecarDiscover: "false"
@@ -144,8 +144,8 @@ services:
   bff:
     container_name: bff
     hostname: bff
-    image: aeroalpes/bff 
-    profiles: ["aeroalpes", "bff"]
+    image: aeroalpes/bff
+    profiles: [ "aeroalpes", "bff" ]
     depends_on:
       - aeroalpes
       - broker
@@ -156,3 +156,22 @@ services:
       - pulsar
     ports:
       - "8003:8003"
+
+  # Servicio Cliente
+  cliente:
+    container_name: cliente
+    hostname: cliente
+    image: cliente/flask
+    profiles: [ "cliente", "monolito" ]
+    networks:
+      - pulsar
+    labels:
+      SidecarDiscover: "false"
+    depends_on:
+      - broker
+      - db
+    environment:
+      - PROPIEDADESDELOSALPES_ADDRESS=cliente
+      - PULSAR_ADDRESS=broker
+    ports:
+      - "8001:8001"

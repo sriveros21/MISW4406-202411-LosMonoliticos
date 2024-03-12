@@ -1,16 +1,16 @@
+import pickle
 from abc import ABC, abstractmethod
 from enum import Enum
-from ...seedwork.dominio.entidades import AgregacionRaiz
 
 from pydispatch import dispatcher
-from typing import List
 
-import pickle
+from ...seedwork.dominio.entidades import AgregacionRaiz
 
 
 class Lock(Enum):
     OPTIMISTA = 1
     PESIMISTA = 2
+
 
 class Batch:
     def __init__(self, operacion, lock: Lock, *args, **kwargs):
@@ -18,6 +18,7 @@ class Batch:
         self.args = args
         self.lock = lock
         self.kwargs = kwargs
+
 
 class UnidadTrabajo(ABC):
 
@@ -27,25 +28,37 @@ class UnidadTrabajo(ABC):
     def __exit__(self, *args):
         self.rollback()
 
-    def _obtener_eventos(self, batches=None):
+    def _obtener_eventos_rollback(self, batches=None):
         batches = self.batches if batches is None else batches
+        eventos = list()
         for batch in batches:
             for arg in batch.args:
                 if isinstance(arg, AgregacionRaiz):
-                    return arg.eventos
-        return list()
+                    eventos += arg.evento_compensacion
+                    break
+        return eventos
+
+    def _obtener_eventos(self, batches=None):
+        batches = self.batches if batches is None else batches
+        eventos = list()
+        for batch in batches:
+            for arg in batch.args:
+                if isinstance(arg, AgregacionRaiz):
+                    eventos += arg.eventos
+                    break
+        return eventos
 
     @abstractmethod
     def _limpiar_batches(self):
         raise NotImplementedError
 
     @abstractmethod
-    def batches(self) -> List[Batch]:
+    def batches(self) -> list[Batch]:
         raise NotImplementedError
 
     @abstractmethod
     def savepoints(self) -> list:
-        raise NotImplementedError                    
+        raise NotImplementedError
 
     def commit(self):
         self._publicar_eventos_post_commit()
@@ -54,7 +67,7 @@ class UnidadTrabajo(ABC):
     @abstractmethod
     def rollback(self, savepoint=None):
         self._limpiar_batches()
-    
+
     @abstractmethod
     def savepoint(self):
         raise NotImplementedError
@@ -78,6 +91,7 @@ class UnidadTrabajo(ABC):
             logging.error('ERROR: Suscribiendose al tópico de eventos!')
             traceback.print_exc()
 
+
 def is_flask():
     try:
         from flask import session
@@ -85,28 +99,34 @@ def is_flask():
     except Exception as e:
         return False
 
+
 def registrar_unidad_de_trabajo(serialized_obj):
-    from PropiedadesdelosAlpes.config.uow import UnidadTrabajoSQLAlchemy
     from flask import session
-    
 
     session['uow'] = serialized_obj
 
+
 def flask_uow():
     from flask import session
-    from PropiedadesdelosAlpes.config.uow import UnidadTrabajoSQLAlchemy
+    from PropiedadesdelosAlpes.cliente.config.uow import UnidadTrabajoSQLAlchemy, UnidadTrabajoPulsar
     if session.get('uow'):
         return session['uow']
-    else:
-        uow_serialized = pickle.dumps(UnidadTrabajoSQLAlchemy())
-        registrar_unidad_de_trabajo(uow_serialized)
-        return uow_serialized
+
+    uow_serialized = pickle.dumps(UnidadTrabajoSQLAlchemy())
+
+    if session.get('uow_metodo') == 'pulsar':
+        uow_serialized = pickle.dumps(UnidadTrabajoPulsar())
+
+    registrar_unidad_de_trabajo(uow_serialized)
+    return uow_serialized
+
 
 def unidad_de_trabajo() -> UnidadTrabajo:
     if is_flask():
         return pickle.loads(flask_uow())
     else:
         raise Exception('No hay unidad de trabajo')
+
 
 def guardar_unidad_trabajo(uow: UnidadTrabajo):
     if is_flask():

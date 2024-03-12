@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from PropiedadesdelosAlpes.seedwork.dominio.eventos import (EventoDominio)
+from ....cliente.seedwork.dominio.eventos import (EventoDominio)
 
 
 @dataclass
