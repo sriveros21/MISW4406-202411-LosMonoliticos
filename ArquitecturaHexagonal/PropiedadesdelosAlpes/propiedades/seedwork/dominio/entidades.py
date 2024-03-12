@@ -37,6 +37,9 @@ class AgregacionRaiz(Entidad, ValidarReglasMixin):
 
     def agregar_evento(self, evento: EventoDominio):
         self.eventos.append(evento)
+
+        if evento_compensacion:
+            self.eventos_compensacion.append(evento_compensacion)
     
     def limpiar_eventos(self):
         self.eventos = list()
