@@ -6,24 +6,16 @@ from flask_sqlalchemy import SQLAlchemy
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 def register_handlers():
-    import PropiedadesdelosAlpes.modulos.propiedades.aplicacion
-    import PropiedadesdelosAlpes.modulos.cliente.aplicacion
-    import PropiedadesdelosAlpes.modulos.auditorias.aplicacion
+    import PropiedadesdelosAlpes.propiedades.modulos.aplicacion
 
 def import_domain_models():
     # Import DTOs from the infrastructure layer to ensure they are recognized by SQLAlchemy
-    import PropiedadesdelosAlpes.modulos.propiedades.infraestructura.dto
-    import PropiedadesdelosAlpes.modulos.propiedades.aplicacion.dto
-    import PropiedadesdelosAlpes.modulos.cliente.infraestructura.dto
-    import PropiedadesdelosAlpes.modulos.cliente.aplicacion.dto
-    import PropiedadesdelosAlpes.modulos.auditorias.infraestructura.dto
-    import PropiedadesdelosAlpes.modulos.auditorias.aplicacion.dto
+    import PropiedadesdelosAlpes.propiedades.modulos.infraestructura.dto
+    import PropiedadesdelosAlpes.propiedades.modulos.aplicacion.dto
 
 def register_event_consumers(app):
     import threading
-    import PropiedadesdelosAlpes.modulos.propiedades.infraestructura.consumidores as propiedades
-    import PropiedadesdelosAlpes.modulos.cliente.infraestructura.consumidores as cliente
-    import PropiedadesdelosAlpes.modulos.auditorias.infraestructura.consumidores as auditorias
+    import PropiedadesdelosAlpes.propiedades.modulos.infraestructura.consumidores as propiedades
 
     #SUBSCRIBING TO EVENTS
     threading.Thread(target=propiedades.suscribirse_a_eventos).start()
@@ -62,12 +54,8 @@ def create_app(configuracion={}):
             register_event_consumers(app)
         
     from . import propiedades
-    from . import cliente
-    from . import auditorias
 
     app.register_blueprint(propiedades.bp)
-    app.register_blueprint(cliente.bp)
-    app.register_blueprint(auditorias.bp)
 
     @app.route("/health")
     def health():

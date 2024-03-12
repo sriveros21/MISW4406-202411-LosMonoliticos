@@ -13,8 +13,8 @@ class ObtenerPropiedad(Query):
 class ObtenerPropiedadHandler(PropiedadQueryBaseHandler):
 
     def handle(self, query: ObtenerPropiedad) -> QueryResultado:
-        repositorio = self.fabrica_repositorio.crear_objeto(RepositorioPropiedades.__class__)
-        propiedad = self.fabrica_propiedades.crear_objeto(repositorio.obtener_por_id(query.id), MapeadorPropiedad())
+        vista = self.fabrica_vista.crear_objeto(Propiedad)
+        propiedad = self.fabrica_propiedades.crear_objeto(vista.obtener_por_id(id=query.id)[0], MapeadorPropiedad())
         return QueryResultado(resultado=propiedad)
 
 @query.register(ObtenerPropiedad)
