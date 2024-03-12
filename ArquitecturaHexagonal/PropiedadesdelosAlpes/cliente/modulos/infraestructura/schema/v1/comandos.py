@@ -1,4 +1,4 @@
-from PropiedadesdelosAlpes.seedwork.infraestructura.schema.v1.comandos import ComandoIntegracion
+from PropiedadesdelosAlpes.cliente.seedwork.infraestructura.schema.v1.comandos import ComandoIntegracion
 from pulsar.schema import *
 
 

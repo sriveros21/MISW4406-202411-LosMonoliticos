@@ -4,19 +4,20 @@
 
 tasks:
   - name: Instalar Python
-    init: > 
+    init: >
       pyenv install 3.10.7 -f &&
       pyenv local 3.10.7 &&
       gp sync-done bundle
   - name: Instalar dependencias
     init: gp sync-await bundle
-    command: pip install -r requirements.txt && pip install -r bff-requirements.txt
+    command: pip install -r auditorias-requirements.txt && pip install -r bff-requirements.txt && pip install -r cliente-requirements.txt
   - name: Crear imagenes Docker
-    init: > 
-      docker build . -f auditorias.dockerfile -t auditorias/flask &&
+    init: >
+      docker build . -f auditorias.Dockerfile -t auditorias/flask &&
+      docker build . -f cliente.Dockerfile -t auditorias/cliente &&
       gp sync-done images
   - name: Crear folder para datos y asigna permisos
-    init: > 
+    init: >
       mkdir -p data/bookkeeper && 
       mkdir -p data/zookeeper && 
       mkdir -p data/mysql && 
@@ -25,7 +26,7 @@ tasks:
   - name: Pull el Docker compose
     init: gp sync-await images
     command: docker-compose pull
-  
+
 ports:
   - port: 2181
     onOpen: ignore

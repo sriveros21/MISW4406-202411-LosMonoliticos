@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from PropiedadesdelosAlpes.seedwork.dominio.objetos_valor import ObjetoValor
+from ....cliente.seedwork.dominio.objetos_valor import ObjetoValor
 
 
 @dataclass(frozen=True)

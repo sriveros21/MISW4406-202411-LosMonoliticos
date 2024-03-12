@@ -1,27 +1,30 @@
 from dataclasses import dataclass
 
-from PropiedadesdelosAlpes.modulos.cliente.dominio.fabricas import FabricaCliente
-from PropiedadesdelosAlpes.modulos.cliente.dominio.repositorios import RepositorioCliente
-from PropiedadesdelosAlpes.modulos.cliente.infraestructura.mapeadores import MapeadorCliente
-from sqlalchemy.orm import Session
+from PropiedadesdelosAlpes.cliente.modulos.dominio.repositorios import RepositorioCliente, RepositorioEventosCliente
+from PropiedadesdelosAlpes.cliente.modulos.infraestructura.vistas import VistaCliente
+from PropiedadesdelosAlpes.cliente.seedwork.dominio.fabricas import Fabrica
+from PropiedadesdelosAlpes.cliente.seedwork.dominio.repositorios import Repositorio
+from PropiedadesdelosAlpes.cliente.seedwork.infraestructura.vistas import Vista
 
-from .repositorios import RepositorioClienteSQLite
+from .excepciones import ExcepcionFabrica
+from .repositorios import RepositorioClienteSQLAlchemy, RepositorioEventosClienteSQLAlchemy
 
 
 @dataclass
-class FabricaRepositorioCliente:
+class FabricaRepositorioCliente(Fabrica):
 
-    def __init__(self, db_session: Session):
-        self.db_session = db_session
+    def crear_objeto(self, obj: type, mapeador: any = None) -> Repositorio:
+        if obj == RepositorioCliente:
+            return RepositorioClienteSQLAlchemy()
+        elif obj == RepositorioEventosCliente:
+            return RepositorioEventosClienteSQLAlchemy()
+        else:
+            raise ExcepcionFabrica(f'No existe fábrica para el objeto {obj}')
 
-    def crear_repositorio_cliente(self) -> RepositorioClienteSQLite:
-        mapeador_cliente = MapeadorCliente(db_session=self.db_session)
-        fabrica_cliente = FabricaCliente()
-        return RepositorioClienteSQLite(db_session=self.db_session, mapeador=mapeador_cliente, fabrica=fabrica_cliente)
-
-    def obtener_repositorio_propiedades(self) -> RepositorioCliente:
-        """
-        Returns an instance of RepositorioPropiedades.
-        This method simplifies accessing the properties repository.
-        """
-        return RepositorioClienteSQLite()
+    @dataclass
+    class FabricaVista(Fabrica):
+        def crear_objeto(self, obj: type, mapeador: any = None) -> Vista:
+            if obj == Cliente:
+                return VistaCliente()
+            else:
+                raise ExcepcionFabrica(f'No existe fábrica para el objeto {obj}')

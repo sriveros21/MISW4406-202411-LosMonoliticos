@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 
-from PropiedadesdelosAlpes.modulos.cliente.aplicacion.mapeadores import MapeadorCliente
-from PropiedadesdelosAlpes.seedwork.aplicacion.queries import Query, QueryResultado
-from PropiedadesdelosAlpes.seedwork.aplicacion.queries import ejecutar_query as query
+from PropiedadesdelosAlpes.cliente.modulos.aplicacion.mapeadores import MapeadorCliente
+from PropiedadesdelosAlpes.cliente.modulos.dominio.entidades import Cliente
+from PropiedadesdelosAlpes.cliente.seedwork.aplicacion.queries import Query, QueryResultado
+from PropiedadesdelosAlpes.cliente.seedwork.aplicacion.queries import ejecutar_query as query
 
 from .base import ClienteQueryBaseHandler
 
@@ -15,10 +16,9 @@ class ObtenerCliente(Query):
 class ObtenerClienteHandler(ClienteQueryBaseHandler):
 
     def handle(self, query: ObtenerCliente) -> QueryResultado:
-        repositorio = RepositorioCliente = self.fabrica_repositorio.obtener_repositorio_cliente()
-        cliente = repositorio.obtener_por_id(query.id_cliente)
-        cliente_dto = MapeadorCliente.entidad_a_dto(cliente)
-        return QueryResultado(resultado=cliente_dto)
+        vista = self.fabrica_vista.crear_objeto(Cliente)
+        cliente = self.fabrica_cliente.crear_objeto(vista.obtener_por_id(id_cliente=query.id_cliente)[0], MapeadorCliente)
+        return QueryResultado(resultado=cliente)
 
 
 @query.register(ObtenerCliente)

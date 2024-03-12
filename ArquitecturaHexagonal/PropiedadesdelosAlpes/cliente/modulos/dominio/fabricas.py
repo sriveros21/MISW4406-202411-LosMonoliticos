@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 
-from PropiedadesdelosAlpes.seedwork.dominio.fabricas import Fabrica
-from PropiedadesdelosAlpes.seedwork.dominio.repositorios import Mapeador
+from PropiedadesdelosAlpes.cliente.seedwork.dominio.eventos import EventoDominio
+from PropiedadesdelosAlpes.cliente.seedwork.dominio.fabricas import Fabrica
+from PropiedadesdelosAlpes.cliente.seedwork.dominio.repositorios import Mapeador
 
 from .entidades import Cliente, Entidad
 from .excepciones import TipoObjetoNoExisteEnDominioClienteExcepcion
@@ -11,7 +12,7 @@ from .excepciones import TipoObjetoNoExisteEnDominioClienteExcepcion
 class _FabricaCliente(Fabrica):
 
     def crear_objeto(self, obj: any, mapeador: Mapeador) -> any:
-        if isinstance(obj, Entidad):
+        if isinstance(obj, Entidad) or isinstance(obj, EventoDominio):
             return mapeador.entidad_a_dto(obj)
         else:
             cliente: Cliente = mapeador.dto_a_entidad(obj)
