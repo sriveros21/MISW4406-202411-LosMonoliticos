@@ -144,13 +144,13 @@ services:
   bff:
     container_name: bff
     hostname: bff
-    image: aeroalpes/bff
+    image: propiedadesdelosalpes/bff
     profiles: [ "aeroalpes", "bff" ]
     depends_on:
-      - aeroalpes
+      - auditorias
       - broker
     environment:
-      - AEROALPES_ADDRESS=aeroalpes
+      - PROPIEDADESDELOSALPES_ADDRESS=auditorias
       - BROKER_HOST=broker
     networks:
       - pulsar
